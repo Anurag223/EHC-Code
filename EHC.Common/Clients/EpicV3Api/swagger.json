@@ -1,0 +1,880 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "MasterData API",
+    "description": "Provides an API to MasterData context<script type=\"text/javascript\">\r\n    function toggle(id) {\r\n        var e = document.getElementById(id);\r\n        e.style.display = (e.style.display === 'block') ? 'none' : 'block';\r\n    }\r\n</script><h4>Collection Support</h4>\r\n<p>\r\n    For APIs that return a collection of resources the following features are available. The case of the parameter names does not matter, however the case\r\n    of the parameters' values does matter.\r\n</p><h4 onclick=\"toggle('filtering')\">Filtering</h4>\r\n<div id=\"filtering\">\r\n    <p>\r\n        One ore more filters can be applied to one or more fields (see the documentation for a specific endpoint as to which fields are available. When multiple filters are applied to\r\n        a single field, they are effectively \"ORed'\". Filters for multiple fields are \"ANDed\". Field values are case-insensitive with respect to the comparison operator. While you can\r\n        search against any field of the resource, this is discouraged because not all fields are indexed. The indexed fields are listed in the documentation below. Queries against\r\n        non-indexed fields may be rate limited or prohibited in the future.\r\n    </p>\r\n    <h5>Separators</h5>\r\n    <p>\r\n        To correctly handle underlying data that may have special characters, the API can be made to use either the default separators or custom separators.\r\n    </p>\r\n    <ul>\r\n        <li>\r\n            The default separator between operands against the same field is a comma (,). For example: <strong>filter[code]=ABC,ne:DEF,eq:GHI</strong>. This can be changed by\r\n            including <strong>filterSep=<em>char</em></strong> in the query string.\r\n        </li>\r\n        <li>\r\n            The default separator between values for a multi-valued operator is a pipe (|). For example: <strong>filter[code]=in:ABC|DEF|GHI</strong>. This can be changed by\r\n            including <strong>valueSep=<em>char</em></strong> in the query string.\r\n        </li>\r\n    </ul>\r\n    <h5>Syntax</h5>\r\n    <p>\r\n        <strong>filter[<em>fieldName</em>]=<em>operator</em>:<em>value(s)</em></strong>. The operator and following colon, if omitted, is assumed to be <strong>equals</strong>. The following case-insensitive operators and their aliases, are supported\r\n        <ul>\r\n            <li>\r\n                <strong>\r\n                    <em>value</em>\r\n                </strong> - equal to the specified value (same as eq:value)\r\n            </li>\r\n            <li><strong>eq:<em>value</em></strong> - equal to the specified value. Aliases: <strong>eq</strong>, <strong>equal</strong></li>\r\n            <li><strong>ne:<em>value</em></strong> - not equal to the specified value. Aliases: <strong>notEqual</strong>, <strong>notEquals</strong></li>\r\n            <li><strong>gt:<em>value</em></strong> - greater than the specified value</li>\r\n            <li><strong>ge:<em>value</em></strong> - greater than or equal to the specified value. Aliases: <strong>gte</strong></li>\r\n            <li><strong>lt:<em>value</em></strong> - less than to the specified value. Aliases: <strong>lte</strong></li>\r\n            <li><strong>le:<em>value</em></strong> - less than or equal to the specified value</li>\r\n            <li><strong>between:<em>value</em>|<em>value2</em></strong> - inclusively between two values</li>\r\n            <li><strong>isNull</strong> - the field is null</li>\r\n            <li><strong>isNotNull</strong> - the field is not null</li>\r\n            <li><strong>in:<em>value1</em>|<em>value2</em>|<em>valueN</em></strong> - in a set of comma separated values</li>\r\n            <li><strong>ni:<em>value1</em>|<em>value2</em>|<em>valueN</em></strong> - not in a set of pipe separated values. Aliases: <strong>notIn</strong></li>\r\n            <li><strong>lk:<em>value</em></strong> - like the specified value (this is a <a href=\"https://en.wikipedia.org/wiki/Perl_Compatible_Regular_Expressions\">PCRE regex</a>). All expressions will be treated as case-insensitive and the beginning and trailing <strong>/</strong> or <strong>/i</strong> are not necessary. It is preferred that you anchor your expressions if possible (e.g. ^ABC) and query against indexed fields (usually those listed in the documentation below). Aliases: <strong>like</strong>, <strong>matches</strong></li>\r\n            <li><strong>c:<em>value</em></strong> - collection contains the specified value. Aliases: <strong>contains</strong></li>\r\n        </ul>\r\n    </p>\r\n    <h5>Examples</h5>\r\n    <p>\r\n        <ul>\r\n            <li><strong>?filter[modifiedDate]=gt:2019-04-01</strong> - only get resources modified after April 1, 2019</li>\r\n            <li><strong>?filter[parentId]=isnotnull</strong> - only get resources that have a parent</li>\r\n            <li><strong>?filter[owningSiteCode]=HOU&amp;filter[modifiedDate]=between:2019-03-01|2019-03-30</strong> - only get resources from HOU and modified in March 2019</li>\r\n            <li><strong>?filter[owningSiteCode]=eq:HOU&amp;filter[modifiedDate]gte:2019-03-01,lte:2019-03-30</strong> - same as the above</li>\r\n            <li><strong>?filter[owningSiteCode]=in:HOU|CCO|OKCTLM|OKC|MLD</strong> - only get resources owned by one of the 5 sites</li>\r\n            <li><strong>?filter[owningSiteCode]=ni:HOU|CCO|OKCTLM|OKC|MLD</strong> - only get resources not owned by any of the 5 sites</li>\r\n        </ul>\r\n        Filters can also be applied to nested objects including collections by \"dotting\" into the nested object(s). For example\r\n        <ul>\r\n            <li><strong>?filter[childWorkorders.plannedStartDate]=gt:2019-04-01</strong> - only workorders whose child workorders start after April 1, 2019</li>\r\n            <li><strong>?filter[equipment.workorders]=4500:Qtrac</strong> - only equipment with the specified workorder</li>\r\n        </ul>\r\n    </p>\r\n</div><h4>Sorting</h4>\r\nFields can be sorted. See the documentation for a specific model as to which fields are available. The field name is case-insensitive.\r\n<h5>Syntax</h5>\r\n<p>\r\n    <strong>sort=[-]<em>fieldName</em>[,[-]<em>fieldName2</em>[[-]<em>fieldName3</em>]]</strong> where a dash indicates a descending sort and lack of a dash indicates an ascending sort.\r\n</p>\r\n<h5>Examples</h5>\r\n<p>\r\n    <ul>\r\n        <li><strong>?sort=-modifiedDate</strong> - sort by modified date descending</li>\r\n        <li><strong>?sort=equipmentCode,-serialNumber</strong> - sort by equipment code ascending, serial number descending</li>\r\n    </ul>\r\n</p><h4>Paging</h4>\r\n<p>\r\n    Unless specifically noted collections will be paged. See the documentation for a specific API for the default page size and limit. The default page number is 1.\r\n    A page size must be 2 or greater even if the expected collection is likely to have only 1 item in it.\r\n</p>\r\n<h5>Syntax</h5>\r\n<p>\r\n    <strong>page[size]=<em>value</em></strong> where size is a positive integer greater than 1 and <strong>page[number]=<em>value</em></strong> where value is a positive integer\r\n</p>\r\n<h5>Example</h5>\r\n<p>\r\n    <ul>\r\n        <li>\r\n            <strong>?page[size]=100&amp;page[number]=10</strong>\r\n        </li>\r\n    </ul>\r\n</p><h4>Resource Inclusion (aka Includeables)</h4>\r\n<p>\r\n    By default, all includeables (sub-resources) are excluded from the root resource, however that resource may support the inclusion of sub-resources\r\n    if directed to. See the documentation for a specific API as to which resources can be included. The values of the 'include' parameter are case-insensitive.\r\n</p>\r\n<h5>Syntax</h5>\r\n<p>\r\n    <strong>?include=<em>fieldName</em>[,<em>fieldName2</em>[<em>fieldName3</em>]]</strong> where each includeable is separated by a comma by default.\r\n</p>\r\n<p>\r\n    To correctly handle underlying data that may have special characters, the API can be made to use\r\n    an alternate separator. To do this add <strong>includeSep=<em>char</em></strong> to the query string.\r\n</p>\r\n<h5>Example</h5>\r\n<p>\r\n    <ul>\r\n        <li><strong>?include=workorders,parent</strong> - include an equipment's workorders and parent</li>\r\n    </ul>\r\n</p>\r\n<h4>Sparse Field Sets</h4>\r\n<p>\r\n    By default, all fields except the includeables above are included. There are cases where a client may want to only include a few fields (what is known as\r\n    a sparse field set). All fields included explicitly means that all other fields are excluded implicitly. The values of the 'fields' parameter are case-insensitive.\r\n</p>\r\n<h5>Syntax</h5>\r\n<p>\r\n    <strong>?fields=<em>fieldName</em>[,<em>fieldName2</em>[<em>fieldName3</em>]]</strong> where each field is separated by a comma by default.\r\n</p>\r\n<p>\r\n    To correctly handle underlying data that may have special characters, the API can be made to use\r\n    an alternate separator. To do this add <strong>includeSep=<em>char</em></strong> to the query string.\r\n</p>\r\n<h5>Example</h5>\r\n<p>\r\n    <ul>\r\n        <li><strong>?fields=equipment,createdBy,updatedBy,description</strong> - include these 4 fields, and exclude all others</li>\r\n    </ul>\r\n</p>",
+    "version": "v3"
+  },
+  "paths": {
+    "/api/v3/masterdata/epics/{id}": {
+      "get": {
+        "tags": [
+          "EPICV3"
+        ],
+        "summary": "Gets epic data by epic id. Example: group:RDG.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "Specify **attributes** to include them in the results.",
+            "schema": {
+              "type": "string",
+              "description": "Specify **attributes** to include them in the results.",
+              "format": ""
+            }
+          },
+          {
+            "name": "filter[includeParent]",
+            "in": "query",
+            "description": "Include the parent node in the EPIC hierarchy. Acceptable values: **true** or **false**",
+            "schema": {
+              "type": "boolean",
+              "description": "Include the parent node in the EPIC hierarchy. Acceptable values: **true** or **false**",
+              "format": "true|false"
+            }
+          },
+          {
+            "name": "filter[parentNodeLevel]",
+            "in": "query",
+            "description": "Include the specified parent node level in the EPIC hierarchy",
+            "schema": {
+              "type": "object",
+              "description": "Include the specified parent node level in the EPIC hierarchy",
+              "format": ""
+            }
+          },
+          {
+            "name": "filter[includeChildren]",
+            "in": "query",
+            "description": "Include child nodes in the EPIC hierarchy. Acceptable values: **true** or **false**",
+            "schema": {
+              "type": "boolean",
+              "description": "Include child nodes in the EPIC hierarchy. Acceptable values: **true** or **false**",
+              "format": "true|false"
+            }
+          },
+          {
+            "name": "filter[childNodeLevel]",
+            "in": "query",
+            "description": "Include the specified children node level in the EPIC hierarchy",
+            "schema": {
+              "type": "object",
+              "description": "Include the specified children node level in the EPIC hierarchy",
+              "format": ""
+            }
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorDocument"
+                }
+              },
+              "application/vnd.api+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorDocument"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorDocument"
+                }
+              },
+              "application/vnd.api+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorDocument"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/epicRepresentationV3"
+                }
+              },
+              "application/vnd.api+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/epicRepresentationV3"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "Root"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/v3/masterdata/epics": {
+      "get": {
+        "tags": [
+          "EPICV3"
+        ],
+        "summary": "Gets epic data.",
+        "parameters": [
+          {
+            "name": "include",
+            "in": "query",
+            "description": "Specify **attributes** to include them in the results.",
+            "schema": {
+              "type": "string",
+              "description": "Specify **attributes** to include them in the results.",
+              "format": ""
+            }
+          },
+          {
+            "name": "filter[wkId]",
+            "in": "query",
+            "description": "Filter by Epic wkid",
+            "schema": {
+              "type": "string",
+              "description": "Filter by Epic wkid",
+              "format": ""
+            }
+          },
+          {
+            "name": "filter[includeParent]",
+            "in": "query",
+            "description": "Include the parent node in the EPIC hierarchy. Acceptable values: **true** or **false**",
+            "schema": {
+              "type": "boolean",
+              "description": "Include the parent node in the EPIC hierarchy. Acceptable values: **true** or **false**",
+              "format": "true|false"
+            }
+          },
+          {
+            "name": "filter[parentNodeLevel]",
+            "in": "query",
+            "description": "Include the specified parent node level in the EPIC hierarchy",
+            "schema": {
+              "type": "object",
+              "description": "Include the specified parent node level in the EPIC hierarchy",
+              "format": ""
+            }
+          },
+          {
+            "name": "filter[includeChildren]",
+            "in": "query",
+            "description": "Include child nodes in the EPIC hierarchy. Acceptable values: **true** or **false**",
+            "schema": {
+              "type": "boolean",
+              "description": "Include child nodes in the EPIC hierarchy. Acceptable values: **true** or **false**",
+              "format": "true|false"
+            }
+          },
+          {
+            "name": "filter[childNodeLevel]",
+            "in": "query",
+            "description": "Include the specified children node level in the EPIC hierarchy",
+            "schema": {
+              "type": "object",
+              "description": "Include the specified children node level in the EPIC hierarchy",
+              "format": ""
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorDocument"
+                }
+              },
+              "application/vnd.api+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorDocument"
+                }
+              }
+            }
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/problemDetails"
+                }
+              },
+              "application/vnd.api+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/problemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/epicRepresentationV3Collection"
+                }
+              },
+              "application/vnd.api+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/epicRepresentationV3Collection"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "Root"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/v3/equipmenthierarchy/{namedHierarchy}": {
+      "get": {
+        "tags": [
+          "EquipmentHierarchyV3"
+        ],
+        "parameters": [
+          {
+            "name": "namedHierarchy",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "Comma separate resources to include (all others will be excluded, and if blank, all will be excluded). Available resources: **children.Children.ReferenceObject.Attribute, children.ReferenceObject.Attribute, referenceObject.Attribute**",
+            "schema": {
+              "type": "string",
+              "description": "Comma separate resources to include (all others will be excluded, and if blank, all will be excluded). Available resources: **children.Children.ReferenceObject.Attribute, children.ReferenceObject.Attribute, referenceObject.Attribute**",
+              "format": ""
+            },
+            "examples": {
+              "IncludeNothing": {
+                "summary": "Include nothing",
+                "description": "Includes nothing in each epic v 3",
+                "value": ""
+              },
+              "IncludeEverything": {
+                "summary": "Include everything",
+                "description": "Includes everything in each epic v 3",
+                "value": "children.Children.ReferenceObject.Attribute, children.ReferenceObject.Attribute, referenceObject.Attribute"
+              },
+              "Includechildren-children_reference.object-attribute": {
+                "summary": "Include children.Children.ReferenceObject.Attribute",
+                "description": "Include children children reference object attribute in each epic v 3",
+                "value": "children.Children.ReferenceObject.Attribute"
+              },
+              "Includechildren-reference_object.attribute": {
+                "summary": "Include children.ReferenceObject.Attribute",
+                "description": "Include children reference object attribute in each epic v 3",
+                "value": "children.ReferenceObject.Attribute"
+              },
+              "Includereference-object_attribute": {
+                "summary": "Include referenceObject.Attribute",
+                "description": "Include reference object attribute in each epic v 3",
+                "value": "referenceObject.Attribute"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorDocument"
+                }
+              },
+              "application/vnd.api+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorDocument"
+                }
+              }
+            }
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/problemDetails"
+                }
+              },
+              "application/vnd.api+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/problemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/epicV3"
+                  }
+                }
+              },
+              "application/vnd.api+json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/epicV3"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "Root"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "sortDirection": {
+        "enum": [
+          "Ascending",
+          "Descending"
+        ],
+        "type": "string",
+        "description": "<ul><li>0 - Ascending</li><li>1 - Descending</li></ul>",
+        "example": "Ascending"
+      },
+      "operator": {
+        "enum": [
+          "Between",
+          "Equals",
+          "GreaterThan",
+          "GreaterThanOrEqualTo",
+          "LessThan",
+          "LessThanOrEqualTo",
+          "NotEqual",
+          "IsNull",
+          "IsNotNull",
+          "In",
+          "NotIn",
+          "Set",
+          "Like",
+          "Contains",
+          "Invalid"
+        ],
+        "type": "string",
+        "description": "<ul><li>0 - between</li><li>1 - equals</li><li>2 - greaterthan - greater than</li><li>3 - greaterthanorequalto - greater than or equal to</li><li>4 - lessthan - less than</li><li>5 - lessthanorequalto - less than or equal to</li><li>6 - notequal - not equal</li><li>7 - is null</li><li>8 - is not null</li><li>9 - in</li><li>10 - notin - not in</li><li>11 - set</li><li>12 - like</li><li>13 - contains</li><li>14 - Invalid</li></ul>",
+        "example": "between"
+      },
+      "queryExclusionPolicies": {
+        "enum": [
+          "None",
+          "ExcludeFieldsInMemory",
+          "ExcludeFieldsInRepo",
+          "AlwaysIncludeFields",
+          "ExcludeIncludeablesInMemory",
+          "ExcludeFieldsAndIncludeablesInMemory",
+          "ExcludeIncludeablesInRepo",
+          "ExcludeFieldsAndIncludeablesInRepo",
+          "ApplyExclusionsEverywhere",
+          "AlwaysIncludeIncludeables"
+        ],
+        "type": "string",
+        "description": "<ul><li>0 - None</li><li>1 - ExcludeFieldsInMemory</li><li>2 - ExcludeFieldsInRepo</li><li>4 - AlwaysIncludeFields</li><li>8 - ExcludeIncludeablesInMemory</li><li>9 - ExcludeFieldsAndIncludeablesInMemory</li><li>16 - ExcludeIncludeablesInRepo</li><li>18 - ExcludeFieldsAndIncludeablesInRepo</li><li>27 - ApplyExclusionsEverywhere</li><li>32 - AlwaysIncludeIncludeables</li></ul>",
+        "example": "None"
+      },
+      "link": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string",
+            "nullable": true
+          },
+          "meta": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "additionalProperties": false
+            },
+            "nullable": true
+          },
+          "rel": {
+            "type": "string",
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "links": {
+        "type": "object",
+        "properties": {
+          "actualLinks": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/link"
+            },
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "errorSource": {
+        "type": "object",
+        "properties": {
+          "parameter": {
+            "type": "string",
+            "nullable": true
+          },
+          "pointer": {
+            "type": "string",
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "error": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "links": {
+            "$ref": "#/components/schemas/links"
+          },
+          "meta": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "additionalProperties": false
+            },
+            "nullable": true
+          },
+          "source": {
+            "$ref": "#/components/schemas/errorSource"
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "model": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "errorDocument": {
+        "type": "object",
+        "properties": {
+          "errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/error"
+            },
+            "nullable": true
+          },
+          "included": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/model"
+            },
+            "nullable": true
+          },
+          "links": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/link"
+            },
+            "nullable": true
+          },
+          "meta": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "additionalProperties": false
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "equipmentClassificationTypeV3": {
+        "enum": [
+          "Division",
+          "BusinessLine",
+          "SubBusinessLine",
+          "ProductFamily",
+          "Technology",
+          "Brand",
+          "EquipmentSystem",
+          "EquipmentToolset",
+          "Attribute",
+          "EquipmentPRT",
+          "ChemicalSystem",
+          "EquipmentSubsystem",
+          "Filecode",
+          "SurfaceEquipment"
+        ],
+        "type": "string",
+        "description": "<ul><li>1 - Division</li><li>2 - BusinessLine</li><li>3 - SubBusinessLine</li><li>4 - ProductFamily</li><li>5 - Technology</li><li>6 - Brand</li><li>7 - EquipmentSystem</li><li>8 - EquipmentToolset</li><li>9 - Attribute</li><li>10 - EquipmentPRT</li><li>11 - ChemicalSystem</li><li>12 - EquipmentSubsystem</li><li>13 - Filecode</li><li>14 - SurfaceEquipment</li></ul>",
+        "example": "Division"
+      },
+      "attributeValue": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "type": "string",
+            "nullable": true
+          },
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "dimension": {
+            "type": "string",
+            "nullable": true
+          },
+          "sequence": {
+            "type": "string",
+            "nullable": true
+          },
+          "uom": {
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "epicRepresentationV3": {
+        "required": [
+          "createdDate",
+          "modifiedDate",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "modifiedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "modifiedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "code": {
+            "type": "string",
+            "description": "A code used to uniquely identify the EPIC.",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the EPIC.",
+            "nullable": true
+          },
+          "parentCode": {
+            "type": "string",
+            "description": "A code used to uniquely identify the parent EPIC. This will be null if the subject EPIC is at the Group level.",
+            "nullable": true
+          },
+          "type": {
+            "$ref": "#/components/schemas/equipmentClassificationTypeV3"
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/epicRepresentationV3"
+            },
+            "description": "The children at the immediate level below this EPIC.",
+            "nullable": true
+          },
+          "attributes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/attributeValue"
+            },
+            "description": "Equipment System Attributes",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "problemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "A URI reference [RFC3986] that identifies the problem type. This specification encourages that, when dereferenced, it provide human-readable documentation for the problem type (e.g., using HTML [W3C.REC-html5-20141028]). When this member is not present, its value is assumed to be 'about: blank'.",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "description": "A short, human-readable summary of the problem type. It will generally not change from occurrence to occurrence of the problem.",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "description": "The HTTP status code([RFC7231], Section 6) generated by the origin server for this occurrence of the problem.",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "description": "A human-readable explanation specific to this occurrence of the problem",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "description": "URI reference that identifies the specific occurrence of the problem. It may or may not yield further information if dereferenced.",
+            "nullable": true
+          },
+          "extensions": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "additionalProperties": false
+            },
+            "description": "Any extensions that the API may provide",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A machine-readable format for specifying errors in HTTP API responses based on https://tools.ietf.org/html/rfc7807."
+      },
+      "collectionMeta": {
+        "required": [
+          "totalCount"
+        ],
+        "type": "object",
+        "properties": {
+          "totalCount": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "epicRepresentationV3Collection": {
+        "type": "object",
+        "properties": {
+          "collection": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/epicRepresentationV3"
+            },
+            "nullable": true
+          },
+          "links": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/link"
+            },
+            "nullable": true
+          },
+          "meta": {
+            "$ref": "#/components/schemas/collectionMeta"
+          }
+        },
+        "additionalProperties": false
+      },
+      "referenceObject": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "type": "string",
+            "nullable": true
+          },
+          "wkId": {
+            "type": "string",
+            "nullable": true
+          },
+          "attribute": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "additionalProperties": false
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "epicV3": {
+        "required": [
+          "createdDate",
+          "modifiedDate",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "modifiedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "modifiedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "$ref": "#/components/schemas/equipmentClassificationTypeV3"
+          },
+          "referenceObject": {
+            "$ref": "#/components/schemas/referenceObject"
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/epicV3"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "oauth2": {
+        "type": "oauth2",
+        "description": "OAuth2 authentication",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "https://auth.test.tlm.slb.com/connect/authorize",
+            "tokenUrl": "https://auth.test.tlm.slb.com/connect/token",
+            "scopes": {
+              "masterdataapi": "masterdataapi"
+            }
+          }
+        }
+      }
+    }
+  }
+}

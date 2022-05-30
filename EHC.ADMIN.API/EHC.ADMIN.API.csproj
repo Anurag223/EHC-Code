@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+	 <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <AssemblyName>Tlm.EHC.ADMIN.API</AssemblyName>
+    <RootNamespace>TLM.EHC.ADMIN.API</RootNamespace>
+	 <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
+	 <UserSecretsId>cfd49e14-1bf5-4494-9115-c0a15c19daf9</UserSecretsId>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\Debug\netcoreapp2.2\Tlm.EHC.ADMIN.API.xml</DocumentationFile>
+  </PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<DocumentationFile>bin\Debug\netcoreapp2.2\Tlm.EHC.ADMIN.API.xml</DocumentationFile>
+	</PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
+    <PackageReference Include="Tlm.Fed.Framework.ApiSupport" Version="12.1.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EHC.Common\EHC.Common.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,8 @@
+{
+  "code": "AirPressure",
+  "name": "Air Pressure",
+  "dimension": "Pressure",
+  "uom": "kPa",
+  "type": "raw",
+  "legalClassification": "SLB"
+}

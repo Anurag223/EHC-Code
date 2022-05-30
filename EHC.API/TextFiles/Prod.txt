@@ -1,0 +1,27 @@
+﻿
+
+
+April 7, 2020
+-------------------------------------------------------
+# disabled the service, which ran docker-compose up on every system boot
+# launched v1 api from console instead
+
+systemctl stop MTEquipmentHistorian
+systemctl disable MTEquipmentHistorian
+
+docker run -d \
+  --name ehc.api.v1 \
+  --network=eq_historian_network \
+  --network-alias=ehc.api.v1 \
+  --restart=unless-stopped \
+  -v /usr/local/EquipmentHistorian/logs:/equipmentHistorianLogs \
+  -v /usr/local/EquipmentHistorian/conf:/equipmentHistorianConf \
+  -p 56001:80 \
+   api.historian.deadletter:latest
+
+
+# see
+/etc/systemd/system/MTEquipmentHistorian.service
+/usr/local/EquipmentHistorian/conf
+
+

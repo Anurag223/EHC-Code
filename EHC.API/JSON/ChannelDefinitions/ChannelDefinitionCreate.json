@@ -1,0 +1,8 @@
+{
+  "code": "AirPressure",
+  "name": "Air Pressure",
+  "dimension": "Pressure",
+  "uom": "psi",
+  "type": "raw",
+  "legalClassification": "EHC"
+}

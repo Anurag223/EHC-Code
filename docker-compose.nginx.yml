@@ -1,0 +1,24 @@
+version: '3'
+# this docker-compose file is used for QA and PROD servers in GCP by 'EHC.API-Nginx' realease pipeline
+# NOTE: both QA and PROD stages take this file from 'develop' branch
+# see files 'prod.conf' and 'qa.conf' in '/nginx' source code folder
+
+services:
+  ehc.api.nginx:
+    image: nginx:1.15.11
+    container_name: nginx
+    hostname:       nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /etc/nginx/docker/conf.d:/etc/nginx/conf.d/
+      - /etc/nginx/docker/certs:/certs
+    networks:
+      - eq_historian_network
+
+networks:
+  eq_historian_network:
+    external:
+      name: eq_historian_network

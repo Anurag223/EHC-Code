@@ -1,0 +1,88 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <AssemblyName>Tlm.EHC.API</AssemblyName>
+    <RootNamespace>TLM.EHC.API</RootNamespace>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
+    <UserSecretsId>cfd49e14-1bf5-4494-9115-c0a15c19daf9</UserSecretsId>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\Debug\netcoreapp2.2\Tlm.EHC.API.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\netcoreapp2.2\Tlm.EHC.API.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="JSON\ChannelData\Input\Explicit.json" />
+    <Content Remove="JSON\ChannelData\Input\SendBulk.json" />
+    <Content Remove="JSON\ChannelDefinitions\ChannelDefinitionCreate.json" />
+    <Content Remove="JSON\ChannelDefinitions\ChannelDefinitionUpdate.json" />
+    <Content Remove="JSON\Episodes\EpisodeCreate.json" />
+    <Content Remove="JSON\Episodes\EpisodeUpdate.json" />
+    <Content Remove="JSON\EpisodicPoints\Explicit.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="JSON\ChannelData\Input\Explicit.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="JSON\ChannelData\Input\SendBulk.json" />
+    <EmbeddedResource Include="JSON\ChannelDefinitions\ChannelDefinitionCreate.json" />
+    <EmbeddedResource Include="JSON\ChannelDefinitions\ChannelDefinitionUpdate.json" />
+    <EmbeddedResource Include="JSON\Episodes\EpisodeCreate.json" />
+    <EmbeddedResource Include="JSON\Episodes\EpisodeUpdate.json" />
+    <EmbeddedResource Include="JSON\EpisodicPoints\Input\Explicit.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.7.12" />
+
+    <PackageReference Include="Tlm.Fed.Framework.ApiSupport" Version="12.1.6" />
+    <PackageReference Include="Vibrant.InfluxDB.Client" Version="4.0.1" />
+    <PackageReference Include="Anemonis.AspNetCore.RequestDecompression" Version="1.5.1" />
+
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EHC.Common\EHC.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="JSON\ChannelData\ChannelDefinitions_collection.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Update="JSON\ChannelData\Channel_collection.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Update="JSON\ChannelData\Channel_single.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Update="JSON\ChannelData\Input\Implicit.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Update="JSON\Episodes\EpisodeGet.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Update="JSON\Episodes\EpisodeList.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Update="JSON\EpisodicPoints\EpisodeRows.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Update="JSON\EpisodicPoints\Input\Explicit.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="PostmanCollection\" />
+  </ItemGroup>
+
+</Project>

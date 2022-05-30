@@ -1,0 +1,40 @@
+pool:
+  name: '$(azure_pool_name)'
+  demands: 
+    - Agent.ComputerName -equals azr4908devweb01 # should be removed once we have more agents for building .net core 3
+
+trigger:
+  batch: false
+  branches:
+    include:
+    - develop
+    - master
+    - releases/*
+    - hotfixes/*
+    - sprintreleases/*
+  paths:
+    include: 
+    - EHC.ADMIN.API/*
+    - EHC.ADMIN.API.Tests/*    
+
+resources:
+  repositories:
+  - repository: templates
+    type: git
+    name: 'es-TLM-FMP-Infrastructure'
+    ref: refs/heads/develop
+
+variables:
+- group: 'Mateo2 microservice'
+- group: 'Mateo2 Build common'
+- name: build.configuration
+  value: release
+
+steps:
+- template: 'templates/azure-pipelines-steps.yml@templates'
+  parameters:
+    projectname: 'EHC.ADMIN.API'
+    imagename: 'ehc.admin.api'
+    NamespaceName: 'TLM.EHC.ADMIN.API'
+    RepositoryFolder: 'ehc.admin.api'
+    

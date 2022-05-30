@@ -1,0 +1,114 @@
+[
+  {
+    "_id": "60d5c554cd2d0e7af4c12d24",
+    "createddate": "2021-06-25T11:50:51Z",
+    "createdby": "EHC",
+    "modifieddate": "2021-06-25T11:50:51Z",
+    "modifiedby": "EHC",
+    "dbname": "DXP_WPS_PUMPING_EQUIPMENT",
+    "retentionpolicy": "autogen",
+    "measurementname": "STIMULATION_PUMP_WS-67",
+    "brandname": "STIMULATION PUMP",
+    "brandcode": "WS-67",
+    "technologycode": "DXP",
+    "technologyname": "WPS PUMPING EQUIPMENT",
+    "status": "Enabled",
+    "equipmentcodes": [
+      "SPF-343",
+      "SPF-344",
+      "SPF-744",
+      "SPF-843",
+      "SPF-743"
+    ]
+  },
+  {
+    "_id": "60d5c554cd2d0e7af4c129456",
+    "createddate": "2021-06-25T11:50:51Z",
+    "createdby": "EHC",
+    "modifieddate": "2021-06-25T11:50:51Z",
+    "modifiedby": "EHC",
+    "dbname": "D01_WPS_OMEGA_EQUIPMENT",
+    "retentionpolicy": "autogen",
+    "measurementname": "STIMULATION_BLENDER_OMEGA_WS-61",
+    "brandname": "STIMULATION BLENDER OMEGA",
+    "brandcode": "WS-61",
+    "technologycode": "D01",
+    "technologyname": "WPS OMEGA EQUIPMENT",
+    "status": "Enabled",
+    "equipmentcodes": [
+      "SBF-677"
+    ]
+  },
+  {
+    "_id": "60eefa338331adb26262ac23",
+    "createddate": "2021-06-25T11:50:51Z",
+    "createdby": "EHC",
+    "modifieddate": "2021-06-25T11:50:51Z",
+    "modifiedby": "EHC",
+    "dbname": "NX4_CTS_SURFACE_EQUIPMENT",
+    "retentionpolicy": "autogen",
+    "measurementname": "TUBING_AUXILIARIES_MISCELLANEOUS_WS-84",
+    "brandname": "TUBING AUXILIARIES MISCELLANEOUS",
+    "brandcode": "WS-84",
+    "technologycode": "NX4",
+    "technologyname": "CTS SURFACE EQUIPMENT",
+    "status": "Enabled",
+    "equipmentcodes": [
+      "TCS-923"
+    ]
+  },
+  {
+    "_id": "60eefa338331adc26262ac27",
+    "createddate": "2021-06-25T11:50:51Z",
+    "createdby": "EHC",
+    "modifieddate": "2021-06-25T11:50:51Z",
+    "modifiedby": "EHC",
+    "dbname": "NX4_CTS_SURFACE_EQUIPMENT",
+    "retentionpolicy": "autogen",
+    "measurementname": "TUBING_UNIT_FLOAT_WS-93",
+    "brandname": "TUBING UNIT FLOAT",
+    "brandcode": "WS-93",
+    "technologycode": "NX4",
+    "technologyname": "CTS SURFACE EQUIPMENT",
+    "status": "Enabled",
+    "equipmentcodes": [
+      "TUF-321"
+    ]
+  },
+  {
+    "_id": "60eeyu338331adc26245ac27",
+    "createddate": "2021-06-25T11:50:51Z",
+    "createdby": "EHC",
+    "modifieddate": "2021-06-25T11:50:51Z",
+    "modifiedby": "EHC",
+    "dbname": "NX4_CTS_SURFACE_EQUIPMENT",
+    "retentionpolicy": "autogen",
+    "measurementname": "TUBING_POWER_PACK_SKID_WS-88",
+    "brandname": "TUBING POWER PACK SKID",
+    "brandcode": "WS-88",
+    "technologycode": "NX4",
+    "technologyname": "CTS SURFACE EQUIPMENT",
+    "status": "Enabled",
+    "equipmentcodes": [
+      "TPS-933"
+    ]
+  },
+  {
+    "_id": "60d89554cd2d0e7af4c129456",
+    "createddate": "2021-06-25T11:50:51Z",
+    "createdby": "EHC",
+    "modifieddate": "2021-06-25T11:50:51Z",
+    "modifiedby": "EHC",
+    "dbname": "DXG_WCS_PUMPING_EQUIPMENT",
+    "retentionpolicy": "autogen",
+    "measurementname": "CEMENT_PUMP_WS-15",
+    "brandname": "CEMENT PUMP",
+    "brandcode": "WS-15",
+    "technologycode": "Q13",
+    "technologyname": "WCS PUMPING EQUIPMENT",
+    "status": "Enabled",
+    "equipmentcodes": [
+      "CPF-377"
+    ]
+  }
+]

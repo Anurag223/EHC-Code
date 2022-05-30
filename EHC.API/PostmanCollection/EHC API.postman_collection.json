@@ -1,0 +1,3482 @@
+{
+	"info": {
+		"_postman_id": "fbabb396-d0cc-436f-be90-db10f220c603",
+		"name": "EHC API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "ChannelDefinitions",
+			"item": [
+				{
+					"name": "Channel Definition",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-apikey",
+								"type": "text",
+								"value": "{{apiKey}}"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{apigeeUrl}}/channel-definitions",
+							"host": [
+								"{{apigeeUrl}}"
+							],
+							"path": [
+								"channel-definitions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Channel Definition By Code",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-apikey",
+								"type": "text",
+								"value": "{{apiKey}}"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{apigeeUrl}}/channel-definitions/:channelcode",
+							"host": [
+								"{{apigeeUrl}}"
+							],
+							"path": [
+								"channel-definitions",
+								":channelcode"
+							],
+							"variable": [
+								{
+									"key": "channelcode",
+									"value": "{{channelCode}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Channel Definition",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true,
+							"content-type": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "x-apikey",
+								"value": "{{apiKey}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \n    \n    \"code\": \"test1\",\n    \"name\": \"test1\",\n    \"dimension\": \"test1\",\n    \"uom\": \"test1\",\n    \"type\": \"test1\",\n    \"legalClassification\": \"test1\"\n}"
+						},
+						"url": {
+							"raw": "{{apigeeUrl}}/channel-definitions",
+							"host": [
+								"{{apigeeUrl}}"
+							],
+							"path": [
+								"channel-definitions"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"createdDate\": \"<dateTime>\",\n    \"modifiedDate\": \"<dateTime>\",\n    \"id\": \"<string>\",\n    \"createdBy\": \"<string>\",\n    \"modifiedBy\": \"<string>\",\n    \"code\": \"<string>\",\n    \"name\": \"<string>\",\n    \"dimension\": \"<string>\",\n    \"uom\": \"<string>\",\n    \"type\": \"<string>\",\n    \"legalClassification\": \"<string>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/v2/channel-definitions",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"v2",
+										"channel-definitions"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"createdDate\": \"<dateTime>\",\n \"modifiedDate\": \"<dateTime>\",\n \"id\": \"<string>\",\n \"createdBy\": \"<string>\",\n \"modifiedBy\": \"<string>\",\n \"code\": \"<string>\",\n \"name\": \"<string>\",\n \"dimension\": \"<string>\",\n \"uom\": \"<string>\",\n \"type\": \"<string>\",\n \"legalClassification\": \"<string>\"\n}"
+						},
+						{
+							"name": "Forbidden",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"createdDate\": \"<dateTime>\",\n    \"modifiedDate\": \"<dateTime>\",\n    \"id\": \"<string>\",\n    \"createdBy\": \"<string>\",\n    \"modifiedBy\": \"<string>\",\n    \"code\": \"<string>\",\n    \"name\": \"<string>\",\n    \"dimension\": \"<string>\",\n    \"uom\": \"<string>\",\n    \"type\": \"<string>\",\n    \"legalClassification\": \"<string>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/v2/channel-definitions",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"v2",
+										"channel-definitions"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Bad Request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"createdDate\": \"<dateTime>\",\n    \"modifiedDate\": \"<dateTime>\",\n    \"id\": \"<string>\",\n    \"createdBy\": \"<string>\",\n    \"modifiedBy\": \"<string>\",\n    \"code\": \"<string>\",\n    \"name\": \"<string>\",\n    \"dimension\": \"<string>\",\n    \"uom\": \"<string>\",\n    \"type\": \"<string>\",\n    \"legalClassification\": \"<string>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/v2/channel-definitions",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"v2",
+										"channel-definitions"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"errors\": [\n  {\n   \"code\": \"ad cupidatat deserunt sint minim\",\n   \"detail\": \"Duis\",\n   \"id\": \"Excepteur consequat\",\n   \"links\": {\n    \"actualLinks\": {},\n    \"id\": \"occaecat aliquip\"\n   },\n   \"meta\": {},\n   \"source\": {\n    \"parameter\": \"eu Duis ex\",\n    \"pointer\": \"sed sit in\",\n    \"id\": \"tempor consequat amet eu\"\n   },\n   \"status\": \"et Ut\",\n   \"title\": \"in\"\n  },\n  {\n   \"code\": \"aliquip min\",\n   \"detail\": \"culpa aliqua\",\n   \"id\": \"esse laborum in\",\n   \"links\": {\n    \"actualLinks\": {},\n    \"id\": \"ex pariatur\"\n   },\n   \"meta\": {},\n   \"source\": {\n    \"parameter\": \"tempor ea laboris reprehenderit\",\n    \"pointer\": \"est minim anim\",\n    \"id\": \"culpa elit tempor\"\n   },\n   \"status\": \"qui dese\",\n   \"title\": \"qui\"\n  }\n ],\n \"included\": [\n  {\n   \"id\": \"veniam qui\"\n  },\n  {\n   \"id\": \"sit\"\n  }\n ],\n \"links\": {},\n \"meta\": {}\n}"
+						},
+						{
+							"name": "Unauthorized",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"createdDate\": \"<dateTime>\",\n    \"modifiedDate\": \"<dateTime>\",\n    \"id\": \"<string>\",\n    \"createdBy\": \"<string>\",\n    \"modifiedBy\": \"<string>\",\n    \"code\": \"<string>\",\n    \"name\": \"<string>\",\n    \"dimension\": \"<string>\",\n    \"uom\": \"<string>\",\n    \"type\": \"<string>\",\n    \"legalClassification\": \"<string>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/v2/channel-definitions",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"v2",
+										"channel-definitions"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Channel Definition",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "x-apikey",
+								"value": "{{apiKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \n    \n    \"code\": \"test1\",\n    \"name\": \"test1\",\n    \"dimension\": \"test1\",\n    \"uom\": \"test1\",\n    \"type\": \"test1\",\n    \"legalClassification\": \"reee\"\n}"
+						},
+						"url": {
+							"raw": "{{apigeeUrl}}/channel-definitions/:code",
+							"host": [
+								"{{apigeeUrl}}"
+							],
+							"path": [
+								"channel-definitions",
+								":code"
+							],
+							"variable": [
+								{
+									"key": "code",
+									"value": "test1",
+									"description": "(Required) Specify the channel code."
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"createdDate\": \"<dateTime>\",\n    \"modifiedDate\": \"<dateTime>\",\n    \"id\": \"<string>\",\n    \"createdBy\": \"<string>\",\n    \"modifiedBy\": \"<string>\",\n    \"code\": \"<string>\",\n    \"name\": \"<string>\",\n    \"dimension\": \"<string>\",\n    \"uom\": \"<string>\",\n    \"type\": \"<string>\",\n    \"legalClassification\": \"<string>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/v2/channel-definitions/:code",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"v2",
+										"channel-definitions",
+										":code"
+									],
+									"variable": [
+										{
+											"key": "code"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"errors\": [\n  {\n   \"code\": \"cupidatat dolore occaecat qui\",\n   \"detail\": \"ea ullamco\",\n   \"id\": \"esse\",\n   \"links\": {\n    \"actualLinks\": {},\n    \"id\": \"cupidatat in\"\n   },\n   \"meta\": {},\n   \"source\": {\n    \"parameter\": \"aliquip elit\",\n    \"pointer\": \"Ut do dolore\",\n    \"id\": \"est Excepteur anim\"\n   },\n   \"status\": \"nostrud\",\n   \"title\": \"ipsum consequat ut\"\n  },\n  {\n   \"code\": \"eu incididunt deserunt\",\n   \"detail\": \"laboris reprehenderit et exercitation culpa\",\n   \"id\": \"minim sed nisi commodo\",\n   \"links\": {\n    \"actualLinks\": {},\n    \"id\": \"aliqua proident qui elit\"\n   },\n   \"meta\": {},\n   \"source\": {\n    \"parameter\": \"aliqua qui in do\",\n    \"pointer\": \"sunt consectetur mollit minim\",\n    \"id\": \"Lorem officia\"\n   },\n   \"status\": \"in\",\n   \"title\": \"commodo sint consectetur dolore\"\n  }\n ],\n \"included\": [\n  {\n   \"id\": \"Duis fugiat consectetur\"\n  },\n  {\n   \"id\": \"id velit pariatur eiusmod\"\n  }\n ],\n \"links\": {},\n \"meta\": {}\n}"
+						},
+						{
+							"name": "Bad Request",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"createdDate\": \"<dateTime>\",\n    \"modifiedDate\": \"<dateTime>\",\n    \"id\": \"<string>\",\n    \"createdBy\": \"<string>\",\n    \"modifiedBy\": \"<string>\",\n    \"code\": \"<string>\",\n    \"name\": \"<string>\",\n    \"dimension\": \"<string>\",\n    \"uom\": \"<string>\",\n    \"type\": \"<string>\",\n    \"legalClassification\": \"<string>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/v2/channel-definitions/:code",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"v2",
+										"channel-definitions",
+										":code"
+									],
+									"variable": [
+										{
+											"key": "code"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"Code\": \"INVALIDCHANNELCODE\",\n \"Detail\": \"Channel code xyz is invalid\",\n \"Source\": {\n  \"Parameter\": \"code\"\n },\n \"Status\": \"400\",\n \"Title\": \"Invalid Channel Code\"\n}"
+						},
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"createdDate\": \"<dateTime>\",\n    \"modifiedDate\": \"<dateTime>\",\n    \"id\": \"<string>\",\n    \"createdBy\": \"<string>\",\n    \"modifiedBy\": \"<string>\",\n    \"code\": \"<string>\",\n    \"name\": \"<string>\",\n    \"dimension\": \"<string>\",\n    \"uom\": \"<string>\",\n    \"type\": \"<string>\",\n    \"legalClassification\": \"<string>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/v2/channel-definitions/:code",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"v2",
+										"channel-definitions",
+										":code"
+									],
+									"variable": [
+										{
+											"key": "code"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Forbidden",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"createdDate\": \"<dateTime>\",\n    \"modifiedDate\": \"<dateTime>\",\n    \"id\": \"<string>\",\n    \"createdBy\": \"<string>\",\n    \"modifiedBy\": \"<string>\",\n    \"code\": \"<string>\",\n    \"name\": \"<string>\",\n    \"dimension\": \"<string>\",\n    \"uom\": \"<string>\",\n    \"type\": \"<string>\",\n    \"legalClassification\": \"<string>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/v2/channel-definitions/:code",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"v2",
+										"channel-definitions",
+										":code"
+									],
+									"variable": [
+										{
+											"key": "code"
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Unauthorized",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"createdDate\": \"<dateTime>\",\n    \"modifiedDate\": \"<dateTime>\",\n    \"id\": \"<string>\",\n    \"createdBy\": \"<string>\",\n    \"modifiedBy\": \"<string>\",\n    \"code\": \"<string>\",\n    \"name\": \"<string>\",\n    \"dimension\": \"<string>\",\n    \"uom\": \"<string>\",\n    \"type\": \"<string>\",\n    \"legalClassification\": \"<string>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/v2/channel-definitions/:code",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"v2",
+										"channel-definitions",
+										":code"
+									],
+									"variable": [
+										{
+											"key": "code"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Channel Definition",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-apikey",
+								"value": "{{apiKey}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{apigeeUrl}}/channel-definitions/:code",
+							"host": [
+								"{{apigeeUrl}}"
+							],
+							"path": [
+								"channel-definitions",
+								":code"
+							],
+							"variable": [
+								{
+									"key": "code",
+									"value": "test1",
+									"description": "(Required) Specify the channel code."
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Bad Request",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/v2/channel-definitions/:code",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"v2",
+										"channel-definitions",
+										":code"
+									],
+									"variable": [
+										{
+											"key": "code"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"errors\": [\n  {\n   \"code\": \"cupidatat dolore occaecat qui\",\n   \"detail\": \"ea ullamco\",\n   \"id\": \"esse\",\n   \"links\": {\n    \"actualLinks\": {},\n    \"id\": \"cupidatat in\"\n   },\n   \"meta\": {},\n   \"source\": {\n    \"parameter\": \"aliquip elit\",\n    \"pointer\": \"Ut do dolore\",\n    \"id\": \"est Excepteur anim\"\n   },\n   \"status\": \"nostrud\",\n   \"title\": \"ipsum consequat ut\"\n  },\n  {\n   \"code\": \"eu incididunt deserunt\",\n   \"detail\": \"laboris reprehenderit et exercitation culpa\",\n   \"id\": \"minim sed nisi commodo\",\n   \"links\": {\n    \"actualLinks\": {},\n    \"id\": \"aliqua proident qui elit\"\n   },\n   \"meta\": {},\n   \"source\": {\n    \"parameter\": \"aliqua qui in do\",\n    \"pointer\": \"sunt consectetur mollit minim\",\n    \"id\": \"Lorem officia\"\n   },\n   \"status\": \"in\",\n   \"title\": \"commodo sint consectetur dolore\"\n  }\n ],\n \"included\": [\n  {\n   \"id\": \"Duis fugiat consectetur\"\n  },\n  {\n   \"id\": \"id velit pariatur eiusmod\"\n  }\n ],\n \"links\": {},\n \"meta\": {}\n}"
+						},
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/v2/channel-definitions/:code",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"v2",
+										"channel-definitions",
+										":code"
+									],
+									"variable": [
+										{
+											"key": "code"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Unauthorized",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/v2/channel-definitions/:code",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"v2",
+										"channel-definitions",
+										":code"
+									],
+									"variable": [
+										{
+											"key": "code"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/v2/channel-definitions/:code",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"v2",
+										"channel-definitions",
+										":code"
+									],
+									"variable": [
+										{
+											"key": "code"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"errors\": [\n  {\n   \"code\": \"cupidatat dolore occaecat qui\",\n   \"detail\": \"ea ullamco\",\n   \"id\": \"esse\",\n   \"links\": {\n    \"actualLinks\": {},\n    \"id\": \"cupidatat in\"\n   },\n   \"meta\": {},\n   \"source\": {\n    \"parameter\": \"aliquip elit\",\n    \"pointer\": \"Ut do dolore\",\n    \"id\": \"est Excepteur anim\"\n   },\n   \"status\": \"nostrud\",\n   \"title\": \"ipsum consequat ut\"\n  },\n  {\n   \"code\": \"eu incididunt deserunt\",\n   \"detail\": \"laboris reprehenderit et exercitation culpa\",\n   \"id\": \"minim sed nisi commodo\",\n   \"links\": {\n    \"actualLinks\": {},\n    \"id\": \"aliqua proident qui elit\"\n   },\n   \"meta\": {},\n   \"source\": {\n    \"parameter\": \"aliqua qui in do\",\n    \"pointer\": \"sunt consectetur mollit minim\",\n    \"id\": \"Lorem officia\"\n   },\n   \"status\": \"in\",\n   \"title\": \"commodo sint consectetur dolore\"\n  }\n ],\n \"included\": [\n  {\n   \"id\": \"Duis fugiat consectetur\"\n  },\n  {\n   \"id\": \"id velit pariatur eiusmod\"\n  }\n ],\n \"links\": {},\n \"meta\": {}\n}"
+						},
+						{
+							"name": "Forbidden",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/v2/channel-definitions/:code",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"v2",
+										"channel-definitions",
+										":code"
+									],
+									"variable": [
+										{
+											"key": "code"
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Channels",
+			"item": [
+				{
+					"name": "Channels",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-apikey",
+								"value": "{{apiKey}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"meta\": {\r\n    \"channels\": [\r\n      {\r\n        \"index\":  0,\r\n        \"code\": \"time\",\r\n        \"uom\": \"d\",\r\n        \"dimension\": \"time\"\r\n      },\r\n      {\r\n        \"index\":  1,\r\n        \"code\": \"AirPressure\",\r\n        \"uom\": \"kPa\",\r\n        \"dimension\": \"pressure\"\r\n      },\r\n      {\r\n        \"index\": 2,\r\n        \"code\": \"CMT_TRUCK_FLUID_VOL_TOT\",\r\n        \"uom\": \"m3\",\r\n        \"dimension\": \"volume\"\r\n      },\r\n      {\r\n        \"index\": 3,\r\n        \"code\": \"DischargeRate\",\r\n        \"uom\": \"hz\",\r\n        \"dimension\": \"frequency\"\r\n      }\r\n    ]\r\n  },\r\n  \"rows\": [\r\n    [\r\n        [0, \"2019-07-29T15:30:02.156Z\"],\r\n        [1, 655829.25]\r\n    ],[\r\n        [0, \"2019-07-29T15:30:04.431Z\"],\r\n        [1, 655830.84],\r\n        [2, 491541.375],\r\n        [3, 0.0870783925056458]\r\n    ],[\r\n        [0, \"2019-07-29T15:30:07.293Z\"],\r\n        [3, 0.0871633142232895]\r\n    ]\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{apigeeUrl}}/equipment/:wkeid/channels",
+							"host": [
+								"{{apigeeUrl}}"
+							],
+							"path": [
+								"equipment",
+								":wkeid",
+								"channels"
+							],
+							"variable": [
+								{
+									"key": "wkeid",
+									"value": "{{wkeid}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Channels",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-apikey",
+								"value": "{{apiKey}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{apigeeUrl}}/equipment/:equipmentWkeId/channels?start={{startime-channels}}&end={{endtime-channels}}",
+							"host": [
+								"{{apigeeUrl}}"
+							],
+							"path": [
+								"equipment",
+								":equipmentWkeId",
+								"channels"
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "{{startime-channels}}"
+								},
+								{
+									"key": "end",
+									"value": "{{endtime-channels}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "equipmentWkeId",
+									"value": "{{wkeid}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Calculated Channels",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-apikey",
+								"type": "text",
+								"value": "{{apiKey}}",
+								"disabled": true
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{apigeeUrl}}/equipment/:equipmentWkeId/calculatedchannels/:firstChannelCode/:secondChannelCode/?fillValue={{fillValue}}&mathFunction={{mathFunction}}&start={{startime-channels}}&end={{endtime-channels}}",
+							"host": [
+								"{{apigeeUrl}}"
+							],
+							"path": [
+								"equipment",
+								":equipmentWkeId",
+								"calculatedchannels",
+								":firstChannelCode",
+								":secondChannelCode",
+								""
+							],
+							"query": [
+								{
+									"key": "fillValue",
+									"value": "{{fillValue}}"
+								},
+								{
+									"key": "mathFunction",
+									"value": "{{mathFunction}}"
+								},
+								{
+									"key": "start",
+									"value": "{{startime-channels}}"
+								},
+								{
+									"key": "end",
+									"value": "{{endtime-channels}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "equipmentWkeId",
+									"value": "{{wkeid}}"
+								},
+								{
+									"key": "firstChannelCode",
+									"value": "{{firstChannelCode}}"
+								},
+								{
+									"key": "secondChannelCode",
+									"value": "{{secondChannelCode}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Channels By Code",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-apikey",
+								"type": "text",
+								"value": "{{apiKey}}"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{apigeeUrl}}/equipment/:equipmentWkeId/channels/:code?start=2019-07-29T15:30:07.293Z&end=2019-07-30T15:30:07.500Z",
+							"host": [
+								"{{apigeeUrl}}"
+							],
+							"path": [
+								"equipment",
+								":equipmentWkeId",
+								"channels",
+								":code"
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "2019-07-29T15:30:07.293Z"
+								},
+								{
+									"key": "end",
+									"value": "2019-07-30T15:30:07.500Z"
+								}
+							],
+							"variable": [
+								{
+									"key": "equipmentWkeId",
+									"value": "{{wkeid}}"
+								},
+								{
+									"key": "code",
+									"value": "{{channelCode}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Channels By LatestTimeStamp",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-apikey",
+								"type": "text",
+								"value": "{{apiKey}}"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{apigeeUrl}}/equipment/:equipmentWkeId/latesttimestamp/:code",
+							"host": [
+								"{{apigeeUrl}}"
+							],
+							"path": [
+								"equipment",
+								":equipmentWkeId",
+								"latesttimestamp",
+								":code"
+							],
+							"variable": [
+								{
+									"key": "equipmentWkeId",
+									"value": "{{wkeid}}"
+								},
+								{
+									"key": "code",
+									"value": "{{channelCode}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Channels By ChannelDef",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-apikey",
+								"type": "text",
+								"value": "{{apiKey}}"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{apigeeUrl}}/equipment/:equipmentWkeId/channel-definitions",
+							"host": [
+								"{{apigeeUrl}}"
+							],
+							"path": [
+								"equipment",
+								":equipmentWkeId",
+								"channel-definitions"
+							],
+							"variable": [
+								{
+									"key": "equipmentWkeId",
+									"value": "{{wkeid}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Channels Bulk",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-apikey",
+								"type": "text",
+								"value": "{{apiKey}}"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{apigeeUrl}}/channels?equipmentWkeIdList={{wkeid}}&start={{starttime-channels}}&end={{endtime-channels}}",
+							"host": [
+								"{{apigeeUrl}}"
+							],
+							"path": [
+								"channels"
+							],
+							"query": [
+								{
+									"key": "equipmentWkeIdList",
+									"value": "{{wkeid}}"
+								},
+								{
+									"key": "start",
+									"value": "{{starttime-channels}}"
+								},
+								{
+									"key": "end",
+									"value": "{{endtime-channels}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Channels Bulk",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-apikey",
+								"type": "text",
+								"value": "{{apiKey}}"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"equipmentWkeMappings\": [\r\n{\r\n\"deviceId\": \"Pump141\",\r\n\"equipmentWkeId\": \"100051617:37441\"\r\n},\r\n{\r\n\"deviceId\": \"Pump142\",\r\n\"equipmentWkeId\": \"100051617:39125\"\r\n}\r\n],\r\n\"body\": {\r\n\"data\": [\r\n{\r\n\"deviceId\": \"All\",\r\n\"rows\": [\r\n[\r\n[\r\n2, 3.33333333\r\n],\r\n[\r\n3, 6984\r\n],\r\n[\r\n1, \"2021/11/14T20:51:28Z\"\r\n]\r\n],\r\n[\r\n[\r\n2, 4.444444444444\r\n],\r\n[\r\n3, 6988\r\n],\r\n\r\n[\r\n1, \"2021/11/13T20:51:28Z\"\r\n]\r\n],\r\n[\r\n[\r\n2, 5.555555555555\r\n],\r\n[\r\n3, 7087\r\n],\r\n\r\n[\r\n1, \"2021/11/12T20:51:28Z\"\r\n]\r\n]\r\n]\r\n},\r\n{\r\n\"deviceId\": \"Pump141\",\r\n\"rows\": [\r\n[\r\n[\r\n2,\r\n12.300000190734\r\n],\r\n[\r\n3,\r\n16984\r\n],\r\n\r\n[\r\n1,\r\n\"2021-11-14T20:51:28Z\"\r\n]\r\n],\r\n[\r\n[\r\n2,\r\n12.300000190734555\r\n],\r\n[\r\n3,\r\n26988\r\n],\r\n\r\n[\r\n1,\r\n\"2021-11-13T20:51:28Z\"\r\n]\r\n],\r\n[\r\n[\r\n2,\r\n10.199999809265666\r\n],\r\n[\r\n3,\r\n37087\r\n],\r\n\r\n[\r\n1,\r\n\"2021-11-12T20:51:28Z\"\r\n]\r\n]\r\n]\r\n}\r\n],\r\n\"channels\": [\r\n{\r\n\"code\": \"time\",\r\n\"dimension\": \"time\",\r\n\"index\": 1,\r\n\"uom\": \"d\"\r\n},\r\n{\r\n\"code\": \"Rate\",\r\n\"dimension\": \"FlowRate\",\r\n\"index\": 2,\r\n\"uom\": \"BBL/Min\"\r\n},\r\n{\r\n\"code\": \"DischargePressure\",\r\n\"dimension\": \"Pressure\",\r\n\"index\": 3,\r\n\"uom\": \"PSI\"\r\n}\r\n]\r\n}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{apigeeUrl}}/channels",
+							"host": [
+								"{{apigeeUrl}}"
+							],
+							"path": [
+								"channels"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Episodes",
+			"item": [
+				{
+					"name": "Channels By Episode ID",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-apikey",
+								"value": "{{apiKey}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{apigeeUrl}}/episodes/:id/channels",
+							"host": [
+								"{{apigeeUrl}}"
+							],
+							"path": [
+								"episodes",
+								":id",
+								"channels"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{episodeId}}",
+									"description": "(Required) Episode id."
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Bad Request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/v2/episodes/:id/channels",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"v2",
+										"episodes",
+										":id",
+										"channels"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"Code\": \"EPISODENOTFOUND\",\n \"Detail\": \"Episode not found 34asdjkas1\",\n \"Source\": {\n  \"Parameter\": \"episodeid\"\n },\n \"Status\": \"400\",\n \"Title\": \"Episode Not Found\"\n}"
+						},
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/v2/episodes/:id/channels",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"v2",
+										"episodes",
+										":id",
+										"channels"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"episodeId\": \"tempor elit\",\n \"equipmentList\": [\n  {\n   \"meta\": {\n    \"equipmentWkeId\": \"ea proident deserunt officia\",\n    \"materialNumber\": \"cupidatat dolor esse\",\n    \"serialNumber\": \"labore dolor deserunt magna\",\n    \"equipmentCode\": \"dolore mollit nostrud ut\",\n    \"period\": {\n     \"end\": \"2001-07-01T11:07:04.022Z\",\n     \"start\": \"1952-08-01T17:07:06.379Z\"\n    },\n    \"channels\": [\n     {\n      \"code\": \"sint mollit\",\n      \"name\": \"aute ipsum sed\",\n      \"dimension\": \"et minim adipisicing esse\",\n      \"uom\": \"ut in\",\n      \"type\": \"pariatur\",\n      \"legalClassification\": \"eu ut sit aliquip Duis\",\n      \"index\": 13070021\n     },\n     {\n      \"code\": \"Duis ipsum\",\n      \"name\": \"cupidatat officia cillum Lorem pariatur\",\n      \"dimension\": \"nostrud minim\",\n      \"uom\": \"ad elit sunt\",\n      \"type\": \"ut esse id non\",\n      \"legalClassification\": \"enim veniam\",\n      \"index\": -5431646\n     }\n    ]\n   },\n   \"rows\": [\n    [],\n    []\n   ],\n   \"links\": {}\n  },\n  {\n   \"meta\": {\n    \"equipmentWkeId\": \"est\",\n    \"materialNumber\": \"dolore aliquip mollit esse\",\n    \"serialNumber\": \"officia ea\",\n    \"equipmentCode\": \"minim elit in ullamco\",\n    \"period\": {\n     \"end\": \"1966-01-10T20:14:00.782Z\",\n     \"start\": \"1956-10-04T17:13:21.812Z\"\n    },\n    \"channels\": [\n     {\n      \"code\": \"Excepteur incididunt deserunt irure do\",\n      \"name\": \"ex laborum veniam Ut exercitation\",\n      \"dimension\": \"aute qui\",\n      \"uom\": \"ex aute\",\n      \"type\": \"ad non incididunt id quis\",\n      \"legalClassification\": \"cillum nisi\",\n      \"index\": 78626631\n     },\n     {\n      \"code\": \"dolor do fugiat\",\n      \"name\": \"i\",\n      \"dimension\": \"veniam labore ad\",\n      \"uom\": \"irure u\",\n      \"type\": \"non incididunt\",\n      \"legalClassification\": \"non cupidatat\",\n      \"index\": -94286780\n     }\n    ]\n   },\n   \"rows\": [\n    [],\n    []\n   ],\n   \"links\": {}\n  }\n ],\n \"equipmentWkeMappings\": [\n  {\n   \"deviceId\": \"do ullamco velit\",\n   \"equipmentWkeId\": \"ullamco sit officia\"\n  },\n  {\n   \"deviceId\": \"sint\",\n   \"equipmentWkeId\": \"elit aliqua ut aute\"\n  }\n ],\n \"body\": {},\n \"links\": {}\n}"
+						},
+						{
+							"name": "Forbidden",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/v2/episodes/:id/channels",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"v2",
+										"episodes",
+										":id",
+										"channels"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/v2/episodes/:id/channels",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"v2",
+										"episodes",
+										":id",
+										"channels"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"errors\": [\n  {\n   \"code\": \"cupidatat dolore occaecat qui\",\n   \"detail\": \"ea ullamco\",\n   \"id\": \"esse\",\n   \"links\": {\n    \"actualLinks\": {},\n    \"id\": \"cupidatat in\"\n   },\n   \"meta\": {},\n   \"source\": {\n    \"parameter\": \"aliquip elit\",\n    \"pointer\": \"Ut do dolore\",\n    \"id\": \"est Excepteur anim\"\n   },\n   \"status\": \"nostrud\",\n   \"title\": \"ipsum consequat ut\"\n  },\n  {\n   \"code\": \"eu incididunt deserunt\",\n   \"detail\": \"laboris reprehenderit et exercitation culpa\",\n   \"id\": \"minim sed nisi commodo\",\n   \"links\": {\n    \"actualLinks\": {},\n    \"id\": \"aliqua proident qui elit\"\n   },\n   \"meta\": {},\n   \"source\": {\n    \"parameter\": \"aliqua qui in do\",\n    \"pointer\": \"sunt consectetur mollit minim\",\n    \"id\": \"Lorem officia\"\n   },\n   \"status\": \"in\",\n   \"title\": \"commodo sint consectetur dolore\"\n  }\n ],\n \"included\": [\n  {\n   \"id\": \"Duis fugiat consectetur\"\n  },\n  {\n   \"id\": \"id velit pariatur eiusmod\"\n  }\n ],\n \"links\": {},\n \"meta\": {}\n}"
+						},
+						{
+							"name": "Unauthorized",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/v2/episodes/:id/channels",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"v2",
+										"episodes",
+										":id",
+										"channels"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Episode",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "x-apikey",
+								"value": "{{apiKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n  \n  \"name\": \"Avatar Coring 1\",\n  \"startTime\": \"2020-01-15T17:06:21.810Z\",\n  \"endTime\": \"2020-01-15T18:03:52.934Z\",\n  \"type\": \"Coring\",\n  \"parentId\": \"61bb358cfa464e9f01d35864\",\n  \"tags\": [\n    \"avatar-id:purina\",\n    \"avatar-run-id:A61A9864-9302-491B-B146-64FDFA8DAD06\",\n    \"slb-correlation-id:73326016-6010-414e-b731-24e9913a9b45\"\n  ],\n  \"equipmentWkeIdList\": [\n    \"100245635:CPF37708Y0727\"\n  ],\n  \"channels\": [\n    {\n      \"index\": 0,\n      \"code\": \"time\",\n      \"uom\": \"d\",\n      \"dimension\": \"time\"\n    },\n    {\n      \"index\": 1,\n      \"code\": \"DischargeRate\",\n      \"uom\": \"hz\",\n      \"dimension\": \"frequency\"\n    }    \n  ],\n  \"data\": [\n    {\n      \"equipmentWkeId\": \"100245635:CPF37708Y0727\",\n      \"rows\": [\n        [\n          [ 0, \"2020-01-15T13:30:02.156Z\" ],\n          [ 1, 0.22 ]\n        ]\n      ]\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{apigeeUrl}}/episodes/:id",
+							"host": [
+								"{{apigeeUrl}}"
+							],
+							"path": [
+								"episodes",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "61bb358cfa464e9f01d35864",
+									"description": "(Required) Episode id."
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"createdDate\": \"<dateTime>\",\n    \"endTime\": \"<dateTime>\",\n    \"modifiedDate\": \"<dateTime>\",\n    \"startTime\": \"<dateTime>\",\n    \"id\": \"<string>\",\n    \"createdBy\": \"<string>\",\n    \"modifiedBy\": \"<string>\",\n    \"data\": [\n        {\n            \"equipmentWkeId\": \"<string>\",\n            \"rows\": [\n                [\n                    \"<object>\",\n                    \"<object>\"\n                ],\n                [\n                    \"<object>\",\n                    \"<object>\"\n                ]\n            ]\n        },\n        {\n            \"equipmentWkeId\": \"<string>\",\n            \"rows\": [\n                [\n                    \"<object>\",\n                    \"<object>\"\n                ],\n                [\n                    \"<object>\",\n                    \"<object>\"\n                ]\n            ]\n        }\n    ],\n    \"channels\": [\n        {\n            \"index\": \"<integer>\",\n            \"code\": \"<string>\",\n            \"uom\": \"<string>\",\n            \"dimension\": \"<string>\"\n        },\n        {\n            \"index\": \"<integer>\",\n            \"code\": \"<string>\",\n            \"uom\": \"<string>\",\n            \"dimension\": \"<string>\"\n        }\n    ],\n    \"name\": \"<string>\",\n    \"type\": \"<string>\",\n    \"parentId\": \"<string>\",\n    \"tags\": [\n        \"<string>\",\n        \"<string>\"\n    ],\n    \"equipmentWkeIdList\": [\n        \"<string>\",\n        \"<string>\"\n    ],\n    \"relationships\": \"<object>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/v2/episodes/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"v2",
+										"episodes",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"errors\": [\n  {\n   \"code\": \"cupidatat dolore occaecat qui\",\n   \"detail\": \"ea ullamco\",\n   \"id\": \"esse\",\n   \"links\": {\n    \"actualLinks\": {},\n    \"id\": \"cupidatat in\"\n   },\n   \"meta\": {},\n   \"source\": {\n    \"parameter\": \"aliquip elit\",\n    \"pointer\": \"Ut do dolore\",\n    \"id\": \"est Excepteur anim\"\n   },\n   \"status\": \"nostrud\",\n   \"title\": \"ipsum consequat ut\"\n  },\n  {\n   \"code\": \"eu incididunt deserunt\",\n   \"detail\": \"laboris reprehenderit et exercitation culpa\",\n   \"id\": \"minim sed nisi commodo\",\n   \"links\": {\n    \"actualLinks\": {},\n    \"id\": \"aliqua proident qui elit\"\n   },\n   \"meta\": {},\n   \"source\": {\n    \"parameter\": \"aliqua qui in do\",\n    \"pointer\": \"sunt consectetur mollit minim\",\n    \"id\": \"Lorem officia\"\n   },\n   \"status\": \"in\",\n   \"title\": \"commodo sint consectetur dolore\"\n  }\n ],\n \"included\": [\n  {\n   \"id\": \"Duis fugiat consectetur\"\n  },\n  {\n   \"id\": \"id velit pariatur eiusmod\"\n  }\n ],\n \"links\": {},\n \"meta\": {}\n}"
+						},
+						{
+							"name": "Forbidden",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"createdDate\": \"<dateTime>\",\n    \"endTime\": \"<dateTime>\",\n    \"modifiedDate\": \"<dateTime>\",\n    \"startTime\": \"<dateTime>\",\n    \"id\": \"<string>\",\n    \"createdBy\": \"<string>\",\n    \"modifiedBy\": \"<string>\",\n    \"data\": [\n        {\n            \"equipmentWkeId\": \"<string>\",\n            \"rows\": [\n                [\n                    \"<object>\",\n                    \"<object>\"\n                ],\n                [\n                    \"<object>\",\n                    \"<object>\"\n                ]\n            ]\n        },\n        {\n            \"equipmentWkeId\": \"<string>\",\n            \"rows\": [\n                [\n                    \"<object>\",\n                    \"<object>\"\n                ],\n                [\n                    \"<object>\",\n                    \"<object>\"\n                ]\n            ]\n        }\n    ],\n    \"channels\": [\n        {\n            \"index\": \"<integer>\",\n            \"code\": \"<string>\",\n            \"uom\": \"<string>\",\n            \"dimension\": \"<string>\"\n        },\n        {\n            \"index\": \"<integer>\",\n            \"code\": \"<string>\",\n            \"uom\": \"<string>\",\n            \"dimension\": \"<string>\"\n        }\n    ],\n    \"name\": \"<string>\",\n    \"type\": \"<string>\",\n    \"parentId\": \"<string>\",\n    \"tags\": [\n        \"<string>\",\n        \"<string>\"\n    ],\n    \"equipmentWkeIdList\": [\n        \"<string>\",\n        \"<string>\"\n    ],\n    \"relationships\": \"<object>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/v2/episodes/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"v2",
+										"episodes",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"createdDate\": \"<dateTime>\",\n    \"endTime\": \"<dateTime>\",\n    \"modifiedDate\": \"<dateTime>\",\n    \"startTime\": \"<dateTime>\",\n    \"id\": \"<string>\",\n    \"createdBy\": \"<string>\",\n    \"modifiedBy\": \"<string>\",\n    \"data\": [\n        {\n            \"equipmentWkeId\": \"<string>\",\n            \"rows\": [\n                [\n                    \"<object>\",\n                    \"<object>\"\n                ],\n                [\n                    \"<object>\",\n                    \"<object>\"\n                ]\n            ]\n        },\n        {\n            \"equipmentWkeId\": \"<string>\",\n            \"rows\": [\n                [\n                    \"<object>\",\n                    \"<object>\"\n                ],\n                [\n                    \"<object>\",\n                    \"<object>\"\n                ]\n            ]\n        }\n    ],\n    \"channels\": [\n        {\n            \"index\": \"<integer>\",\n            \"code\": \"<string>\",\n            \"uom\": \"<string>\",\n            \"dimension\": \"<string>\"\n        },\n        {\n            \"index\": \"<integer>\",\n            \"code\": \"<string>\",\n            \"uom\": \"<string>\",\n            \"dimension\": \"<string>\"\n        }\n    ],\n    \"name\": \"<string>\",\n    \"type\": \"<string>\",\n    \"parentId\": \"<string>\",\n    \"tags\": [\n        \"<string>\",\n        \"<string>\"\n    ],\n    \"equipmentWkeIdList\": [\n        \"<string>\",\n        \"<string>\"\n    ],\n    \"relationships\": \"<object>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/v2/episodes/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"v2",
+										"episodes",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Bad Request",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"createdDate\": \"<dateTime>\",\n    \"endTime\": \"<dateTime>\",\n    \"modifiedDate\": \"<dateTime>\",\n    \"startTime\": \"<dateTime>\",\n    \"id\": \"<string>\",\n    \"createdBy\": \"<string>\",\n    \"modifiedBy\": \"<string>\",\n    \"data\": [\n        {\n            \"equipmentWkeId\": \"<string>\",\n            \"rows\": [\n                [\n                    \"<object>\",\n                    \"<object>\"\n                ],\n                [\n                    \"<object>\",\n                    \"<object>\"\n                ]\n            ]\n        },\n        {\n            \"equipmentWkeId\": \"<string>\",\n            \"rows\": [\n                [\n                    \"<object>\",\n                    \"<object>\"\n                ],\n                [\n                    \"<object>\",\n                    \"<object>\"\n                ]\n            ]\n        }\n    ],\n    \"channels\": [\n        {\n            \"index\": \"<integer>\",\n            \"code\": \"<string>\",\n            \"uom\": \"<string>\",\n            \"dimension\": \"<string>\"\n        },\n        {\n            \"index\": \"<integer>\",\n            \"code\": \"<string>\",\n            \"uom\": \"<string>\",\n            \"dimension\": \"<string>\"\n        }\n    ],\n    \"name\": \"<string>\",\n    \"type\": \"<string>\",\n    \"parentId\": \"<string>\",\n    \"tags\": [\n        \"<string>\",\n        \"<string>\"\n    ],\n    \"equipmentWkeIdList\": [\n        \"<string>\",\n        \"<string>\"\n    ],\n    \"relationships\": \"<object>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/v2/episodes/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"v2",
+										"episodes",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"Code\": \"EPISODENOTFOUND\",\n \"Detail\": \"Episode not found 34asdjkas1\",\n \"Source\": {\n  \"Parameter\": \"episodeid\"\n },\n \"Status\": \"400\",\n \"Title\": \"Episode Not Found\"\n}"
+						},
+						{
+							"name": "Unauthorized",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"createdDate\": \"<dateTime>\",\n    \"endTime\": \"<dateTime>\",\n    \"modifiedDate\": \"<dateTime>\",\n    \"startTime\": \"<dateTime>\",\n    \"id\": \"<string>\",\n    \"createdBy\": \"<string>\",\n    \"modifiedBy\": \"<string>\",\n    \"data\": [\n        {\n            \"equipmentWkeId\": \"<string>\",\n            \"rows\": [\n                [\n                    \"<object>\",\n                    \"<object>\"\n                ],\n                [\n                    \"<object>\",\n                    \"<object>\"\n                ]\n            ]\n        },\n        {\n            \"equipmentWkeId\": \"<string>\",\n            \"rows\": [\n                [\n                    \"<object>\",\n                    \"<object>\"\n                ],\n                [\n                    \"<object>\",\n                    \"<object>\"\n                ]\n            ]\n        }\n    ],\n    \"channels\": [\n        {\n            \"index\": \"<integer>\",\n            \"code\": \"<string>\",\n            \"uom\": \"<string>\",\n            \"dimension\": \"<string>\"\n        },\n        {\n            \"index\": \"<integer>\",\n            \"code\": \"<string>\",\n            \"uom\": \"<string>\",\n            \"dimension\": \"<string>\"\n        }\n    ],\n    \"name\": \"<string>\",\n    \"type\": \"<string>\",\n    \"parentId\": \"<string>\",\n    \"tags\": [\n        \"<string>\",\n        \"<string>\"\n    ],\n    \"equipmentWkeIdList\": [\n        \"<string>\",\n        \"<string>\"\n    ],\n    \"relationships\": \"<object>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/v2/episodes/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"v2",
+										"episodes",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Episodes",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-apikey",
+								"value": "{{apiKey}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{apigeeUrl}}/episodes",
+							"host": [
+								"{{apigeeUrl}}"
+							],
+							"path": [
+								"episodes"
+							],
+							"query": [
+								{
+									"key": "page[number]",
+									"value": "1",
+									"description": "(Required) ",
+									"disabled": true
+								},
+								{
+									"key": "page[size]",
+									"value": "25",
+									"description": "(Required) ",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "-ModifiedDate",
+									"disabled": true
+								},
+								{
+									"key": "filter[name]",
+									"value": "",
+									"description": "Filter by <strong>name</strong>. Separate multiple values with a comma.",
+									"disabled": true
+								},
+								{
+									"key": "filter[startTime]",
+									"value": "<YYYY-MM-DDThh-mm-ss.fffZ>",
+									"description": "Filter by <strong>start time</strong>. Separate multiple values with a comma.",
+									"disabled": true
+								},
+								{
+									"key": "filter[endTime]",
+									"value": "<YYYY-MM-DDThh-mm-ss.fffZ>",
+									"description": "Filter by <strong>end time</strong>. Separate multiple values with a comma.",
+									"disabled": true
+								},
+								{
+									"key": "filter[type]",
+									"value": "",
+									"description": "Filter by <strong>type</strong>. Separate multiple values with a comma.",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/v2/episodes?page[number]=1&page[size]=25&sort=-ModifiedDate&filter[name]=&filter[startTime]=<YYYY-MM-DDThh-mm-ss.fffZ>&filter[endTime]=<YYYY-MM-DDThh-mm-ss.fffZ>&filter[type]=",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"v2",
+										"episodes"
+									],
+									"query": [
+										{
+											"key": "page[number]",
+											"value": "1"
+										},
+										{
+											"key": "page[size]",
+											"value": "25"
+										},
+										{
+											"key": "sort",
+											"value": "-ModifiedDate"
+										},
+										{
+											"key": "filter[name]",
+											"value": ""
+										},
+										{
+											"key": "filter[startTime]",
+											"value": "<YYYY-MM-DDThh-mm-ss.fffZ>"
+										},
+										{
+											"key": "filter[endTime]",
+											"value": "<YYYY-MM-DDThh-mm-ss.fffZ>"
+										},
+										{
+											"key": "filter[type]",
+											"value": ""
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"data\": [\n  {\n   \"attributes\": {\n    \"createdDate\": \"1999-11-22T12:27:33.294Z\",\n    \"endTime\": \"1970-11-10T09:45:28.725Z\",\n    \"modifiedDate\": \"1948-04-25T07:54:46.705Z\",\n    \"startTime\": \"1970-10-19T20:55:14.105Z\",\n    \"id\": \"consectetur sunt consequat dolore\",\n    \"createdBy\": \"elit laboris mollit\",\n    \"modifiedBy\": \"ut culpa deserunt\",\n    \"name\": \"deserunt eiusmod\",\n    \"type\": \"pariatur sint sed\",\n    \"parentId\": \"qui\",\n    \"tags\": [\n     \"sunt veniam voluptate\",\n     \"officia ut\"\n    ],\n    \"equipmentWkeIdList\": [\n     \"non tempor velit enim\",\n     \"aute ut in Excepteur\"\n    ],\n    \"relationships\": {}\n   },\n   \"links\": {},\n   \"meta\": {},\n   \"relationships\": {},\n   \"type\": \"incididunt\",\n   \"id\": \"ullamco in ipsum proident\"\n  },\n  {\n   \"attributes\": {\n    \"createdDate\": \"2016-05-29T10:31:49.243Z\",\n    \"endTime\": \"2006-04-15T16:31:21.272Z\",\n    \"modifiedDate\": \"2007-06-04T23:17:49.733Z\",\n    \"startTime\": \"2006-07-25T11:20:36.167Z\",\n    \"id\": \"ex cupidatat proident\",\n    \"createdBy\": \"tempor in\",\n    \"modifiedBy\": \"minim incididunt nulla occaecat\",\n    \"name\": \"dolor\",\n    \"type\": \"sunt\",\n    \"parentId\": \"tempor voluptate cillum eiusmod dolor\",\n    \"tags\": [\n     \"ex in\",\n     \"Duis velit\"\n    ],\n    \"equipmentWkeIdList\": [\n     \"aliquip cillum id officia\",\n     \"ex in\"\n    ],\n    \"relationships\": {}\n   },\n   \"links\": {},\n   \"meta\": {},\n   \"relationships\": {},\n   \"type\": \"ullamco est amet\",\n   \"id\": \"Lorem aliqua sunt sint magna\"\n  }\n ],\n \"errors\": [\n  {\n   \"code\": \"sed tempor ut\",\n   \"detail\": \"Ut anim reprehenderit\",\n   \"id\": \"in id Duis\",\n   \"links\": {\n    \"actualLinks\": {},\n    \"id\": \"minim nostrud sed\"\n   },\n   \"meta\": {},\n   \"source\": {\n    \"parameter\": \"dolore mollit\",\n    \"pointer\": \"in id reprehenderit\",\n    \"id\": \"sint velit\"\n   },\n   \"status\": \"nostrud\",\n   \"title\": \"exercitation in Duis\"\n  },\n  {\n   \"code\": \"mollit \",\n   \"detail\": \"pariatur reprehenderit eiusmod Duis\",\n   \"id\": \"consequat\",\n   \"links\": {\n    \"actualLinks\": {},\n    \"id\": \"Ut est\"\n   },\n   \"meta\": {},\n   \"source\": {\n    \"parameter\": \"cillum in amet\",\n    \"pointer\": \"Excep\",\n    \"id\": \"a\"\n   },\n   \"status\": \"sit ut dolor\",\n   \"title\": \"mollit\"\n  }\n ],\n \"included\": [\n  {\n   \"id\": \"incididunt est Lorem nostrud\"\n  },\n  {\n   \"id\": \"eiusmod occaecat exercitation cupidatat\"\n  }\n ],\n \"links\": {},\n \"meta\": {}\n}"
+						},
+						{
+							"name": "Forbidden",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/v2/episodes?page[number]=1&page[size]=25&sort=-ModifiedDate&filter[name]=&filter[startTime]=<YYYY-MM-DDThh-mm-ss.fffZ>&filter[endTime]=<YYYY-MM-DDThh-mm-ss.fffZ>&filter[type]=",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"v2",
+										"episodes"
+									],
+									"query": [
+										{
+											"key": "page[number]",
+											"value": "1"
+										},
+										{
+											"key": "page[size]",
+											"value": "25"
+										},
+										{
+											"key": "sort",
+											"value": "-ModifiedDate"
+										},
+										{
+											"key": "filter[name]",
+											"value": ""
+										},
+										{
+											"key": "filter[startTime]",
+											"value": "<YYYY-MM-DDThh-mm-ss.fffZ>"
+										},
+										{
+											"key": "filter[endTime]",
+											"value": "<YYYY-MM-DDThh-mm-ss.fffZ>"
+										},
+										{
+											"key": "filter[type]",
+											"value": ""
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Unauthorized",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/v2/episodes?page[number]=1&page[size]=25&sort=-ModifiedDate&filter[name]=&filter[startTime]=<YYYY-MM-DDThh-mm-ss.fffZ>&filter[endTime]=<YYYY-MM-DDThh-mm-ss.fffZ>&filter[type]=",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"v2",
+										"episodes"
+									],
+									"query": [
+										{
+											"key": "page[number]",
+											"value": "1"
+										},
+										{
+											"key": "page[size]",
+											"value": "25"
+										},
+										{
+											"key": "sort",
+											"value": "-ModifiedDate"
+										},
+										{
+											"key": "filter[name]",
+											"value": ""
+										},
+										{
+											"key": "filter[startTime]",
+											"value": "<YYYY-MM-DDThh-mm-ss.fffZ>"
+										},
+										{
+											"key": "filter[endTime]",
+											"value": "<YYYY-MM-DDThh-mm-ss.fffZ>"
+										},
+										{
+											"key": "filter[type]",
+											"value": ""
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Bad Request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/v2/episodes?page[number]=1&page[size]=25&sort=-ModifiedDate&filter[name]=&filter[startTime]=<YYYY-MM-DDThh-mm-ss.fffZ>&filter[endTime]=<YYYY-MM-DDThh-mm-ss.fffZ>&filter[type]=",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"v2",
+										"episodes"
+									],
+									"query": [
+										{
+											"key": "page[number]",
+											"value": "1"
+										},
+										{
+											"key": "page[size]",
+											"value": "25"
+										},
+										{
+											"key": "sort",
+											"value": "-ModifiedDate"
+										},
+										{
+											"key": "filter[name]",
+											"value": ""
+										},
+										{
+											"key": "filter[startTime]",
+											"value": "<YYYY-MM-DDThh-mm-ss.fffZ>"
+										},
+										{
+											"key": "filter[endTime]",
+											"value": "<YYYY-MM-DDThh-mm-ss.fffZ>"
+										},
+										{
+											"key": "filter[type]",
+											"value": ""
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"Code\": \"INVALIDPAGESIZE1\",\n \"Detail\": \"The requested page size is -1 which is less than one\",\n \"Source\": {\n  \"Parameter\": \"page[size]\"\n },\n \"Status\": \"400\",\n \"Title\": \"Invalid Page Size(1)\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Episode by Episode ID",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-apikey",
+								"value": "{{apiKey}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{apigeeUrl}}/episodes/:id",
+							"host": [
+								"{{apigeeUrl}}"
+							],
+							"path": [
+								"episodes",
+								":id"
+							],
+							"query": [
+								{
+									"key": "filter[name]",
+									"value": "",
+									"description": "Filter by <strong>name</strong>. Separate multiple values with a comma.",
+									"disabled": true
+								},
+								{
+									"key": "filter[startTime]",
+									"value": "<YYYY-MM-DDThh-mm-ss.fffZ>",
+									"description": "Filter by <strong>start time</strong>. Separate multiple values with a comma.",
+									"disabled": true
+								},
+								{
+									"key": "filter[endTime]",
+									"value": "<YYYY-MM-DDThh-mm-ss.fffZ>",
+									"description": "Filter by <strong>end time</strong>. Separate multiple values with a comma.",
+									"disabled": true
+								},
+								{
+									"key": "filter[type]",
+									"value": "",
+									"description": "Filter by <strong>type</strong>. Separate multiple values with a comma.",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{episodeId}}",
+									"description": "(Required) Episode id."
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/v2/episodes/:id?filter[name]=&filter[startTime]=<YYYY-MM-DDThh-mm-ss.fffZ>&filter[endTime]=<YYYY-MM-DDThh-mm-ss.fffZ>&filter[type]=",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"v2",
+										"episodes",
+										":id"
+									],
+									"query": [
+										{
+											"key": "filter[name]",
+											"value": ""
+										},
+										{
+											"key": "filter[startTime]",
+											"value": "<YYYY-MM-DDThh-mm-ss.fffZ>"
+										},
+										{
+											"key": "filter[endTime]",
+											"value": "<YYYY-MM-DDThh-mm-ss.fffZ>"
+										},
+										{
+											"key": "filter[type]",
+											"value": ""
+										}
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"errors\": [\n  {\n   \"code\": \"cupidatat dolore occaecat qui\",\n   \"detail\": \"ea ullamco\",\n   \"id\": \"esse\",\n   \"links\": {\n    \"actualLinks\": {},\n    \"id\": \"cupidatat in\"\n   },\n   \"meta\": {},\n   \"source\": {\n    \"parameter\": \"aliquip elit\",\n    \"pointer\": \"Ut do dolore\",\n    \"id\": \"est Excepteur anim\"\n   },\n   \"status\": \"nostrud\",\n   \"title\": \"ipsum consequat ut\"\n  },\n  {\n   \"code\": \"eu incididunt deserunt\",\n   \"detail\": \"laboris reprehenderit et exercitation culpa\",\n   \"id\": \"minim sed nisi commodo\",\n   \"links\": {\n    \"actualLinks\": {},\n    \"id\": \"aliqua proident qui elit\"\n   },\n   \"meta\": {},\n   \"source\": {\n    \"parameter\": \"aliqua qui in do\",\n    \"pointer\": \"sunt consectetur mollit minim\",\n    \"id\": \"Lorem officia\"\n   },\n   \"status\": \"in\",\n   \"title\": \"commodo sint consectetur dolore\"\n  }\n ],\n \"included\": [\n  {\n   \"id\": \"Duis fugiat consectetur\"\n  },\n  {\n   \"id\": \"id velit pariatur eiusmod\"\n  }\n ],\n \"links\": {},\n \"meta\": {}\n}"
+						},
+						{
+							"name": "Bad Request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/v2/episodes/:id?filter[name]=&filter[startTime]=<YYYY-MM-DDThh-mm-ss.fffZ>&filter[endTime]=<YYYY-MM-DDThh-mm-ss.fffZ>&filter[type]=",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"v2",
+										"episodes",
+										":id"
+									],
+									"query": [
+										{
+											"key": "filter[name]",
+											"value": ""
+										},
+										{
+											"key": "filter[startTime]",
+											"value": "<YYYY-MM-DDThh-mm-ss.fffZ>"
+										},
+										{
+											"key": "filter[endTime]",
+											"value": "<YYYY-MM-DDThh-mm-ss.fffZ>"
+										},
+										{
+											"key": "filter[type]",
+											"value": ""
+										}
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"Code\": \"EPISODENOTFOUND\",\n \"Detail\": \"Episode not found 34asdjkas1\",\n \"Source\": {\n  \"Parameter\": \"episodeid\"\n },\n \"Status\": \"400\",\n \"Title\": \"Episode Not Found\"\n}"
+						},
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/v2/episodes/:id?filter[name]=&filter[startTime]=<YYYY-MM-DDThh-mm-ss.fffZ>&filter[endTime]=<YYYY-MM-DDThh-mm-ss.fffZ>&filter[type]=",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"v2",
+										"episodes",
+										":id"
+									],
+									"query": [
+										{
+											"key": "filter[name]",
+											"value": ""
+										},
+										{
+											"key": "filter[startTime]",
+											"value": "<YYYY-MM-DDThh-mm-ss.fffZ>"
+										},
+										{
+											"key": "filter[endTime]",
+											"value": "<YYYY-MM-DDThh-mm-ss.fffZ>"
+										},
+										{
+											"key": "filter[type]",
+											"value": ""
+										}
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"data\": {\n  \"attributes\": {\n   \"createdDate\": \"1969-03-19T04:25:11.054Z\",\n   \"endTime\": \"1960-06-06T05:41:11.212Z\",\n   \"modifiedDate\": \"2016-02-25T16:41:02.125Z\",\n   \"startTime\": \"1942-09-06T07:54:48.387Z\",\n   \"id\": \"aliqua\",\n   \"createdBy\": \"Duis sint ex \",\n   \"modifiedBy\": \"nostrud fugiat eu est\",\n   \"name\": \"volupta\",\n   \"type\": \"ex id pariatur cupidatat\",\n   \"parentId\": \"culpa elit voluptate \",\n   \"tags\": [\n    \"fugiat\",\n    \"in do nostrud deserunt\"\n   ],\n   \"equipmentWkeIdList\": [\n    \"irure dolore dolore\",\n    \"elit labore\"\n   ],\n   \"relationships\": {}\n  },\n  \"links\": {},\n  \"meta\": {},\n  \"relationships\": {},\n  \"type\": \"non cillum anim dolore\",\n  \"id\": \"anim dolore commodo Duis\"\n },\n \"errors\": [\n  {\n   \"code\": \"nulla occaecat laborum\",\n   \"detail\": \"in non laborum voluptate sint\",\n   \"id\": \"dolor in\",\n   \"links\": {\n    \"actualLinks\": {},\n    \"id\": \"ex occaecat\"\n   },\n   \"meta\": {},\n   \"source\": {\n    \"parameter\": \"sunt e\",\n    \"pointer\": \"cupidatat nostrud\",\n    \"id\": \"fugiat qui\"\n   },\n   \"status\": \"amet nostrud\",\n   \"title\": \"ex\"\n  },\n  {\n   \"code\": \"commodo esse id quis eiusmod\",\n   \"detail\": \"aute sit\",\n   \"id\": \"ipsum\",\n   \"links\": {\n    \"actualLinks\": {},\n    \"id\": \"nostrud cupidatat velit\"\n   },\n   \"meta\": {},\n   \"source\": {\n    \"parameter\": \"ad ullamco cillum mollit\",\n    \"pointer\": \"eiusmod amet ut consequat\",\n    \"id\": \"officia dolor Excepteur dolor\"\n   },\n   \"status\": \"consequat sed laborum\",\n   \"title\": \"qui sunt\"\n  }\n ],\n \"included\": [\n  {\n   \"id\": \"magna est qui adipisicing\"\n  },\n  {\n   \"id\": \"voluptate in\"\n  }\n ],\n \"links\": {},\n \"meta\": {}\n}"
+						},
+						{
+							"name": "Forbidden",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/v2/episodes/:id?filter[name]=&filter[startTime]=<YYYY-MM-DDThh-mm-ss.fffZ>&filter[endTime]=<YYYY-MM-DDThh-mm-ss.fffZ>&filter[type]=",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"v2",
+										"episodes",
+										":id"
+									],
+									"query": [
+										{
+											"key": "filter[name]",
+											"value": ""
+										},
+										{
+											"key": "filter[startTime]",
+											"value": "<YYYY-MM-DDThh-mm-ss.fffZ>"
+										},
+										{
+											"key": "filter[endTime]",
+											"value": "<YYYY-MM-DDThh-mm-ss.fffZ>"
+										},
+										{
+											"key": "filter[type]",
+											"value": ""
+										}
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Unauthorized",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/v2/episodes/:id?filter[name]=&filter[startTime]=<YYYY-MM-DDThh-mm-ss.fffZ>&filter[endTime]=<YYYY-MM-DDThh-mm-ss.fffZ>&filter[type]=",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"v2",
+										"episodes",
+										":id"
+									],
+									"query": [
+										{
+											"key": "filter[name]",
+											"value": ""
+										},
+										{
+											"key": "filter[startTime]",
+											"value": "<YYYY-MM-DDThh-mm-ss.fffZ>"
+										},
+										{
+											"key": "filter[endTime]",
+											"value": "<YYYY-MM-DDThh-mm-ss.fffZ>"
+										},
+										{
+											"key": "filter[type]",
+											"value": ""
+										}
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Episode",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "x-apikey",
+								"value": "{{apiKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n  \"name\": \"Avatar Coring 1\",\n  \"startTime\": \"2020-01-15T17:06:21.810Z\",\n  \"endTime\": \"2020-01-15T18:03:52.934Z\",\n  \"type\": \"Coring\",\n  \"parentId\": \"61bb358cfa464e9f01d35864\",\n  \"tags\": [\n    \"avatar-id:purina\",\n    \"avatar-run-id:A61A9864-9302-491B-B146-64FDFA8DAD06\",\n    \"slb-correlation-id:73326016-6010-414e-b731-24e9913a9b45\"\n  ],\n  \"equipmentWkeIdList\": [\n    \"100245635:CPF37708Y0727\"\n  ],\n  \"channels\": [\n    {\n      \"index\": 0,\n      \"code\": \"time\",\n      \"uom\": \"d\",\n      \"dimension\": \"time\"\n    },\n    {\n      \"index\": 1,\n      \"code\": \"DischargeRate\",\n      \"uom\": \"hz\",\n      \"dimension\": \"frequency\"\n    }    \n  ],\n  \"data\": [\n    {\n      \"equipmentWkeId\": \"100245635:CPF37708Y0727\",\n      \"rows\": [\n        [\n          [ 0, \"2020-01-15T13:30:02.156Z\" ],\n          [ 1, 0.11 ]\n        ]\n      ]\n    }\n  ]\n}\n"
+						},
+						"url": {
+							"raw": "{{apigeeUrl}}/episodes",
+							"host": [
+								"{{apigeeUrl}}"
+							],
+							"path": [
+								"episodes"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Bad Request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"createdDate\": \"<dateTime>\",\n    \"endTime\": \"<dateTime>\",\n    \"modifiedDate\": \"<dateTime>\",\n    \"startTime\": \"<dateTime>\",\n    \"id\": \"<string>\",\n    \"createdBy\": \"<string>\",\n    \"modifiedBy\": \"<string>\",\n    \"data\": [\n        {\n            \"equipmentWkeId\": \"<string>\",\n            \"rows\": [\n                [\n                    \"<object>\",\n                    \"<object>\"\n                ],\n                [\n                    \"<object>\",\n                    \"<object>\"\n                ]\n            ]\n        },\n        {\n            \"equipmentWkeId\": \"<string>\",\n            \"rows\": [\n                [\n                    \"<object>\",\n                    \"<object>\"\n                ],\n                [\n                    \"<object>\",\n                    \"<object>\"\n                ]\n            ]\n        }\n    ],\n    \"channels\": [\n        {\n            \"index\": \"<integer>\",\n            \"code\": \"<string>\",\n            \"uom\": \"<string>\",\n            \"dimension\": \"<string>\"\n        },\n        {\n            \"index\": \"<integer>\",\n            \"code\": \"<string>\",\n            \"uom\": \"<string>\",\n            \"dimension\": \"<string>\"\n        }\n    ],\n    \"name\": \"<string>\",\n    \"type\": \"<string>\",\n    \"parentId\": \"<string>\",\n    \"tags\": [\n        \"<string>\",\n        \"<string>\"\n    ],\n    \"equipmentWkeIdList\": [\n        \"<string>\",\n        \"<string>\"\n    ],\n    \"relationships\": \"<object>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/v2/episodes",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"v2",
+										"episodes"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"errors\": [\n  {\n   \"code\": \"cupidatat dolore occaecat qui\",\n   \"detail\": \"ea ullamco\",\n   \"id\": \"esse\",\n   \"links\": {\n    \"actualLinks\": {},\n    \"id\": \"cupidatat in\"\n   },\n   \"meta\": {},\n   \"source\": {\n    \"parameter\": \"aliquip elit\",\n    \"pointer\": \"Ut do dolore\",\n    \"id\": \"est Excepteur anim\"\n   },\n   \"status\": \"nostrud\",\n   \"title\": \"ipsum consequat ut\"\n  },\n  {\n   \"code\": \"eu incididunt deserunt\",\n   \"detail\": \"laboris reprehenderit et exercitation culpa\",\n   \"id\": \"minim sed nisi commodo\",\n   \"links\": {\n    \"actualLinks\": {},\n    \"id\": \"aliqua proident qui elit\"\n   },\n   \"meta\": {},\n   \"source\": {\n    \"parameter\": \"aliqua qui in do\",\n    \"pointer\": \"sunt consectetur mollit minim\",\n    \"id\": \"Lorem officia\"\n   },\n   \"status\": \"in\",\n   \"title\": \"commodo sint consectetur dolore\"\n  }\n ],\n \"included\": [\n  {\n   \"id\": \"Duis fugiat consectetur\"\n  },\n  {\n   \"id\": \"id velit pariatur eiusmod\"\n  }\n ],\n \"links\": {},\n \"meta\": {}\n}"
+						},
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"createdDate\": \"<dateTime>\",\n    \"endTime\": \"<dateTime>\",\n    \"modifiedDate\": \"<dateTime>\",\n    \"startTime\": \"<dateTime>\",\n    \"id\": \"<string>\",\n    \"createdBy\": \"<string>\",\n    \"modifiedBy\": \"<string>\",\n    \"data\": [\n        {\n            \"equipmentWkeId\": \"<string>\",\n            \"rows\": [\n                [\n                    \"<object>\",\n                    \"<object>\"\n                ],\n                [\n                    \"<object>\",\n                    \"<object>\"\n                ]\n            ]\n        },\n        {\n            \"equipmentWkeId\": \"<string>\",\n            \"rows\": [\n                [\n                    \"<object>\",\n                    \"<object>\"\n                ],\n                [\n                    \"<object>\",\n                    \"<object>\"\n                ]\n            ]\n        }\n    ],\n    \"channels\": [\n        {\n            \"index\": \"<integer>\",\n            \"code\": \"<string>\",\n            \"uom\": \"<string>\",\n            \"dimension\": \"<string>\"\n        },\n        {\n            \"index\": \"<integer>\",\n            \"code\": \"<string>\",\n            \"uom\": \"<string>\",\n            \"dimension\": \"<string>\"\n        }\n    ],\n    \"name\": \"<string>\",\n    \"type\": \"<string>\",\n    \"parentId\": \"<string>\",\n    \"tags\": [\n        \"<string>\",\n        \"<string>\"\n    ],\n    \"equipmentWkeIdList\": [\n        \"<string>\",\n        \"<string>\"\n    ],\n    \"relationships\": \"<object>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/v2/episodes",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"v2",
+										"episodes"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"createdDate\": \"1988-07-30T12:36:46.974Z\",\n \"endTime\": \"2016-12-31T21:13:42.266Z\",\n \"modifiedDate\": \"2018-11-01T20:06:44.921Z\",\n \"startTime\": \"1998-03-31T20:39:55.016Z\",\n \"id\": \"consectetur\",\n \"createdBy\": \"cupidatat\",\n \"modifiedBy\": \"ex in consectetur adipisicing dolor\",\n \"name\": \"laborum mollit do labore\",\n \"type\": \"proident cupidatat culpa fugiat amet\",\n \"parentId\": \"quis dolor exercitation\",\n \"tags\": [\n  \"dolore velit enim ad\",\n  \"exercitation consectetur officia anim\"\n ],\n \"equipmentWkeIdList\": [\n  \"do consequat\",\n  \"dolor ex officia Lorem irure\"\n ],\n \"relationships\": {}\n}"
+						},
+						{
+							"name": "Forbidden",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"createdDate\": \"<dateTime>\",\n    \"endTime\": \"<dateTime>\",\n    \"modifiedDate\": \"<dateTime>\",\n    \"startTime\": \"<dateTime>\",\n    \"id\": \"<string>\",\n    \"createdBy\": \"<string>\",\n    \"modifiedBy\": \"<string>\",\n    \"data\": [\n        {\n            \"equipmentWkeId\": \"<string>\",\n            \"rows\": [\n                [\n                    \"<object>\",\n                    \"<object>\"\n                ],\n                [\n                    \"<object>\",\n                    \"<object>\"\n                ]\n            ]\n        },\n        {\n            \"equipmentWkeId\": \"<string>\",\n            \"rows\": [\n                [\n                    \"<object>\",\n                    \"<object>\"\n                ],\n                [\n                    \"<object>\",\n                    \"<object>\"\n                ]\n            ]\n        }\n    ],\n    \"channels\": [\n        {\n            \"index\": \"<integer>\",\n            \"code\": \"<string>\",\n            \"uom\": \"<string>\",\n            \"dimension\": \"<string>\"\n        },\n        {\n            \"index\": \"<integer>\",\n            \"code\": \"<string>\",\n            \"uom\": \"<string>\",\n            \"dimension\": \"<string>\"\n        }\n    ],\n    \"name\": \"<string>\",\n    \"type\": \"<string>\",\n    \"parentId\": \"<string>\",\n    \"tags\": [\n        \"<string>\",\n        \"<string>\"\n    ],\n    \"equipmentWkeIdList\": [\n        \"<string>\",\n        \"<string>\"\n    ],\n    \"relationships\": \"<object>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/v2/episodes",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"v2",
+										"episodes"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Unauthorized",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"createdDate\": \"<dateTime>\",\n    \"endTime\": \"<dateTime>\",\n    \"modifiedDate\": \"<dateTime>\",\n    \"startTime\": \"<dateTime>\",\n    \"id\": \"<string>\",\n    \"createdBy\": \"<string>\",\n    \"modifiedBy\": \"<string>\",\n    \"data\": [\n        {\n            \"equipmentWkeId\": \"<string>\",\n            \"rows\": [\n                [\n                    \"<object>\",\n                    \"<object>\"\n                ],\n                [\n                    \"<object>\",\n                    \"<object>\"\n                ]\n            ]\n        },\n        {\n            \"equipmentWkeId\": \"<string>\",\n            \"rows\": [\n                [\n                    \"<object>\",\n                    \"<object>\"\n                ],\n                [\n                    \"<object>\",\n                    \"<object>\"\n                ]\n            ]\n        }\n    ],\n    \"channels\": [\n        {\n            \"index\": \"<integer>\",\n            \"code\": \"<string>\",\n            \"uom\": \"<string>\",\n            \"dimension\": \"<string>\"\n        },\n        {\n            \"index\": \"<integer>\",\n            \"code\": \"<string>\",\n            \"uom\": \"<string>\",\n            \"dimension\": \"<string>\"\n        }\n    ],\n    \"name\": \"<string>\",\n    \"type\": \"<string>\",\n    \"parentId\": \"<string>\",\n    \"tags\": [\n        \"<string>\",\n        \"<string>\"\n    ],\n    \"equipmentWkeIdList\": [\n        \"<string>\",\n        \"<string>\"\n    ],\n    \"relationships\": \"<object>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/v2/episodes",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"v2",
+										"episodes"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Episodic points by Episode ID",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-apikey",
+								"value": "{{apiKey}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{apigeeUrl}}/episodes/:id/episodic-points",
+							"host": [
+								"{{apigeeUrl}}"
+							],
+							"path": [
+								"episodes",
+								":id",
+								"episodic-points"
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "<string>",
+									"description": "Time period start (accepts multiple formats). Episode's start if empty.",
+									"disabled": true
+								},
+								{
+									"key": "end",
+									"value": "<string>",
+									"description": "Time period end (accepts multiple formats). Episode's end if empty.",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{episodeId}}",
+									"description": "(Required) Episode id."
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/v2/episodes/:id/episodic-points?start=<string>&end=<string>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"v2",
+										"episodes",
+										":id",
+										"episodic-points"
+									],
+									"query": [
+										{
+											"key": "start",
+											"value": "<string>"
+										},
+										{
+											"key": "end",
+											"value": "<string>"
+										}
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"errors\": [\n  {\n   \"code\": \"cupidatat dolore occaecat qui\",\n   \"detail\": \"ea ullamco\",\n   \"id\": \"esse\",\n   \"links\": {\n    \"actualLinks\": {},\n    \"id\": \"cupidatat in\"\n   },\n   \"meta\": {},\n   \"source\": {\n    \"parameter\": \"aliquip elit\",\n    \"pointer\": \"Ut do dolore\",\n    \"id\": \"est Excepteur anim\"\n   },\n   \"status\": \"nostrud\",\n   \"title\": \"ipsum consequat ut\"\n  },\n  {\n   \"code\": \"eu incididunt deserunt\",\n   \"detail\": \"laboris reprehenderit et exercitation culpa\",\n   \"id\": \"minim sed nisi commodo\",\n   \"links\": {\n    \"actualLinks\": {},\n    \"id\": \"aliqua proident qui elit\"\n   },\n   \"meta\": {},\n   \"source\": {\n    \"parameter\": \"aliqua qui in do\",\n    \"pointer\": \"sunt consectetur mollit minim\",\n    \"id\": \"Lorem officia\"\n   },\n   \"status\": \"in\",\n   \"title\": \"commodo sint consectetur dolore\"\n  }\n ],\n \"included\": [\n  {\n   \"id\": \"Duis fugiat consectetur\"\n  },\n  {\n   \"id\": \"id velit pariatur eiusmod\"\n  }\n ],\n \"links\": {},\n \"meta\": {}\n}"
+						},
+						{
+							"name": "Unauthorized",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/v2/episodes/:id/episodic-points?start=<string>&end=<string>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"v2",
+										"episodes",
+										":id",
+										"episodic-points"
+									],
+									"query": [
+										{
+											"key": "start",
+											"value": "<string>"
+										},
+										{
+											"key": "end",
+											"value": "<string>"
+										}
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Bad Request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/v2/episodes/:id/episodic-points?start=<string>&end=<string>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"v2",
+										"episodes",
+										":id",
+										"episodic-points"
+									],
+									"query": [
+										{
+											"key": "start",
+											"value": "<string>"
+										},
+										{
+											"key": "end",
+											"value": "<string>"
+										}
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"Code\": \"EPISODENOTFOUND\",\n \"Detail\": \"Episode not found 34asdjkas1\",\n \"Source\": {\n  \"Parameter\": \"episodeid\"\n },\n \"Status\": \"400\",\n \"Title\": \"Episode Not Found\"\n}"
+						},
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/v2/episodes/:id/episodic-points?start=<string>&end=<string>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"v2",
+										"episodes",
+										":id",
+										"episodic-points"
+									],
+									"query": [
+										{
+											"key": "start",
+											"value": "<string>"
+										},
+										{
+											"key": "end",
+											"value": "<string>"
+										}
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"episodeId\": \"do elit Ut adipisicing\",\n \"equipmentList\": [\n  {\n   \"meta\": {\n    \"equipmentWkeId\": \"eu nulla sint\",\n    \"materialNumber\": \"adipisicing elit\",\n    \"serialNumber\": \"ullamco officia adipisicing esse minim\",\n    \"equipmentCode\": \"nulla\",\n    \"period\": {\n     \"end\": \"1985-01-30T15:47:43.473Z\",\n     \"start\": \"1964-02-11T15:52:18.486Z\"\n    },\n    \"channels\": [\n     {\n      \"code\": \"sint Ut ipsum dolor\",\n      \"name\": \"tempor velit ea\",\n      \"dimension\": \"fugiat esse quis velit\",\n      \"uom\": \"nulla\",\n      \"type\": \"tempor\",\n      \"legalClassification\": \"Duis\",\n      \"index\": 1589313\n     },\n     {\n      \"code\": \"pariatur nisi proident\",\n      \"name\": \"voluptate nulla aliqua dolor culpa\",\n      \"dimension\": \"ut esse Ut do\",\n      \"uom\": \"dolor\",\n      \"type\": \"et\",\n      \"legalClassification\": \"ut\",\n      \"index\": 87906733\n     }\n    ]\n   },\n   \"rows\": [\n    [],\n    []\n   ],\n   \"links\": {}\n  },\n  {\n   \"meta\": {\n    \"equipmentWkeId\": \"pariatur mollit\",\n    \"materialNumber\": \"exercitation laborum irure eu quis\",\n    \"serialNumber\": \"Ut occaecat dol\",\n    \"equipmentCode\": \"exercitation cupidatat\",\n    \"period\": {\n     \"end\": \"2017-11-16T15:17:26.164Z\",\n     \"start\": \"2013-07-18T08:56:21.629Z\"\n    },\n    \"channels\": [\n     {\n      \"code\": \"ullamco aute\",\n      \"name\": \"consectetur est eiusmod a\",\n      \"dimension\": \"fugiat s\",\n      \"uom\": \"laborum tempor\",\n      \"type\": \"enim dolor anim Lorem\",\n      \"legalClassification\": \"ea et\",\n      \"index\": 88761240\n     },\n     {\n      \"code\": \"reprehenderit quis Ut minim\",\n      \"name\": \"aute Lorem enim\",\n      \"dimension\": \"in non do mollit\",\n      \"uom\": \"aliquip et in\",\n      \"type\": \"velit nostrud nisi\",\n      \"legalClassification\": \"in officia ullamco Ut\",\n      \"index\": 74971126\n     }\n    ]\n   },\n   \"rows\": [\n    [],\n    []\n   ],\n   \"links\": {}\n  }\n ],\n \"equipmentWkeMappings\": [\n  {\n   \"deviceId\": \"est pariatur Duis et\",\n   \"equipmentWkeId\": \"aute minim eiusmod proident\"\n  },\n  {\n   \"deviceId\": \"ad est commodo\",\n   \"equipmentWkeId\": \"elit\"\n  }\n ],\n \"body\": {},\n \"links\": {}\n}"
+						},
+						{
+							"name": "Forbidden",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/v2/episodes/:id/episodic-points?start=<string>&end=<string>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"v2",
+										"episodes",
+										":id",
+										"episodic-points"
+									],
+									"query": [
+										{
+											"key": "start",
+											"value": "<string>"
+										},
+										{
+											"key": "end",
+											"value": "<string>"
+										}
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Episodic-Points",
+			"item": [
+				{
+					"name": "Episodic Points",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "x-apikey",
+								"value": "{{apiKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"meta\": {\r\n  \t\"episodeId\": \"61447931cc519111e428d68e\",\r\n    \"channels\": [\r\n      {\r\n        \"index\":  0,\r\n        \"code\": \"time\",\r\n        \"uom\": \"d\",\r\n        \"dimension\": \"time\"\r\n      },\r\n      {\r\n        \"index\":  1,\r\n        \"code\": \"AirPressure\",\r\n        \"uom\": \"kPa\",\r\n        \"dimension\": \"pressure\"\r\n      },\r\n      {\r\n        \"index\": 2,\r\n        \"code\": \"CMT_TRUCK_FLUID_VOL_TOT\",\r\n        \"uom\": \"m3\",\r\n        \"dimension\": \"volume\"\r\n      },\r\n      {\r\n        \"index\": 3,\r\n        \"code\": \"DischargeRate\",\r\n        \"uom\": \"hz\",\r\n        \"dimension\": \"frequency\"\r\n      }\r\n    ]\r\n  },\r\n  \"rows\": [\r\n    [\r\n        [0, \"2019-07-29T15:30:02.156Z\"],\r\n        [1, 655829.25]\r\n    ],[\r\n        [0, \"2019-07-29T15:30:04.431Z\"],\r\n        [1, 655830.84],\r\n        [2, 491541.375],\r\n        [3, 0.0870783925056458]\r\n    ],[\r\n        [0, \"2019-07-29T15:30:07.293Z\"],\r\n        [3, 0.0871633142232895]\r\n    ]\r\n  ]\r\n}"
+						},
+						"url": {
+							"raw": "{{apigeeUrl}}/equipment/:equipmentWkeId/episodic-points",
+							"host": [
+								"{{apigeeUrl}}"
+							],
+							"path": [
+								"equipment",
+								":equipmentWkeId",
+								"episodic-points"
+							],
+							"variable": [
+								{
+									"key": "equipmentWkeId",
+									"value": "{{wkeid}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Episodic Points",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-apikey",
+								"value": "{{apiKey}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{apigeeUrl}}/equipment/:equipmentWkeId/episodic-points",
+							"host": [
+								"{{apigeeUrl}}"
+							],
+							"path": [
+								"equipment",
+								":equipmentWkeId",
+								"episodic-points"
+							],
+							"variable": [
+								{
+									"key": "equipmentWkeId",
+									"value": "{{wkeid}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Episodic Points By ChannelCode- DEV",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-apikey",
+								"value": "{{apiKey}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{apigeeUrl}}/equipment/:equipmentWkeId/episodic-points/:channelCode",
+							"host": [
+								"{{apigeeUrl}}"
+							],
+							"path": [
+								"equipment",
+								":equipmentWkeId",
+								"episodic-points",
+								":channelCode"
+							],
+							"variable": [
+								{
+									"key": "equipmentWkeId",
+									"value": "{{wkeid}}"
+								},
+								{
+									"key": "channelCode",
+									"value": "{{channelCode}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Episodic Points By ChannelCode - QA/PROD",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-apikey",
+								"value": "{{apiKey}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{apigeeUrl}}/equipment/:equipmentWkeId/episodic-points/:channelCode",
+							"host": [
+								"{{apigeeUrl}}"
+							],
+							"path": [
+								"equipment",
+								":equipmentWkeId",
+								"episodic-points",
+								":channelCode"
+							],
+							"variable": [
+								{
+									"key": "equipmentWkeId",
+									"value": "{{episodic-wkeid}}"
+								},
+								{
+									"key": "channelCode",
+									"value": "{{episodic-channelcode}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Episodic Points Definitions -DEV",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-apikey",
+								"value": "{{apiKey}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{apigeeUrl}}/equipment/:equipmentWkeId/reading-definitions",
+							"host": [
+								"{{apigeeUrl}}"
+							],
+							"path": [
+								"equipment",
+								":equipmentWkeId",
+								"reading-definitions"
+							],
+							"variable": [
+								{
+									"key": "equipmentWkeId",
+									"value": "{{wkeid}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Episodic Points Definitions - QA/PROD",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-apikey",
+								"type": "text",
+								"value": "{{apiKey}}"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{apigeeUrl}}/equipment/:equipmentWkeId/episodic-point-definitions",
+							"host": [
+								"{{apigeeUrl}}"
+							],
+							"path": [
+								"equipment",
+								":equipmentWkeId",
+								"episodic-point-definitions"
+							],
+							"variable": [
+								{
+									"key": "equipmentWkeId",
+									"value": "{{episodic-wkeid}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Readings",
+			"item": [
+				{
+					"name": "Readings",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "x-apikey",
+								"value": "{{apiKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"meta\": {\r\n    \"channels\": [\r\n      {\r\n        \"index\":  0,\r\n        \"code\": \"time\",\r\n        \"uom\": \"d\",\r\n        \"dimension\": \"time\"\r\n      },\r\n      {\r\n        \"index\":  1,\r\n        \"code\": \"AirPressure\",\r\n        \"uom\": \"kPa\",\r\n        \"dimension\": \"pressure\"\r\n      },\r\n      {\r\n        \"index\": 2,\r\n        \"code\": \"CMT_TRUCK_FLUID_VOL_TOT\",\r\n        \"uom\": \"m3\",\r\n        \"dimension\": \"volume\"\r\n      },\r\n      {\r\n        \"index\": 3,\r\n        \"code\": \"DischargeRate\",\r\n        \"uom\": \"hz\",\r\n        \"dimension\": \"frequency\"\r\n      }\r\n    ]\r\n  },\r\n  \"rows\": [\r\n    [\r\n        [0, \"2019-07-29T15:30:02.156Z\"],\r\n        [1, 655829.25]\r\n    ],[\r\n        [0, \"2019-07-29T15:30:04.431Z\"],\r\n        [1, 655830.84],\r\n        [2, 491541.375],\r\n        [3, 0.0870783925056458]\r\n    ],[\r\n        [0, \"2019-07-29T15:30:07.293Z\"],\r\n        [3, 0.0871633142232895]\r\n    ]\r\n  ]\r\n}"
+						},
+						"url": {
+							"raw": "{{apigeeUrl}}/equipment/:equipmentWkeId/readings",
+							"host": [
+								"{{apigeeUrl}}"
+							],
+							"path": [
+								"equipment",
+								":equipmentWkeId",
+								"readings"
+							],
+							"variable": [
+								{
+									"key": "equipmentWkeId",
+									"value": "{{wkeid}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Readings",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-apikey",
+								"value": "{{apiKey}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{apigeeUrl}}/equipment/:equipmentWkeId/readings",
+							"host": [
+								"{{apigeeUrl}}"
+							],
+							"path": [
+								"equipment",
+								":equipmentWkeId",
+								"readings"
+							],
+							"variable": [
+								{
+									"key": "equipmentWkeId",
+									"value": "{{wkeid}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Readings By ChannelCode -DEV",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-apikey",
+								"type": "text",
+								"value": "{{apiKey}}"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{apigeeUrl}}/equipment/:equipmentWkeId/readings/:channelCode",
+							"host": [
+								"{{apigeeUrl}}"
+							],
+							"path": [
+								"equipment",
+								":equipmentWkeId",
+								"readings",
+								":channelCode"
+							],
+							"variable": [
+								{
+									"key": "equipmentWkeId",
+									"value": "{{wkeid}}"
+								},
+								{
+									"key": "channelCode",
+									"value": "{{channelCode}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Readings By ChannelCode - QA/PROD",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-apikey",
+								"type": "text",
+								"value": "{{apiKey}}"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{apigeeUrl}}/equipment/:equipmentWkeId/readings/:channelCode",
+							"host": [
+								"{{apigeeUrl}}"
+							],
+							"path": [
+								"equipment",
+								":equipmentWkeId",
+								"readings",
+								":channelCode"
+							],
+							"variable": [
+								{
+									"key": "equipmentWkeId",
+									"value": "{{readings-wkeid}}"
+								},
+								{
+									"key": "channelCode",
+									"value": "{{readings-channelcode}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Readings Definitions - DEV",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-apikey",
+								"value": "{{apiKey}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{apigeeUrl}}/equipment/:equipmentWkeId/episodic-point-definitions",
+							"host": [
+								"{{apigeeUrl}}"
+							],
+							"path": [
+								"equipment",
+								":equipmentWkeId",
+								"episodic-point-definitions"
+							],
+							"variable": [
+								{
+									"key": "equipmentWkeId",
+									"value": "{{wkeid}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Readings Definitions - QA/PROD",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-apikey",
+								"type": "text",
+								"value": "{{apiKey}}"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{apigeeUrl}}/equipment/:equipmentWkeId/reading-definitions",
+							"host": [
+								"{{apigeeUrl}}"
+							],
+							"path": [
+								"equipment",
+								":equipmentWkeId",
+								"reading-definitions"
+							],
+							"variable": [
+								{
+									"key": "equipmentWkeId",
+									"value": "{{readings-wkeid}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

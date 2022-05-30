@@ -1,0 +1,93 @@
+version: '3.4'
+# this docker-compose file is used for local development
+# you can start it from Visual Studio or by 'docker-compose up' command
+
+# http://localhost:4080/v2/index.html
+# http://localhost:4080/health
+# http://localhost:8086/query?pretty=true&q=show%20databases
+# http://localhost:8855/ # because port 8888 is used by Fiddler
+
+# when you launch EHC.API project directly from VS as console application
+# it uses mongo and influx already launched from docker-compose
+# and uses VS User Secrets for settings (environment variables)
+# http://localhost:8216/v2/index.html
+# http://localhost:8216/health
+
+services:
+  mongo:
+    image: "mongo:4.4-bionic"
+    container_name: ehc.api.mongo
+    hostname: ehc.api.mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+    networks:
+      - eq_historian_network
+    restart: unless-stopped
+    ports:
+      - "27055:27017"
+    volumes:
+      - ehc.api.mongo.data:/data/db
+      - ehc.api.mongo.configdb:/data/configdb
+  
+  influx_db:
+    image: "influxdb:1.7.6"
+    container_name: influx_db
+    hostname: influx_db
+    environment:
+      - INFLUXDB_HTTP_AUTH_ENABLED=${INFLUXDB_HTTP_AUTH_ENABLED}
+      - INFLUXDB_ADMIN_USER=${ROOTCONFIG__EHCAPICONFIG__INFLUXDB__USERNAME}
+      - INFLUXDB_ADMIN_PASSWORD=${ROOTCONFIG__EHCAPICONFIG__INFLUXDB__PASSWORD}
+    networks:
+      - eq_historian_network
+    restart: unless-stopped
+    ports:
+      - "8086:8086"
+    volumes:
+      - ehc.api.influx:/var/lib/influxdb
+
+  chronograf:
+    image: "chronograf:1.7.12"
+    container_name: chronograf
+    hostname: chronograf
+    environment:
+      - INFLUXDB_URL=http://influx_db:8086
+      - INFLUXDB_USERNAME=${ROOTCONFIG__EHCAPICONFIG__INFLUXDB__USERNAME}
+      - INFLUXDB_PASSWORD=${ROOTCONFIG__EHCAPICONFIG__INFLUXDB__PASSWORD}
+      - GENERIC_TOKEN_URL=${GENERIC_TOKEN_URL}
+      - TENANT=${TENANT}
+      - GENERIC_NAME=${GENERIC_NAME}
+      - GENERIC_API_KEY=${GENERIC_API_KEY}
+      - GENERIC_SCOPES=${GENERIC_SCOPES}
+      - GENERIC_CLIENT_ID=${GENERIC_CLIENT_ID}
+      - GENERIC_AUTH_URL=${GENERIC_AUTH_URL}
+      - GENERIC_CLIENT_SECRET=${GENERIC_CLIENT_SECRET}
+      - TOKEN_SECRET=${TOKEN_SECRET}
+      - GENERIC_API_URL=${GENERIC_API_URL}
+      - PUBLIC_URL=${PUBLIC_URL}
+      - STATUS_FEED_URL=${STATUS_FEED_URL}
+    networks:
+      - eq_historian_network
+    restart: unless-stopped
+    ports:
+      - "8855:8888"
+    volumes:
+      - ehc.api.chronograf:/var/lib/chronograf
+    depends_on:
+      - influx_db
+
+      
+volumes:
+  ehc.api.mongo.data:
+    driver: local
+  ehc.api.mongo.configdb:
+    driver: local  
+  ehc.api.influx:
+    driver: local 
+  ehc.api.chronograf:
+    driver: local
+
+networks:
+  eq_historian_network:
+    external:
+      name: eq_historian_network

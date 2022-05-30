@@ -1,0 +1,68 @@
+version: '2.2'
+# this docker-compose is used for QA and PROD servers in GCP by Azure DevOps realease pipeline
+# NOTE: both QA and PROD stages take this file from 'develop' branch
+
+
+services:
+  ehc.api.web:
+    image: azr6382cr01.azurecr.io/ehc.api/ehc.api:${RELEASE_ARTIFACTS_CONTAINER_REGISTRY_BUILDID}
+    container_name: ehc.api.web
+    hostname: ehc.api.web
+    environment:
+      - Kestrel__Endpoints__Http__Url=${KESTREL__ENDPOINTS__HTTP__URL}
+      - Serilog__MinimumLevel__Default=${SERILOG__MINIMUMLEVEL__DEFAULT}
+      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT}
+      - ASPNETCORE_URLS=http://+:80
+      - DOTNET_RUNNING_IN_CONTAINER=true
+
+      - RootConfig__Repository__ConnectionString=${ROOTCONFIG__REPOSITORY__CONNECTIONSTRING}
+      - RootConfig__Repository__Username=${ROOTCONFIG__REPOSITORY__USERNAME}
+      - RootConfig__Repository__Password=${ROOTCONFIG__REPOSITORY__PASSWORD}
+
+      - RootConfig__Security__IdentityServerUrl=${ROOTCONFIG__SECURITY__IDENTITYSERVERURL} 
+      - RootConfig__HostingConfig__BaseUrl=${ROOTCONFIG__HOSTINGCONFIG__BASEURL}
+      - RootConfig__HostingConfig__HostName=${ROOTCONFIG__HOSTINGCONFIG__HOSTNAME}
+      - RootConfig__HostingConfig__LogRequestBody=${ROOTCONFIG__HOSTINGCONFIG__LOGREQUESTBODY}
+      - RootConfig__HostingConfig__LogRequestHeaders=${ROOTCONFIG__HOSTINGCONFIG__LOGREQUESTHEADERS}
+      - RootConfig__HostingConfig__LogResponseHeaders=${ROOTCONFIG__HOSTINGCONFIG__LOGRESPONSEHEADERS}
+      - RootConfig__HostingConfig__LogRequestUri=${ROOTCONFIG__HOSTINGCONFIG__LOGREQUESTURI}
+
+      - RootConfig__EhcApiConfig__InfluxDB__BaseUrl=${ROOTCONFIG__EHCAPICONFIG__INFLUXDB__BASEURL}
+      - RootConfig__EhcApiConfig__InfluxDB__Username=${ROOTCONFIG__EHCAPICONFIG__INFLUXDB__USERNAME}
+      - RootConfig__EhcApiConfig__InfluxDB__Password=${ROOTCONFIG__EHCAPICONFIG__INFLUXDB__PASSWORD}
+
+      - RootConfig__EhcApiConfig__EquipmentApi__BaseUrl=${ROOTCONFIG__EHCAPICONFIG__EQUIPMENTAPI__BASEURL}
+      - RootConfig__EhcApiConfig__EquipmentApi__XApiKey=${ROOTCONFIG__EHCAPICONFIG__EQUIPMENTAPI__XAPIKEY}
+
+      - RootConfig__EhcApiConfig__EquipmentModelApi__BaseUrl=${ROOTCONFIG__EHCAPICONFIG__EQUIPMENTMODELAPI__BASEURL}
+      - RootConfig__EhcApiConfig__EquipmentModelApi__XApiKey=${ROOTCONFIG__EHCAPICONFIG__EQUIPMENTMODELAPI__XAPIKEY}
+
+      - RootConfig__EhcApiConfig__OdmApi__BaseUrl=${ROOTCONFIG__EHCAPICONFIG__ODMAPI__BASEURL}
+      - RootConfig__EhcApiConfig__OdmApi__XApiKey=${ROOTCONFIG__EHCAPICONFIG__ODMAPI__XAPIKEY}
+
+      - RootConfig__EhcApiConfig__EpicV3Api__BaseUrl=${ROOTCONFIG__EHCAPICONFIG__EPICV3API__BASEURL}
+      - RootConfig__EhcApiConfig__EpicV3Api__XApiKey=${ROOTCONFIG__EHCAPICONFIG__EPICV3API__XAPIKEY}
+      - RootConfig__EhcApiConfig__EhcSupportEmail=${ROOTCONFIG__EHCAPICONFIG__EHCSUPPORTEMAIL}
+
+      - RootConfig__EhcApiConfig__EquipmentApi__CacheTimeDuration=${ROOTCONFIG__EHCAPICONFIG__EQUIPMENTAPI__CACHETIMEDURATION}
+      - RootConfig__EhcApiConfig__EpicV3Api__CacheTimeDuration=${ROOTCONFIG__EHCAPICONFIG__EPICV3API__CACHETIMEDURATION}
+
+      - RootConfig__EhcApiConfig__ServiceCacheTimeDuration=${ROOTCONFIG__EHCAPICONFIG__SERVICECACHETIMEDURATION}
+
+    networks:
+      - eq_historian_network
+    restart: unless-stopped
+    ports:
+      - "4080:80"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "3"
+    cpus: 2
+    mem_limit: 3g
+
+networks:
+  eq_historian_network:
+    external:
+      name: eq_historian_network  

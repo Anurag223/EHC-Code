@@ -1,0 +1,40 @@
+{
+  "meta": {
+    "equpmentCode": "ENGINE",
+    "equipment": {
+      "equipmentWkeId": "10001233:SN3313",
+      "materialNumber": "10001233",
+      "serialNumber": "SN3313",
+      "description": "ROAD ENGINE",
+      "equipmentCode": "ENGINE",
+      "equipmentState": "STACKED",
+      "technology": "DXJ_WPS_BLENDING_EQUIPMENT",
+      "brand": "WS-63_STIMULATION_BLENDER_PROP",
+      "parentEquipmentWKEid": "20000034:GD5002"
+    }
+  },
+  "collection": [
+    {
+      "code": "AirPressure",
+      "name": "Air pressure",
+      "fieldType": "float",
+      "dimension": "Pressure",
+      "unitOfMeasure": "kPa",
+      "classification": ""
+    },
+    {
+      "code": "AirTemp",
+      "name": "Air temperature",
+      "fieldType": "float",
+      "dimension": "Degree",
+      "unitOfMeasure": "Fahrenheit",
+      "classification": ""
+    }
+  ],
+  "links": {
+    "self": {
+      "href": "/api/v2/equipment/10001233:SN3313/channel-definitions",
+      "rel": "self"
+    }
+  }
+}

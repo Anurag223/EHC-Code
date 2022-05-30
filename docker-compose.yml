@@ -1,0 +1,162 @@
+version: '3.4'
+# this docker-compose file is used for local development
+# you can start it from Visual Studio or by 'docker-compose up' command
+
+# http://localhost:4080/v2/index.html
+# http://localhost:4080/health
+# http://localhost:8086/query?pretty=true&q=show%20databases
+# http://localhost:8855/ # because port 8888 is used by Fiddler
+
+# when you launch EHC.API project directly from VS as console application
+# it uses mongo and influx already launched from docker-compose
+# and uses VS User Secrets for settings (environment variables)
+# http://localhost:8216/v2/index.html
+# http://localhost:8216/health
+
+services:
+  ehc.api.web:
+    image: ${DOCKER_REGISTRY-}ehcapi
+    container_name: ehc.api.web
+    hostname: ehc.api.web
+    environment:
+      - ASPNETCORE_ENVIRONMENT=LOCAL
+      - ASPNETCORE_URLS=http://+:80
+      - DOTNET_RUNNING_IN_CONTAINER=true
+
+      - RootConfig__Repository__ConnectionString=mongodb://ehc.api.mongo:27017
+      - RootConfig__Repository__Username=admin
+      - RootConfig__Repository__Password=admin_123
+
+      - RootConfig__Security__IdentityServerUrl=http://fed.dev.tlm.slb.com:5674
+      - RootConfig__HostingConfig__BaseUrl=
+      - RootConfig__HostingConfig__HostName=
+      
+      - RootConfig__EhcApiConfig__InfluxDB__BaseUrl=http://influx_db:8086
+      - RootConfig__EhcApiConfig__InfluxDB__Username=
+      - RootConfig__EhcApiConfig__InfluxDB__Password
+
+      - RootConfig__EhcApiConfig__EquipmentApi__BaseUrl=https://evd.apigateway.slb.com/fmp/v2
+      - RootConfig__EhcApiConfig__EquipmentApi__XApiKey=9D7guad4X9yhRPi4aHOTwqff7zaUQLPd
+
+      - RootConfig__EhcApiConfig__EquipmentModelApi__BaseUrl=https://api.qa.tlm.slb.com
+      - RootConfig__EhcApiConfig__EquipmentModelApi__XApiKey=
+
+      - RootConfig__EhcApiConfig__OdmApi__BaseUrl=https://evd.apigateway.slb.com/odm_phwf/equipment-event/
+      - RootConfig__EhcApiConfig__OdmApi__XApiKey=BRyM2hGAMKPEHHtEgrAGEVnutNTyxpBR
+
+      - RootConfig__EhcApiConfig__EpicV3Api__BaseUrl=https://evd.apigateway.slb.com/fmp/v3
+      - RootConfig__EhcApiConfig__EpicV3Api__XApiKey=UBvm4DpGXb7GnSQHtZV1jXQT9XBgr0An
+      - RootConfig__EhcApiConfig__EhcSupportEmail="EquipmentHistorian@slb.com"
+
+      - RootConfig__EhcApiConfig__EquipmentApi__CacheTimeDuration=24
+      - RootConfig__EhcApiConfig__EpicV3Api__CacheTimeDuration=24
+
+      - RootConfig__EhcApiConfig__ServiceCacheTimeDuration=24
+    build:
+      context: .
+      dockerfile: EHC.API/Dockerfile
+    networks:
+      - eq_historian_network
+    restart: unless-stopped
+    ports:
+      - "4080:80"
+    depends_on:
+      - mongo
+      - influx_db
+  
+  ehc.admin.api.web:
+    image: ${DOCKER_REGISTRY-}ehcadminapi
+    container_name: ehc.admin.api.web
+    hostname: ehc.admin.api.web
+    environment:
+      - ASPNETCORE_ENVIRONMENT=LOCAL
+      - ASPNETCORE_URLS=http://+:80
+      - DOTNET_RUNNING_IN_CONTAINER=true
+
+      - RootConfig__Repository__ConnectionString=mongodb://ehc.api.mongo:27017
+      - RootConfig__Repository__Username=admin
+      - RootConfig__Repository__Password=admin_123
+
+      - RootConfig__Security__IdentityServerUrl=http://fed.dev.tlm.slb.com:5674
+      - RootConfig__HostingConfig__BaseUrl=
+      - RootConfig__HostingConfig__HostName=
+
+      - RootConfig__EhcApiConfig__InfluxDB__BaseUrl=http://influx_db:8086
+      - RootConfig__EhcApiConfig__InfluxDB__Username=
+      - RootConfig__EhcApiConfig__InfluxDB__Password
+      
+      - RootConfig__EhcApiConfig__EpicV3Api__BaseUrl=https://apigateway.evq.it.slb.com/fmp/v3
+      - RootConfig__EhcApiConfig__EpicV3Api__XApiKey=1H5qdvtFZiLCQtrTuSeAGAqXavifuucz
+      
+      - RootConfig__EhcApiConfig__ServiceCacheTimeDuration=24
+
+    build:
+      context: .
+      dockerfile: EHC.ADMIN.API/Dockerfile
+    networks:
+      - eq_historian_network
+    restart: unless-stopped
+    ports:
+      - "4081:80"
+    depends_on:
+      - mongo
+      - influx_db
+
+  mongo:
+    image: "mongo:4-xenial"
+    container_name: ehc.api.mongo
+    hostname: ehc.api.mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin_123
+    networks:
+      - eq_historian_network
+    restart: unless-stopped
+    ports:
+      - "27055:27017"
+    volumes:
+      - ehc.api.mongo.data:/data/db
+      - ehc.api.mongo.configdb:/data/configdb
+  
+  influx_db:
+    image: "influxdb:1.8.10"
+    container_name: influx_db
+    hostname: influx_db
+    networks:
+      - eq_historian_network
+    restart: unless-stopped
+    ports:
+      - "8086:8086"
+    volumes:
+      - ehc.api.influx:/var/lib/influxdb
+
+  chronograf:
+    image: "chronograf:1.7.12"
+    container_name: chronograf
+    hostname: chronograf
+    environment:
+      INFLUXDB_URL: http://influx_db:8086
+    networks:
+      - eq_historian_network
+    restart: unless-stopped
+    ports:
+      - "8855:8888"
+    volumes:
+      - ehc.api.chronograf:/var/lib/chronograf
+    depends_on:
+      - influx_db
+
+      
+volumes:
+  ehc.api.mongo.data:
+    driver: local
+  ehc.api.mongo.configdb:
+    driver: local  
+  ehc.api.influx:
+    driver: local 
+  ehc.api.chronograf:
+    driver: local
+
+networks:
+  eq_historian_network:
+    driver: bridge

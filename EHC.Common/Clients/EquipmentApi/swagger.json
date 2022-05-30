@@ -1,0 +1,2536 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Mateo Equipment API",
+    "description": "Provides an API to perform actions and queries within the Equipment bounded context<script type=\"text/javascript\">\r\n    function toggle(id) {\r\n        var e = document.getElementById(id);\r\n        e.style.display = (e.style.display === 'block') ? 'none' : 'block';\r\n    }\r\n</script><h4>Collection Support</h4>\r\n<p>\r\n    For APIs that return a collection of resources the following features are available. The case of the parameter names does not matter, however the case\r\n    of the parameters' values does matter.\r\n</p><h4 onclick=\"toggle('filtering')\">Filtering</h4>\r\n<div id=\"filtering\">\r\n    <p>\r\n        One ore more filters can be applied to one or more fields (see the documentation for a specific endpoint as to which fields are available. When multiple filters are applied to\r\n        a single field, they are effectively \"ORed'\". Filters for multiple fields are \"ANDed\". Field values are case-insensitive with respect to the comparison operator. While you can\r\n        search against any field of the resource, this is discouraged because not all fields are indexed. The indexed fields are listed in the documentation below. Queries against\r\n        non-indexed fields may be rate limited or prohibited in the future.\r\n    </p>\r\n    <h5>Separators</h5>\r\n    <p>\r\n        To correctly handle underlying data that may have special characters, the API can be made to use either the default separators or custom separators.\r\n    </p>\r\n    <ul>\r\n        <li>\r\n            The default separator between operands against the same field is a comma (,). For example: <strong>filter[code]=ABC,ne:DEF,eq:GHI</strong>. This can be changed by\r\n            including <strong>filterSep=<em>char</em></strong> in the query string.\r\n        </li>\r\n        <li>\r\n            The default separator between values for a multi-valued operator is a pipe (|). For example: <strong>filter[code]=in:ABC|DEF|GHI</strong>. This can be changed by\r\n            including <strong>valueSep=<em>char</em></strong> in the query string.\r\n        </li>\r\n    </ul>\r\n    <h5>Syntax</h5>\r\n    <p>\r\n        <strong>filter[<em>fieldName</em>]=<em>operator</em>:<em>value(s)</em></strong>. The operator and following colon, if omitted, is assumed to be <strong>equals</strong>. The following case-insensitive operators and their aliases, are supported\r\n        <ul>\r\n            <li>\r\n                <strong>\r\n                    <em>value</em>\r\n                </strong> - equal to the specified value (same as eq:value)\r\n            </li>\r\n            <li><strong>eq:<em>value</em></strong> - equal to the specified value. Aliases: <strong>eq</strong>, <strong>equal</strong></li>\r\n            <li><strong>ne:<em>value</em></strong> - not equal to the specified value. Aliases: <strong>notEqual</strong>, <strong>notEquals</strong></li>\r\n            <li><strong>gt:<em>value</em></strong> - greater than the specified value</li>\r\n            <li><strong>ge:<em>value</em></strong> - greater than or equal to the specified value. Aliases: <strong>gte</strong></li>\r\n            <li><strong>lt:<em>value</em></strong> - less than to the specified value. Aliases: <strong>lte</strong></li>\r\n            <li><strong>le:<em>value</em></strong> - less than or equal to the specified value</li>\r\n            <li><strong>between:<em>value</em>|<em>value2</em></strong> - inclusively between two values</li>\r\n            <li><strong>isNull</strong> - the field is null</li>\r\n            <li><strong>isNotNull</strong> - the field is not null</li>\r\n            <li><strong>in:<em>value1</em>|<em>value2</em>|<em>valueN</em></strong> - in a set of comma separated values</li>\r\n            <li><strong>ni:<em>value1</em>|<em>value2</em>|<em>valueN</em></strong> - not in a set of pipe separated values. Aliases: <strong>notIn</strong></li>\r\n            <li><strong>lk:<em>value</em></strong> - like the specified value (this is a <a href=\"https://en.wikipedia.org/wiki/Perl_Compatible_Regular_Expressions\">PCRE regex</a>). All expressions will be treated as case-insensitive and the beginning and trailing <strong>/</strong> or <strong>/i</strong> are not necessary. It is preferred that you anchor your expressions if possible (e.g. ^ABC) and query against indexed fields (usually those listed in the documentation below). Aliases: <strong>like</strong>, <strong>matches</strong></li>\r\n            <li><strong>c:<em>value</em></strong> - collection contains the specified value. Aliases: <strong>contains</strong></li>\r\n        </ul>\r\n    </p>\r\n    <h5>Examples</h5>\r\n    <p>\r\n        <ul>\r\n            <li><strong>?filter[modifiedDate]=gt:2019-04-01</strong> - only get resources modified after April 1, 2019</li>\r\n            <li><strong>?filter[parentId]=isnotnull</strong> - only get resources that have a parent</li>\r\n            <li><strong>?filter[owningSiteCode]=HOU&amp;filter[modifiedDate]=between:2019-03-01|2019-03-30</strong> - only get resources from HOU and modified in March 2019</li>\r\n            <li><strong>?filter[owningSiteCode]=eq:HOU&amp;filter[modifiedDate]gte:2019-03-01,lte:2019-03-30</strong> - same as the above</li>\r\n            <li><strong>?filter[owningSiteCode]=in:HOU|CCO|OKCTLM|OKC|MLD</strong> - only get resources owned by one of the 5 sites</li>\r\n            <li><strong>?filter[owningSiteCode]=ni:HOU|CCO|OKCTLM|OKC|MLD</strong> - only get resources not owned by any of the 5 sites</li>\r\n        </ul>\r\n        Filters can also be applied to nested objects including collections by \"dotting\" into the nested object(s). For example\r\n        <ul>\r\n            <li><strong>?filter[childWorkorders.plannedStartDate]=gt:2019-04-01</strong> - only workorders whose child workorders start after April 1, 2019</li>\r\n            <li><strong>?filter[equipment.workorders]=4500:Qtrac</strong> - only equipment with the specified workorder</li>\r\n        </ul>\r\n    </p>\r\n</div><h4>Sorting</h4>\r\nFields can be sorted. See the documentation for a specific model as to which fields are available. The field name is case-insensitive.\r\n<h5>Syntax</h5>\r\n<p>\r\n    <strong>sort=[-]<em>fieldName</em>[,[-]<em>fieldName2</em>[[-]<em>fieldName3</em>]]</strong> where a dash indicates a descending sort and lack of a dash indicates an ascending sort.\r\n</p>\r\n<h5>Examples</h5>\r\n<p>\r\n    <ul>\r\n        <li><strong>?sort=-modifiedDate</strong> - sort by modified date descending</li>\r\n        <li><strong>?sort=equipmentCode,-serialNumber</strong> - sort by equipment code ascending, serial number descending</li>\r\n    </ul>\r\n</p><h4>Paging</h4>\r\n<p>\r\n    Unless specifically noted collections will be paged. See the documentation for a specific API for the default page size and limit. The default page number is 1.\r\n    A page size must be 2 or greater even if the expected collection is likely to have only 1 item in it.\r\n</p>\r\n<h5>Syntax</h5>\r\n<p>\r\n    <strong>page[size]=<em>value</em></strong> where size is a positive integer greater than 1 and <strong>page[number]=<em>value</em></strong> where value is a positive integer\r\n</p>\r\n<h5>Example</h5>\r\n<p>\r\n    <ul>\r\n        <li>\r\n            <strong>?page[size]=100&amp;page[number]=10</strong>\r\n        </li>\r\n    </ul>\r\n</p><h4>Resource Inclusion</h4>\r\n<p>\r\n    Some resources may support inclusion (expansion) of related resources. If not specifically requesting inclusion the related resources will not be returned with\r\n    the resource. See the documentation for a specific API as to which resources can be included. The value of the include is case-insensitive.\r\n</p>\r\n<h5>Separator</h5>\r\n<p>\r\n    To correctly handle underlying data that may have special characters, the API can be made to use\r\n    an alternate separator. To do this add <strong>includeSep=<em>char</em></strong> to the query string.\r\n</p>\r\n<h5>Syntax</h5>\r\n<p>\r\n    <strong>?include=<em>fieldName</em>[,<em>fieldName2</em>[<em>fieldName3</em>]]</strong> where each field is separated by a comma by default.\r\n</p>\r\n<h5>Example</h5>\r\n<p>\r\n    <ul>\r\n        <li><strong>?include=workorders,parent</strong> - include an equipment's workorders and parent</li>\r\n    </ul>\r\n</p>",
+    "version": "v2"
+  },
+  "paths": {
+    "/api/v2/equipment": {
+      "get": {
+        "tags": [
+          "Equipment"
+        ],
+        "summary": "Gets the equipment matching the specified criteria",
+        "description": "This endpoint supports sorting, filtering, paging, and inclusions. Not all filters are listed in the documentation; the filters\r\nlisted in the documentation are specifically indexed and should perform well. Other fields may be used in a filter, but there\r\nis no SLA governing their use.",
+        "parameters": [
+          {
+            "name": "include",
+            "in": "query",
+            "description": "Specify the resources to include by comma separating them from any of these: **alternateIdentities, attributes, childEquipment, classifications, comments, equipmentDemandSummary, futureMaintenanceCalls, measurementPoints, movementSummary, pairedEquipment, parentEquipment, unmanagedAttributes, workorders**",
+            "schema": {
+              "type": "string",
+              "description": "Specify the resources to include by comma separating them from any of these: **alternateIdentities, attributes, childEquipment, classifications, comments, equipmentDemandSummary, futureMaintenanceCalls, measurementPoints, movementSummary, pairedEquipment, parentEquipment, unmanagedAttributes, workorders**",
+              "format": ""
+            },
+            "examples": {
+              "IncludeNothing": {
+                "summary": "Include Nothing",
+                "description": "Includes nothing in each equipment",
+                "value": ""
+              },
+              "IncludeEverything": {
+                "summary": "Include Everything",
+                "description": "Includes everything in each equipment",
+                "value": "alternateIdentities, attributes, childEquipment, classifications, comments, equipmentDemandSummary, futureMaintenanceCalls, measurementPoints, movementSummary, pairedEquipment, parentEquipment, unmanagedAttributes, workorders"
+              },
+              "Includealternate-identities": {
+                "summary": "Include alternateIdentities",
+                "description": "Include alternate identities in each equipment",
+                "value": "alternateIdentities"
+              },
+              "Includeattributes": {
+                "summary": "Include attributes",
+                "description": "Include attributes in each equipment",
+                "value": "attributes"
+              },
+              "Includechild-equipment": {
+                "summary": "Include childEquipment",
+                "description": "Include child equipment in each equipment",
+                "value": "childEquipment"
+              },
+              "Includeclassifications": {
+                "summary": "Include classifications",
+                "description": "Include classifications in each equipment",
+                "value": "classifications"
+              },
+              "Includecomments": {
+                "summary": "Include comments",
+                "description": "Include comments in each equipment",
+                "value": "comments"
+              },
+              "Includeequipment-demand_summary": {
+                "summary": "Include equipmentDemandSummary",
+                "description": "Include equipment demand summary in each equipment",
+                "value": "equipmentDemandSummary"
+              },
+              "Includefuture-maintenance_calls": {
+                "summary": "Include futureMaintenanceCalls",
+                "description": "Include future maintenance calls in each equipment",
+                "value": "futureMaintenanceCalls"
+              },
+              "Includemeasurement-points": {
+                "summary": "Include measurementPoints",
+                "description": "Include measurement points in each equipment",
+                "value": "measurementPoints"
+              },
+              "Includemovement-summary": {
+                "summary": "Include movementSummary",
+                "description": "Include movement summary in each equipment",
+                "value": "movementSummary"
+              },
+              "Includepaired-equipment": {
+                "summary": "Include pairedEquipment",
+                "description": "Include paired equipment in each equipment",
+                "value": "pairedEquipment"
+              },
+              "Includeparent-equipment": {
+                "summary": "Include parentEquipment",
+                "description": "Include parent equipment in each equipment",
+                "value": "parentEquipment"
+              },
+              "Includeunmanaged-attributes": {
+                "summary": "Include unmanagedAttributes",
+                "description": "Include unmanaged attributes in each equipment",
+                "value": "unmanagedAttributes"
+              },
+              "Includeworkorders": {
+                "summary": "Include workorders",
+                "description": "Include workorders in each equipment",
+                "value": "workorders"
+              }
+            }
+          },
+          {
+            "name": "page[number]",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": "1",
+              "readOnly": true
+            }
+          },
+          {
+            "name": "page[size]",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": "25",
+              "readOnly": true
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "-modifiedDate",
+              "nullable": true
+            }
+          },
+          {
+            "name": "filter[controlSiteCode]",
+            "in": "query",
+            "description": "Filter by <strong>control site code</strong>. Separate multiple values with a comma.",
+            "schema": {
+              "type": "string",
+              "description": "Filter by <strong>control site code</strong>. Separate multiple values with a comma.",
+              "format": ""
+            }
+          },
+          {
+            "name": "filter[controlSiteId]",
+            "in": "query",
+            "description": "Filter by <strong>control site id</strong>. Separate multiple values with a comma.",
+            "schema": {
+              "type": "string",
+              "description": "Filter by <strong>control site id</strong>. Separate multiple values with a comma.",
+              "format": ""
+            }
+          },
+          {
+            "name": "filter[equipmentCode]",
+            "in": "query",
+            "description": "Filter by <strong>equipment code</strong>. Separate multiple values with a comma.",
+            "schema": {
+              "type": "string",
+              "description": "Filter by <strong>equipment code</strong>. Separate multiple values with a comma.",
+              "format": ""
+            }
+          },
+          {
+            "name": "filter[equipmentState]",
+            "in": "query",
+            "description": "Filter by <strong>equipment state</strong>. Separate multiple values with a comma.",
+            "schema": {
+              "type": "string",
+              "description": "Filter by <strong>equipment state</strong>. Separate multiple values with a comma.",
+              "format": ""
+            }
+          },
+          {
+            "name": "filter[equipmentType]",
+            "in": "query",
+            "description": "Filter by <strong>equipment type</strong>. Separate multiple values with a comma.",
+            "schema": {
+              "type": "string",
+              "description": "Filter by <strong>equipment type</strong>. Separate multiple values with a comma.",
+              "format": ""
+            }
+          },
+          {
+            "name": "filter[manufacturerSerialNumber]",
+            "in": "query",
+            "description": "Filter by <strong>manufacturer serial number</strong>. Separate multiple values with a comma.",
+            "schema": {
+              "type": "string",
+              "description": "Filter by <strong>manufacturer serial number</strong>. Separate multiple values with a comma.",
+              "format": ""
+            }
+          },
+          {
+            "name": "filter[materialNumber]",
+            "in": "query",
+            "description": "Filter by <strong>material number</strong>. Separate multiple values with a comma.",
+            "schema": {
+              "type": "string",
+              "description": "Filter by <strong>material number</strong>. Separate multiple values with a comma.",
+              "format": ""
+            }
+          },
+          {
+            "name": "filter[ownerSiteCode]",
+            "in": "query",
+            "description": "Filter by <strong>owner site code</strong>. Separate multiple values with a comma.",
+            "schema": {
+              "type": "string",
+              "description": "Filter by <strong>owner site code</strong>. Separate multiple values with a comma.",
+              "format": ""
+            }
+          },
+          {
+            "name": "filter[ownerSiteId]",
+            "in": "query",
+            "description": "Filter by <strong>owner site id</strong>. Separate multiple values with a comma.",
+            "schema": {
+              "type": "string",
+              "description": "Filter by <strong>owner site id</strong>. Separate multiple values with a comma.",
+              "format": ""
+            }
+          },
+          {
+            "name": "filter[pairedEquipmentId]",
+            "in": "query",
+            "description": "Filter by <strong>paired equipment id</strong>. Separate multiple values with a comma.",
+            "schema": {
+              "type": "string",
+              "description": "Filter by <strong>paired equipment id</strong>. Separate multiple values with a comma.",
+              "format": ""
+            }
+          },
+          {
+            "name": "filter[parentEquipmentId]",
+            "in": "query",
+            "description": "Filter by <strong>parent equipment id</strong>. Separate multiple values with a comma.",
+            "schema": {
+              "type": "string",
+              "description": "Filter by <strong>parent equipment id</strong>. Separate multiple values with a comma.",
+              "format": ""
+            }
+          },
+          {
+            "name": "filter[serialNumber]",
+            "in": "query",
+            "description": "Filter by <strong>serial number</strong>. Separate multiple values with a comma.",
+            "schema": {
+              "type": "string",
+              "description": "Filter by <strong>serial number</strong>. Separate multiple values with a comma.",
+              "format": ""
+            }
+          },
+          {
+            "name": "filter[wellKnownEntityId]",
+            "in": "query",
+            "description": "Filter by <strong>well known entity id</strong>. Separate multiple values with a comma.",
+            "schema": {
+              "type": "string",
+              "description": "Filter by <strong>well known entity id</strong>. Separate multiple values with a comma.",
+              "format": ""
+            }
+          },
+          {
+            "name": "filter[epicCode]",
+            "in": "query",
+            "description": "Filter equipment based on the **EPIC code**",
+            "schema": {
+              "type": "string",
+              "description": "Filter equipment based on the **EPIC code**",
+              "format": ""
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorDocument"
+                },
+                "examples": {
+                  "Duplicate-Filter": {
+                    "summary": "Duplicate Filter",
+                    "description": "A filter can be specified only once. However, you can separate operators within that filter; for example, filter[epicCode]=in:ABC,lk:ab.d",
+                    "value": {
+                      "Code": "DUPLICATEFILTER",
+                      "Detail": "There must be only zero or one 'filter[epicCode]' specification in the query string. If you need to express multiple filters on the same field separate them with a comma, e.g. 'filter[x]=gt:1,lt:8'",
+                      "Source": {
+                        "Parameter": "filter[epicCode]"
+                      },
+                      "Status": "400",
+                      "Title": "Duplicate Filter"
+                    }
+                  },
+                  "Malformed-Filter_Parameter": {
+                    "summary": "Malformed Filter Parameter",
+                    "description": "Occurs whenever it appears there is a filter parameter, but some aspect of the syntax is incorrect",
+                    "value": {
+                      "Code": "MALFORMEDFILTERPARAMETER",
+                      "Detail": "The filter specification 'filter[siteCode=HOU' is invalid",
+                      "Source": {
+                        "Parameter": "filter[siteCode"
+                      },
+                      "Status": "400",
+                      "Title": "Malformed Filter Parameter"
+                    }
+                  },
+                  "Paging-Not_Supported": {
+                    "summary": "Paging Not Supported",
+                    "description": "Not all endpoints support paging. This error occurs when a page has been requested of a non-paging endpoint.",
+                    "value": {
+                      "Code": "PAGINGNOTSUPPORTED",
+                      "Detail": "This API does not support paging; remove page[number] from the query string",
+                      "Source": {
+                        "Parameter": "page[number]"
+                      },
+                      "Status": "400",
+                      "Title": "Paging Not Supported"
+                    }
+                  },
+                  "Duplicate-Page_Size.Parameter": {
+                    "summary": "Duplicate Page Size Parameter",
+                    "description": "Each paging parameter can only be specified once.",
+                    "value": {
+                      "Code": "DUPLICATEPAGESIZEPARAMETER",
+                      "Detail": "There must be only zero or one 'page[number]' specification in the query string",
+                      "Source": {
+                        "Parameter": "page[number]"
+                      },
+                      "Status": "400",
+                      "Title": "Duplicate Page Size Parameter"
+                    }
+                  },
+                  "Invalid-Page_Size": {
+                    "summary": "Invalid Page Size",
+                    "description": "Page numbers must be integers",
+                    "value": {
+                      "Code": "INVALIDPAGESIZE",
+                      "Detail": "The requested page size 5. is invalid",
+                      "Source": {
+                        "Parameter": "page[number]"
+                      },
+                      "Status": "400",
+                      "Title": "Invalid Page Size"
+                    }
+                  },
+                  "Invalid-Page_Number": {
+                    "summary": "Invalid Page Number",
+                    "description": "Page numbers must be positive",
+                    "value": {
+                      "Code": "INVALIDPAGENUMBER",
+                      "Detail": "The requested page number is -1 which is less than one",
+                      "Source": {
+                        "Parameter": "page[number]"
+                      },
+                      "Status": "400",
+                      "Title": "Invalid Page Number"
+                    }
+                  },
+                  "Malformed-Page_Parameter": {
+                    "summary": "Malformed Page Parameter",
+                    "description": "A page specification is either page[size] or page[number] followed by a valid integer value",
+                    "value": {
+                      "Code": "MALFORMEDPAGEPARAMETER",
+                      "Detail": "The paging specification 'pages[num=5' is invalid",
+                      "Source": {
+                        "Parameter": "pages[num"
+                      },
+                      "Status": "400",
+                      "Title": "Malformed Page Parameter"
+                    }
+                  },
+                  "Invalid-Value": {
+                    "summary": "Invalid Value",
+                    "description": "The page size must be at least 2",
+                    "value": {
+                      "Code": "INVALIDVALUE",
+                      "Detail": "The page size must be at least 2",
+                      "Source": {
+                        "Parameter": "page[size]"
+                      },
+                      "Status": "400",
+                      "Title": "Invalid Value"
+                    }
+                  },
+                  "Duplicate-Sort": {
+                    "summary": "Duplicate Sort",
+                    "description": "There must be only zero or one sort specification in the query string; however, you may specify multiple fields to sort on",
+                    "value": {
+                      "Code": "DUPLICATESORT",
+                      "Detail": "There must be only zero or one sort specification in the query string; however, you may specify multiple fields to sort on",
+                      "Source": {
+                        "Parameter": "sort"
+                      },
+                      "Status": "400",
+                      "Title": "Duplicate Sort"
+                    }
+                  },
+                  "Missing-Value": {
+                    "summary": "Missing Value",
+                    "description": "The 'include' parameter has no value",
+                    "value": {
+                      "Code": "MISSINGVALUE",
+                      "Detail": "The 'include' parameter has no value",
+                      "Source": {
+                        "Parameter": "include"
+                      },
+                      "Status": "400",
+                      "Title": "Missing Value"
+                    }
+                  },
+                  "Malformed-Sort_Parameter": {
+                    "summary": "Malformed Sort Parameter",
+                    "description": "It appears like a sort was requested, but not using the 'sort' parameter or with an invalid field specification",
+                    "value": {
+                      "Code": "MALFORMEDSORTPARAMETER",
+                      "Detail": "The sort specification 'sortOn=modifiedDate' is invalid",
+                      "Source": {
+                        "Parameter": "sortOn"
+                      },
+                      "Status": "400",
+                      "Title": "Malformed Sort Parameter"
+                    }
+                  },
+                  "Duplicate-Include_Parameter": {
+                    "summary": "Duplicate Include Parameter",
+                    "description": "The 'include' parameter was specified more than once",
+                    "value": {
+                      "Code": "DUPLICATEINCLUDEPARAMETER",
+                      "Detail": "There must be only zero or one include specification in the query string",
+                      "Source": {
+                        "Parameter": "include"
+                      },
+                      "Status": "400",
+                      "Title": "Duplicate Include Parameter"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/problemDetails"
+                },
+                "example": {
+                  "Title": "Not Acceptable",
+                  "Status": 406,
+                  "Detail": "The requested media type is not supported",
+                  "Extensions": {}
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/equipmentCollection"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "Root"
+            ]
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Equipment"
+        ],
+        "summary": "Creates new Workorder",
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/equipmentShellRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorDocument"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Success"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "Root",
+              "createequipmentshell"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/v2/equipment/{id}": {
+      "get": {
+        "tags": [
+          "Equipment"
+        ],
+        "summary": "Gets the equipment with the specified ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The equipment's identifier.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The equipment's identifier.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "Specify the resources to include by comma separating them from any of these: **alternateIdentities, attributes, childEquipment, classifications, comments, equipmentDemandSummary, futureMaintenanceCalls, measurementPoints, movementSummary, pairedEquipment, parentEquipment, unmanagedAttributes, workorders**",
+            "schema": {
+              "type": "string",
+              "description": "Specify the resources to include by comma separating them from any of these: **alternateIdentities, attributes, childEquipment, classifications, comments, equipmentDemandSummary, futureMaintenanceCalls, measurementPoints, movementSummary, pairedEquipment, parentEquipment, unmanagedAttributes, workorders**",
+              "format": ""
+            },
+            "examples": {
+              "IncludeNothing": {
+                "summary": "Include Nothing",
+                "description": "Includes nothing in the equipment",
+                "value": ""
+              },
+              "IncludeEverything": {
+                "summary": "Include Everything",
+                "description": "Includes everything in the equipment",
+                "value": "alternateIdentities, attributes, childEquipment, classifications, comments, equipmentDemandSummary, futureMaintenanceCalls, measurementPoints, movementSummary, pairedEquipment, parentEquipment, unmanagedAttributes, workorders"
+              },
+              "Includealternate-identities": {
+                "summary": "Include alternateIdentities",
+                "description": "Include alternate identities in the equipment",
+                "value": "alternateIdentities"
+              },
+              "Includeattributes": {
+                "summary": "Include attributes",
+                "description": "Include attributes in the equipment",
+                "value": "attributes"
+              },
+              "Includechild-equipment": {
+                "summary": "Include childEquipment",
+                "description": "Include child equipment in the equipment",
+                "value": "childEquipment"
+              },
+              "Includeclassifications": {
+                "summary": "Include classifications",
+                "description": "Include classifications in the equipment",
+                "value": "classifications"
+              },
+              "Includecomments": {
+                "summary": "Include comments",
+                "description": "Include comments in the equipment",
+                "value": "comments"
+              },
+              "Includeequipment-demand_summary": {
+                "summary": "Include equipmentDemandSummary",
+                "description": "Include equipment demand summary in the equipment",
+                "value": "equipmentDemandSummary"
+              },
+              "Includefuture-maintenance_calls": {
+                "summary": "Include futureMaintenanceCalls",
+                "description": "Include future maintenance calls in the equipment",
+                "value": "futureMaintenanceCalls"
+              },
+              "Includemeasurement-points": {
+                "summary": "Include measurementPoints",
+                "description": "Include measurement points in the equipment",
+                "value": "measurementPoints"
+              },
+              "Includemovement-summary": {
+                "summary": "Include movementSummary",
+                "description": "Include movement summary in the equipment",
+                "value": "movementSummary"
+              },
+              "Includepaired-equipment": {
+                "summary": "Include pairedEquipment",
+                "description": "Include paired equipment in the equipment",
+                "value": "pairedEquipment"
+              },
+              "Includeparent-equipment": {
+                "summary": "Include parentEquipment",
+                "description": "Include parent equipment in the equipment",
+                "value": "parentEquipment"
+              },
+              "Includeunmanaged-attributes": {
+                "summary": "Include unmanagedAttributes",
+                "description": "Include unmanaged attributes in the equipment",
+                "value": "unmanagedAttributes"
+              },
+              "Includeworkorders": {
+                "summary": "Include workorders",
+                "description": "Include workorders in the equipment",
+                "value": "workorders"
+              }
+            }
+          },
+          {
+            "name": "filter[controlSiteCode]",
+            "in": "query",
+            "description": "Filter by <strong>control site code</strong>. Separate multiple values with a comma.",
+            "schema": {
+              "type": "string",
+              "description": "Filter by <strong>control site code</strong>. Separate multiple values with a comma.",
+              "format": ""
+            }
+          },
+          {
+            "name": "filter[controlSiteId]",
+            "in": "query",
+            "description": "Filter by <strong>control site id</strong>. Separate multiple values with a comma.",
+            "schema": {
+              "type": "string",
+              "description": "Filter by <strong>control site id</strong>. Separate multiple values with a comma.",
+              "format": ""
+            }
+          },
+          {
+            "name": "filter[equipmentCode]",
+            "in": "query",
+            "description": "Filter by <strong>equipment code</strong>. Separate multiple values with a comma.",
+            "schema": {
+              "type": "string",
+              "description": "Filter by <strong>equipment code</strong>. Separate multiple values with a comma.",
+              "format": ""
+            }
+          },
+          {
+            "name": "filter[equipmentState]",
+            "in": "query",
+            "description": "Filter by <strong>equipment state</strong>. Separate multiple values with a comma.",
+            "schema": {
+              "type": "string",
+              "description": "Filter by <strong>equipment state</strong>. Separate multiple values with a comma.",
+              "format": ""
+            }
+          },
+          {
+            "name": "filter[equipmentType]",
+            "in": "query",
+            "description": "Filter by <strong>equipment type</strong>. Separate multiple values with a comma.",
+            "schema": {
+              "type": "string",
+              "description": "Filter by <strong>equipment type</strong>. Separate multiple values with a comma.",
+              "format": ""
+            }
+          },
+          {
+            "name": "filter[manufacturerSerialNumber]",
+            "in": "query",
+            "description": "Filter by <strong>manufacturer serial number</strong>. Separate multiple values with a comma.",
+            "schema": {
+              "type": "string",
+              "description": "Filter by <strong>manufacturer serial number</strong>. Separate multiple values with a comma.",
+              "format": ""
+            }
+          },
+          {
+            "name": "filter[materialNumber]",
+            "in": "query",
+            "description": "Filter by <strong>material number</strong>. Separate multiple values with a comma.",
+            "schema": {
+              "type": "string",
+              "description": "Filter by <strong>material number</strong>. Separate multiple values with a comma.",
+              "format": ""
+            }
+          },
+          {
+            "name": "filter[ownerSiteCode]",
+            "in": "query",
+            "description": "Filter by <strong>owner site code</strong>. Separate multiple values with a comma.",
+            "schema": {
+              "type": "string",
+              "description": "Filter by <strong>owner site code</strong>. Separate multiple values with a comma.",
+              "format": ""
+            }
+          },
+          {
+            "name": "filter[ownerSiteId]",
+            "in": "query",
+            "description": "Filter by <strong>owner site id</strong>. Separate multiple values with a comma.",
+            "schema": {
+              "type": "string",
+              "description": "Filter by <strong>owner site id</strong>. Separate multiple values with a comma.",
+              "format": ""
+            }
+          },
+          {
+            "name": "filter[pairedEquipmentId]",
+            "in": "query",
+            "description": "Filter by <strong>paired equipment id</strong>. Separate multiple values with a comma.",
+            "schema": {
+              "type": "string",
+              "description": "Filter by <strong>paired equipment id</strong>. Separate multiple values with a comma.",
+              "format": ""
+            }
+          },
+          {
+            "name": "filter[parentEquipmentId]",
+            "in": "query",
+            "description": "Filter by <strong>parent equipment id</strong>. Separate multiple values with a comma.",
+            "schema": {
+              "type": "string",
+              "description": "Filter by <strong>parent equipment id</strong>. Separate multiple values with a comma.",
+              "format": ""
+            }
+          },
+          {
+            "name": "filter[serialNumber]",
+            "in": "query",
+            "description": "Filter by <strong>serial number</strong>. Separate multiple values with a comma.",
+            "schema": {
+              "type": "string",
+              "description": "Filter by <strong>serial number</strong>. Separate multiple values with a comma.",
+              "format": ""
+            }
+          },
+          {
+            "name": "filter[wellKnownEntityId]",
+            "in": "query",
+            "description": "Filter by <strong>well known entity id</strong>. Separate multiple values with a comma.",
+            "schema": {
+              "type": "string",
+              "description": "Filter by <strong>well known entity id</strong>. Separate multiple values with a comma.",
+              "format": ""
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The equipment with the specified ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/equipment"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "equipment has missing/invalid values",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorDocument"
+                },
+                "examples": {
+                  "Invalid-ID": {
+                    "summary": "Invalid ID",
+                    "description": "The provided ID is not valid",
+                    "value": [
+                      {
+                        "Code": "INVALIDID",
+                        "Detail": "The provided ID, 604b8647994aa94e9c47e5fa, is not valid.",
+                        "Source": {
+                          "Parameter": "id",
+                          "Id": "SOMEID"
+                        },
+                        "Status": "400",
+                        "Title": "Invalid ID"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorDocument"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Oops! Can't get equipment right now"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "Root"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/v2/equipment/{id}/workorders": {
+      "get": {
+        "tags": [
+          "Equipment"
+        ],
+        "summary": "Gets the workorders associated with the specified equipment.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The equipment's identifier.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The equipment's identifier.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "Specify the resources to include by comma separating them from any of these: **attributes, unmanagedAttributes**",
+            "schema": {
+              "type": "string",
+              "description": "Specify the resources to include by comma separating them from any of these: **attributes, unmanagedAttributes**",
+              "format": ""
+            },
+            "examples": {
+              "IncludeNothing": {
+                "summary": "Include Nothing",
+                "description": "Includes nothing in each workorder reference",
+                "value": ""
+              },
+              "IncludeEverything": {
+                "summary": "Include Everything",
+                "description": "Includes everything in each workorder reference",
+                "value": "attributes, unmanagedAttributes"
+              },
+              "Includeattributes": {
+                "summary": "Include attributes",
+                "description": "Include attributes in each workorder reference",
+                "value": "attributes"
+              },
+              "Includeunmanaged-attributes": {
+                "summary": "Include unmanagedAttributes",
+                "description": "Include unmanaged attributes in each workorder reference",
+                "value": "unmanagedAttributes"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/problemDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/problemDetails"
+                },
+                "examples": {
+                  "Invalid-ID": {
+                    "summary": "Invalid ID",
+                    "description": "The provided ID is not valid",
+                    "value": [
+                      {
+                        "Code": "INVALIDID",
+                        "Detail": "The provided ID, 604b8647994aa94e9c47e5fb, is not valid.",
+                        "Source": {
+                          "Parameter": "id",
+                          "Id": "SOMEID"
+                        },
+                        "Status": "400",
+                        "Title": "Invalid ID"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/workorderReferenceCollection"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "Root"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/v2/equipmentmodels/{equipmentcode}/sbom": {
+      "get": {
+        "tags": [
+          "EquipmentModels"
+        ],
+        "summary": "Gets the EquipmentModel with the specified equipmentcode.",
+        "parameters": [
+          {
+            "name": "equipmentcode",
+            "in": "path",
+            "description": "The equipmentcode.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The equipmentcode.",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "EquipmentModel has missing/invalid values",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorDocument"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorDocument"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "The EquipmentModel with the specified equipmentcode",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/equipmentModel"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "Root"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/v2/equipmentmodels/{equipmentcode}/sbom/{maintenanceactivitytypecode}/level/{level}": {
+      "get": {
+        "tags": [
+          "EquipmentModels"
+        ],
+        "summary": "Gets the Strategy with the specified EquipmentCode, MaintenanceActivityTypeCode and Level.",
+        "parameters": [
+          {
+            "name": "equipmentcode",
+            "in": "path",
+            "description": "The equipmentcode.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The equipmentcode.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "maintenanceactivitytypecode",
+            "in": "path",
+            "description": "MaintenanceActivityTypeCode",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "MaintenanceActivityTypeCode",
+              "nullable": true
+            }
+          },
+          {
+            "name": "level",
+            "in": "path",
+            "description": "MaintenanceActivityTypeLevel",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "MaintenanceActivityTypeLevel",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "MaintenanceStrategy has missing/invalid values",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorDocument"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorDocument"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "The MaintenanceStrategy with the specified EquipmentCode, MaintenanceActivityTypeCode and Level",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/equipmentModel"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "Root"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/v2/toolsettemplates": {
+      "get": {
+        "tags": [
+          "ToolSetTemplates"
+        ],
+        "summary": "Get the ToolSetTemplates using the specified query parameters.",
+        "responses": {
+          "400": {
+            "description": "ToolSetTemplates has missing/invalid values",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorDocument"
+                }
+              }
+            }
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/problemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "The ToolSetTemplate with the specified query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/toolSetTemplate"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "Root"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/v2/toolsettemplates/{equipmentcode}": {
+      "get": {
+        "tags": [
+          "ToolSetTemplates"
+        ],
+        "summary": "Gets the ToolSetTemplates with the specified equipmentcode.",
+        "parameters": [
+          {
+            "name": "equipmentcode",
+            "in": "path",
+            "description": "The equipmentcode.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The equipmentcode.",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorDocument"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "ToolSetTemplates has missing/invalid values",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorDocument"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "The ToolSetTemplate with the specified equipmentcode",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/toolSetTemplateCollection"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "Root"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "link": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string",
+            "nullable": true
+          },
+          "meta": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "additionalProperties": false
+            },
+            "nullable": true
+          },
+          "rel": {
+            "type": "string",
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "links": {
+        "type": "object",
+        "properties": {
+          "actualLinks": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/link"
+            },
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "errorSource": {
+        "type": "object",
+        "properties": {
+          "parameter": {
+            "type": "string",
+            "nullable": true
+          },
+          "pointer": {
+            "type": "string",
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "error": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "links": {
+            "$ref": "#/components/schemas/links"
+          },
+          "meta": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "additionalProperties": false
+            },
+            "nullable": true
+          },
+          "source": {
+            "$ref": "#/components/schemas/errorSource"
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "model": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "errorDocument": {
+        "type": "object",
+        "properties": {
+          "errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/error"
+            },
+            "nullable": true
+          },
+          "included": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/model"
+            },
+            "nullable": true
+          },
+          "links": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/link"
+            },
+            "nullable": true
+          },
+          "meta": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "additionalProperties": false
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "problemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "A URI reference [RFC3986] that identifies the problem type. This specification encourages that, when dereferenced, it provide human-readable documentation for the problem type (e.g., using HTML [W3C.REC-html5-20141028]). When this member is not present, its value is assumed to be 'about: blank'.",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "description": "A short, human-readable summary of the problem type. It will generally not change from occurrence to occurrence of the problem.",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "description": "The HTTP status code([RFC7231], Section 6) generated by the origin server for this occurrence of the problem.",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "description": "A human-readable explanation specific to this occurrence of the problem",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "description": "URI reference that identifies the specific occurrence of the problem. It may or may not yield further information if dereferenced.",
+            "nullable": true
+          },
+          "extensions": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "additionalProperties": false
+            },
+            "description": "Any extensions that the API may provide",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A machine-readable format for specifying errors in HTTP API responses based on https://tools.ietf.org/html/rfc7807."
+      },
+      "alternateIdentity": {
+        "type": "object",
+        "properties": {
+          "alternateSystemRecordId": {
+            "type": "string",
+            "nullable": true
+          },
+          "sourceSystemId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "classification": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "parentCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "equipmentType": {
+        "enum": [
+          "PCV",
+          "ServiceAssembly",
+          "Equipment",
+          "SubAssembly"
+        ],
+        "type": "string",
+        "description": "<ul><li>0 - PCV</li><li>1 - ServiceAssembly</li><li>2 - Equipment</li><li>3 - SubAssembly</li></ul>",
+        "example": "PCV"
+      },
+      "ownership": {
+        "enum": [
+          "SLB",
+          "Customer",
+          "Rental"
+        ],
+        "type": "string",
+        "description": "<ul><li>0 - SLB</li><li>1 - Customer</li><li>2 - Rental</li></ul>",
+        "example": "SLB"
+      },
+      "equipmentReference": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "equipmentCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "manufacturer": {
+            "type": "string",
+            "nullable": true
+          },
+          "manufacturersCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "attributeValue": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "type": "string",
+            "nullable": true
+          },
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "dimension": {
+            "type": "string",
+            "nullable": true
+          },
+          "sequence": {
+            "type": "string",
+            "nullable": true
+          },
+          "uom": {
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "unmanagedAttributeValue": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "uom": {
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "workorderReference": {
+        "required": [
+          "completedTaskCount",
+          "createdDate",
+          "modifiedDate",
+          "totalTaskCount"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "modifiedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "modifiedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "maintenanceActivitySubType": {
+            "type": "string",
+            "nullable": true
+          },
+          "maintenanceActivityType": {
+            "type": "string",
+            "nullable": true
+          },
+          "parentWorkorderId": {
+            "type": "string",
+            "nullable": true
+          },
+          "plannedEndDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "plannedStartDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "priority": {
+            "type": "string",
+            "nullable": true
+          },
+          "repairSiteCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "repairSiteId": {
+            "type": "string",
+            "nullable": true
+          },
+          "statusChangeDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "workorderNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "workorderStatusValue": {
+            "type": "string",
+            "nullable": true
+          },
+          "totalTaskCount": {
+            "type": "integer",
+            "description": "Total task associated with a workorder.",
+            "format": "int32"
+          },
+          "completedTaskCount": {
+            "type": "integer",
+            "description": "Completed task count associated with workorder.",
+            "format": "int32"
+          },
+          "attributes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/attributeValue"
+            },
+            "nullable": true
+          },
+          "unmanagedAttributes": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/components/schemas/unmanagedAttributeValue"
+              }
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Projection of the Work Order into the Equipment Context.\r\nFor Identification, not for the Content properties."
+      },
+      "equipmentStatus": {
+        "type": "object",
+        "properties": {
+          "technicalStatus": {
+            "type": "string",
+            "description": "The Technical status of the Equipment.",
+            "nullable": true
+          },
+          "movementStatus": {
+            "type": "string",
+            "description": "The Movement status of the Equipment.",
+            "nullable": true
+          },
+          "repairStatus": {
+            "type": "string",
+            "description": "The Repair status of the Equipment.",
+            "nullable": true
+          },
+          "logisticsStatus": {
+            "type": "string",
+            "description": "The Logistics status of the Equipment. \r\nThis is not the same as Movement status.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Represents the status of an equipment."
+      },
+      "measurementPointReference": {
+        "required": [
+          "createdDate",
+          "modifiedDate"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "modifiedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "modifiedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "defaultUOM": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "futureMaintenanceCall": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "previousWorkorderId": {
+            "type": "string",
+            "nullable": true
+          },
+          "nextWorkorderId": {
+            "type": "string",
+            "nullable": true
+          },
+          "nextDueDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lastCompletedDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "pmNumber": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "movement": {
+        "type": "object",
+        "properties": {
+          "movementId": {
+            "type": "string",
+            "nullable": true
+          },
+          "shipmentNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "shipmentDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "movementSummary": {
+        "type": "object",
+        "properties": {
+          "movements": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/movement"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "comment": {
+        "required": [
+          "commentDate"
+        ],
+        "type": "object",
+        "properties": {
+          "commentDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "commentedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "commentText": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "equipmentDemandPlan": {
+        "type": "object",
+        "properties": {
+          "equipmentDemandNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "customerName": {
+            "type": "string",
+            "nullable": true
+          },
+          "rigName": {
+            "type": "string",
+            "nullable": true
+          },
+          "activitywkeid": {
+            "type": "string",
+            "nullable": true
+          },
+          "activityType": {
+            "type": "string",
+            "nullable": true
+          },
+          "edoPlannedShipDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "edfPlannedShipDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "equipmentDemandSummary": {
+        "type": "object",
+        "properties": {
+          "equipmentDemandPlans": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/equipmentDemandPlan"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "location": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the location",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of the location",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Class to hold equipment location related information"
+      },
+      "position": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the position",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of the position",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Class to hold equipment position related information"
+      },
+      "equipment": {
+        "required": [
+          "createdDate",
+          "equipmentType",
+          "modifiedDate",
+          "ownership"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "modifiedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "modifiedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "activeCmms": {
+            "type": "string",
+            "nullable": true
+          },
+          "sourceSystemRecordId": {
+            "type": "string",
+            "nullable": true
+          },
+          "alternateIdentities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/alternateIdentity"
+            },
+            "description": "Alternate identities of the equipment.",
+            "nullable": true
+          },
+          "controlSiteCode": {
+            "type": "string",
+            "description": "The code from the control site associated with the equipment.",
+            "nullable": true
+          },
+          "controlSiteId": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the equipment. This is typically inherited from the reference\r\nequipment template, but can be changed as modifications are implemented.",
+            "nullable": true
+          },
+          "equipmentCode": {
+            "type": "string",
+            "description": "EPIC Equipment Code is  similar to a model number.  It Identifies the type of\r\nequipment and replaces the legacy term \"File Code\".\r\nThe Equipment Code is the link to the Equipment Template (aka Reference\r\nEquipment) that contains the Maintenance Program and default definition of the\r\nEquipment.\r\nIt differs from a Material Number in that a material number defines what an\r\nequipment, the Equipment Code identifies How it is used.\r\nAKA\r\n- File Code\r\n- Model\r\n- EPIC code",
+            "nullable": true
+          },
+          "classifications": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/classification"
+              }
+            },
+            "description": "List of all taxonomies the equipment belongs to.",
+            "nullable": true
+          },
+          "equipmentState": {
+            "type": "string",
+            "description": "The state of the equipment.",
+            "nullable": true
+          },
+          "equipmentType": {
+            "$ref": "#/components/schemas/equipmentType"
+          },
+          "manufacturer": {
+            "type": "string",
+            "nullable": true
+          },
+          "manufacturedDate": {
+            "type": "string",
+            "description": "",
+            "format": "date-time",
+            "nullable": true
+          },
+          "manufacturerSerialNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "materialNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "owner": {
+            "type": "string",
+            "description": "Customer/vendor name, which is defined based on the ownership attribute.",
+            "nullable": true
+          },
+          "ownership": {
+            "$ref": "#/components/schemas/ownership"
+          },
+          "ownerSiteCode": {
+            "type": "string",
+            "description": "The code for the owning site associated with the equipment.",
+            "nullable": true
+          },
+          "ownerSiteId": {
+            "type": "string",
+            "nullable": true
+          },
+          "pairedEquipment": {
+            "$ref": "#/components/schemas/equipment"
+          },
+          "pairedEquipmentId": {
+            "type": "string",
+            "description": "The ID of the paired equipment if there is one.",
+            "nullable": true
+          },
+          "parentEquipment": {
+            "$ref": "#/components/schemas/equipment"
+          },
+          "parentEquipmentId": {
+            "type": "string",
+            "description": "The ID of the parent equipment if there is one.",
+            "nullable": true
+          },
+          "childEquipment": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/equipmentReference"
+            },
+            "description": "Child Equipment",
+            "nullable": true
+          },
+          "serialNumber": {
+            "type": "string",
+            "description": "Key identifier for the Equipment used for tracking purposes.\r\nThe Serial Number is only unique within the context of the Material Number.\r\nTogether the Material Number and Serial Number provide a Natural Unique Key for the Equipment.",
+            "nullable": true
+          },
+          "wellKnownEntityId": {
+            "type": "string",
+            "description": "Well-known Equipment ID, in form of MaterialNumber:SerialNumber,\r\nboth as given at birth.",
+            "nullable": true
+          },
+          "workorders": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/workorderReference"
+            },
+            "description": "References to work orders associated with this piece of equipment.",
+            "nullable": true
+          },
+          "equipmentStatus": {
+            "$ref": "#/components/schemas/equipmentStatus"
+          },
+          "measurementPoints": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/measurementPointReference"
+            },
+            "description": "Reference to Measurement Points",
+            "nullable": true
+          },
+          "futureMaintenanceCalls": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/futureMaintenanceCall"
+            },
+            "description": "Future maintenance data.",
+            "nullable": true
+          },
+          "movementSummary": {
+            "$ref": "#/components/schemas/movementSummary"
+          },
+          "comments": {
+            "$ref": "#/components/schemas/comment"
+          },
+          "equipmentDemandSummary": {
+            "$ref": "#/components/schemas/equipmentDemandSummary"
+          },
+          "assetNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "revision": {
+            "type": "string",
+            "nullable": true
+          },
+          "countryOfOrigin": {
+            "type": "string",
+            "nullable": true
+          },
+          "originationDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "orderLineId": {
+            "type": "string",
+            "nullable": true
+          },
+          "manufacturersCode": {
+            "type": "string",
+            "description": "Manufacturer's as advertised/promoted code.",
+            "nullable": true
+          },
+          "location": {
+            "$ref": "#/components/schemas/location"
+          },
+          "position": {
+            "$ref": "#/components/schemas/position"
+          },
+          "attributes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/attributeValue"
+            },
+            "nullable": true
+          },
+          "unmanagedAttributes": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/components/schemas/unmanagedAttributeValue"
+              }
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Equipment is the Physical Entity that represents the real-world object that\r\nprovides a some value/service to a business. Other terms that are used for\r\nEquipment include:\r\n<ul><li>Tool</li><li>Asset</li><li>Product</li></ul>\r\nEquipment is typically maintained and monitored via Measure Points. An\r\nEquipment will be associated to a Financial Asset. All equipment are traceable\r\nand trackable via a Serial Number - Equipment Code combination."
+      },
+      "collectionMeta": {
+        "required": [
+          "totalCount"
+        ],
+        "type": "object",
+        "properties": {
+          "totalCount": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "equipmentCollection": {
+        "type": "object",
+        "properties": {
+          "collection": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/equipment"
+            },
+            "nullable": true
+          },
+          "links": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/link"
+            },
+            "nullable": true
+          },
+          "meta": {
+            "$ref": "#/components/schemas/collectionMeta"
+          }
+        },
+        "additionalProperties": false
+      },
+      "equipmentShellRequest": {
+        "required": [
+          "createdDate",
+          "modifiedDate"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "modifiedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "modifiedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "assetNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "wellKnownEntityId": {
+            "type": "string",
+            "nullable": true
+          },
+          "materialNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "serialNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "equipmentCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "manufacturer": {
+            "type": "string",
+            "nullable": true
+          },
+          "revision": {
+            "type": "string",
+            "nullable": true
+          },
+          "countryOfOrigin": {
+            "type": "string",
+            "nullable": true
+          },
+          "originationDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "workorderReferenceCollection": {
+        "type": "object",
+        "properties": {
+          "collection": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/workorderReference"
+            },
+            "nullable": true
+          },
+          "links": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/link"
+            },
+            "nullable": true
+          },
+          "meta": {
+            "$ref": "#/components/schemas/collectionMeta"
+          }
+        },
+        "additionalProperties": false
+      },
+      "cmmsId": {
+        "enum": [
+          "None",
+          "QTrac",
+          "Maximo",
+          "RITE",
+          "MT",
+          "Mateo"
+        ],
+        "type": "string",
+        "description": "<ul><li>0 - None</li><li>880 - RITE</li><li>990 - QTrac</li><li>2392 - Maximo</li><li>6010 - MT</li><li>6382 - Mateo</li></ul>",
+        "example": "None"
+      },
+      "sbom": {
+        "required": [
+          "quantity",
+          "unitPrice"
+        ],
+        "type": "object",
+        "properties": {
+          "eventId": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "materialNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "unitPrice": {
+            "type": "number",
+            "format": "double"
+          },
+          "uom": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "maintenanceStrategy": {
+        "required": [
+          "createdDate",
+          "modifiedDate"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "modifiedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "modifiedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "equipmentCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "maintenanceActivityTypeCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "maintenanceActivityTypeLevel": {
+            "type": "string",
+            "nullable": true
+          },
+          "sboms": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/sbom"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "equipmentModel": {
+        "required": [
+          "activeCmmsId",
+          "createdDate",
+          "modifiedDate"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "modifiedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "modifiedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "activeCmmsId": {
+            "$ref": "#/components/schemas/cmmsId"
+          },
+          "equipmentCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "maintenanceStrategies": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/maintenanceStrategy"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "alternate": {
+        "type": "object",
+        "properties": {
+          "materialNumber": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "buildItem": {
+        "type": "object",
+        "properties": {
+          "equipmentCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "materialNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "alternates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/alternate"
+            },
+            "nullable": true
+          },
+          "attributes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/attributeValue"
+            },
+            "description": "List of attributes.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "toolSetTemplate": {
+        "required": [
+          "activeCmmsId",
+          "createdDate",
+          "modifiedDate"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "modifiedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "modifiedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "activeCmmsId": {
+            "$ref": "#/components/schemas/cmmsId"
+          },
+          "equipmentCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "buildItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/buildItem"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "ToolSetTemplate is the Physical Entity that represents the entity\r\nfrom MAXIMO"
+      },
+      "toolSetTemplateCollection": {
+        "type": "object",
+        "properties": {
+          "collection": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/toolSetTemplate"
+            },
+            "nullable": true
+          },
+          "links": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/link"
+            },
+            "nullable": true
+          },
+          "meta": {
+            "$ref": "#/components/schemas/collectionMeta"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "oauth2": {
+        "type": "oauth2",
+        "description": "OAuth2 authentication",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "https://auth.test.tlm.slb.com/connect/authorize",
+            "tokenUrl": "https://auth.test.tlm.slb.com/connect/token",
+            "scopes": {
+              "equipmentapi": "equipmentapi"
+            }
+          }
+        }
+      }
+    }
+  }
+}

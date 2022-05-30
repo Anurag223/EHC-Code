@@ -1,0 +1,32 @@
+﻿***This file changes are not required*****
+
+swagger.json is not fully correct
+so following steps were performed (you can refer to commit f92582f):
+
+1. Format swagger.json file
+2. Find operation /api/v2/equipment-models/{equipmentCode}
+3. Change line
+
+"$ref": "#/definitions/equipmentModelDocument"
+
+to
+
+"$ref": "#/definitions/equipmentModel"
+
+
+
+4. Find "channelReferenceCollection": {
+5. Replace it totally with
+
+
+"channelReferenceCollection": {
+    "uniqueItems": false,
+    "type": "array",
+    "items": {
+        "$ref": "#/definitions/channelReference"
+    }
+},
+
+
+
+6. Generate client class with EquipmentApiClientGenerate.bat

@@ -1,0 +1,113 @@
+{
+  "id": null,
+  "name": "Fixing the leak",
+  "startTime": "2019-09-25T17:06:21.810Z",
+  "endTime": "2019-09-25T18:03:52.934Z",
+  "type": "standard",
+  "parentId": null,
+  "tags": [
+    "south_america",
+    "5W-30"
+  ],
+  "equipmentWkeIdList": [
+    "100196736:SBF624S11002",
+    "100196736:SBF624S11007"
+  ],
+  "channels": [
+    {
+      "index": 0,
+      "code": "time",
+      "uom": "d",
+      "dimension": "time"
+    },
+    {
+      "index": 1,
+      "code": "AirPressure",
+      "uom": "kPa",
+      "dimension": "pressure"
+    },
+    {
+      "index": 2,
+      "code": "CMT_TRUCK_FLUID_VOL_TOT",
+      "uom": "m3",
+      "dimension": "volume"
+    },
+    {
+      "index": 3,
+      "code": "DischargeRate",
+      "uom": "hz",
+      "dimension": "frequency"
+    }
+  ],
+  "data": [
+    {
+      "equipmentWkeId": "100196736:SBF624S11002",
+      "rows": [
+        [
+          [ 0, "2019-09-25T17:30:02.156Z" ],
+          [ 1, 655829.25 ]
+        ],
+        [
+          [ 0, "2019-09-25T17:30:04.431Z" ],
+          [ 1, 655830.84 ],
+          [ 2, 491541.375 ]
+        ],
+        [
+          [ 0, "2019-09-25T17:30:07.293Z" ],
+          [ 2, 568499.84 ]
+        ]
+      ]
+    },
+    {
+      "equipmentWkeId": "100196736:SBF624S11007",
+      "rows": [
+        [
+          [ 0, "2019-09-25T17:30:03.432Z" ],
+          [ 3, 0.0844615925056458 ]
+        ],
+        [
+          [ 0, "2019-09-25T17:30:05.883Z" ],
+          [ 3, 0.0850783925056458 ]
+        ],
+        [
+          [ 0, "2019-09-25T17:30:06.125Z" ],
+          [ 3, 0.0871633142232895 ]
+        ]
+      ]
+    }
+  ],
+  "relationships": {
+    "well": {
+      "links": {
+        "cost_center": {
+          "href": "http://cost-center.com/3087",
+          "rel": "cost_center"
+        },
+        "FMP": {
+          "href": "http://fed.demo.tlm.slb.com/api/v2/equipment/3829F:289942",
+          "rel": "FMP"
+        }
+      },
+      "data": {
+        "latitude": "40.7128° N",
+        "longitude": "74.0060° W"
+      }
+    },
+    "operator": {
+      "links": {
+        "profile": {
+          "href": "https://employees.com/id/12345",
+          "rel": "profile"
+        },
+        "membership": {
+          "href": "https://groups.com/member/12345",
+          "rel": "membership"
+        }
+      },
+      "data": {
+        "GIN": "541125",
+        "access": "full"
+      }
+    }
+  }
+}

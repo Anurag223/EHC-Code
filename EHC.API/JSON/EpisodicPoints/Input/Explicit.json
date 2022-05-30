@@ -1,0 +1,47 @@
+{
+  "meta": {
+    "episodeId": "5ea35fddb0bdd65c88c5c103",
+    "channels": [
+      {
+        "index": 0,
+        "code": "time",
+        "uom": "d",
+        "dimension": "time"
+      },
+      {
+        "index": 1,
+        "code": "AirPressure",
+        "uom": "kPa",
+        "dimension": "pressure"
+      },
+      {
+        "index": 2,
+        "code": "CMT_TRUCK_FLUID_VOL_TOT",
+        "uom": "m3",
+        "dimension": "volume"
+      },
+      {
+        "index": 3,
+        "code": "DischargeRate",
+        "uom": "hz",
+        "dimension": "frequency"
+      }
+    ]
+  },
+  "rows": [
+    [
+      [ 0, "2019-07-29T15:30:02.156Z" ],
+      [ 1, 655829.25 ]
+    ],
+    [
+      [ 0, "2019-07-29T15:30:04.431Z" ],
+      [ 1, 655830.84 ],
+      [ 2, 491541.375 ],
+      [ 3, 0.0870783925056458 ]
+    ],
+    [
+      [ 0, "2019-07-29T15:30:07.293Z" ],
+      [ 3, 0.0871633142232895 ]
+    ]
+  ]
+}

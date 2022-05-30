@@ -1,0 +1,295 @@
+[
+  {
+    "_id": "60d5c554cd2d0e7af4c12d24",
+    "createddate": "2021-06-25T11:50:51Z",
+    "createdby": "EHC",
+    "modifieddate": "2021-06-25T11:50:51Z",
+    "modifiedby": "EHC",
+    "dbname": "DXP_WPS_PUMPING_EQUIPMENT",
+    "retentionpolicy": "autogen",
+    "measurementname": "STIMULATION_PUMP_WS-67",
+    "brandname": "STIMULATION PUMP",
+    "brandcode": "WS-67",
+    "technologycode": "DXP",
+    "technologyname": "WPS PUMPING EQUIPMENT",
+    "status": "Enabled",
+    "equipmentcodes": [
+      "SPF-343",
+      "SPF-344",
+      "SPF-744",
+      "SPF-843",
+      "SPF-743"
+    ]
+  },
+  {
+    "_id": "60d5c554cd2d0e7af4c129456",
+    "createddate": "2021-06-25T11:50:51Z",
+    "createdby": "EHC",
+    "modifieddate": "2021-06-25T11:50:51Z",
+    "modifiedby": "EHC",
+    "dbname": "D01_WPS_OMEGA_EQUIPMENT",
+    "retentionpolicy": "autogen",
+    "measurementname": "STIMULATION_BLENDER_OMEGA_WS-61",
+    "brandname": "STIMULATION BLENDER OMEGA",
+    "brandcode": "WS-61",
+    "technologycode": "D01",
+    "technologyname": "WPS OMEGA EQUIPMENT",
+    "status": "Enabled",
+    "equipmentcodes": [
+      "SBF-677"
+    ]
+  },
+  {
+    "_id": "60e712b3d176174bf24afb68",
+    "createddate": "2021-06-25T11:50:51Z",
+    "createdby": "EHC",
+    "modifieddate": "2021-06-25T11:50:51Z",
+    "modifiedby": "EHC",
+    "dbname": "DXJ_WPS_BLENDING_EQUIPMENT",
+    "retentionpolicy": "autogen",
+    "measurementname": "STIMULATION_BLENDER_PROP_WS-63",
+    "brandname": "STIMULATION BLENDER PROP",
+    "brandcode": "WS-63",
+    "technologycode": "DXJ",
+    "technologyname": "WPS BLENDING EQUIPMENT",
+    "status": "Enabled",
+    "equipmentcodes": [
+      "SBF-624"
+    ]
+  },
+  {
+    "_id": "60e71291d176174bf24afb55",
+    "createddate": "2021-06-25T11:50:51Z",
+    "createdby": "EHC",
+    "modifieddate": "2021-06-25T11:50:51Z",
+    "modifiedby": "EHC",
+    "dbname": "DXJ_WPS_BLENDING_EQUIPMENT",
+    "retentionpolicy": "autogen",
+    "measurementname": "STIMULATION_BLENDER_FLUID_WS-62",
+    "brandname": "STIMULATION BLENDER FLUID",
+    "brandcode": "WS-62",
+    "technologycode": "DXJ",
+    "technologyname": "WPS BLENDING EQUIPMENT",
+    "status": "Enabled",
+    "equipmentcodes": [
+      "SBF-215"
+    ]
+  },
+  {
+    "_id": "60eefa338331adb26262ac23",
+    "createddate": "2021-06-25T11:50:51Z",
+    "createdby": "EHC",
+    "modifieddate": "2021-06-25T11:50:51Z",
+    "modifiedby": "EHC",
+    "dbname": "NX4_CTS_SURFACE_EQUIPMENT",
+    "retentionpolicy": "autogen",
+    "measurementname": "TUBING_AUXILIARIES_MISCELLANEOUS_WS-84",
+    "brandname": "TUBING AUXILIARIES MISCELLANEOUS",
+    "brandcode": "WS-84",
+    "technologycode": "NX4",
+    "technologyname": "CTS SURFACE EQUIPMENT",
+    "status": "Enabled",
+    "equipmentcodes": [
+      "TCS-923",
+      "TCS-322"
+    ]
+  },
+  {
+    "_id": "60eefa338331adc26262ac27",
+    "createddate": "2021-06-25T11:50:51Z",
+    "createdby": "EHC",
+    "modifieddate": "2021-06-25T11:50:51Z",
+    "modifiedby": "EHC",
+    "dbname": "NX4_CTS_SURFACE_EQUIPMENT",
+    "retentionpolicy": "autogen",
+    "measurementname": "TUBING_CABIN_SKID_WS-86",
+    "brandname": "TUBING CABIN SKID",
+    "technologyname": "CTS SURFACE EQUIPMENT",
+    "brandcode": "WS-86",
+    "technologycode": "NX4",
+    "status": "Enabled",
+    "equipmentcodes": [
+      "TCS-321",
+      "TCS-323"
+    ]
+  },
+  {
+    "_id": "60eefa338331adc26245ac27",
+    "createddate": "2021-06-25T11:50:51Z",
+    "createdby": "EHC",
+    "modifieddate": "2021-06-25T11:50:51Z",
+    "modifiedby": "EHC",
+    "dbname": "NX4_CTS_SURFACE_EQUIPMENT",
+    "retentionpolicy": "autogen",
+    "measurementname": "TUBING_INJECTOR_SKID_WS-87",
+    "brandname": "TUBING INJECTOR SKID",
+    "brandcode": "WS-87",
+    "technologycode": "NX4",
+    "technologyname": "CTS SURFACE EQUIPMENT",
+    "status": "Enabled",
+    "equipmentcodes": [
+      "TIS-330",
+      "TIS-363",
+      "TIS-370",
+      "TIS-373"
+    ]
+  },
+  {
+    "_id": "60eeyu338331adc26245ac27",
+    "createddate": "2021-06-25T11:50:51Z",
+    "createdby": "EHC",
+    "modifieddate": "2021-06-25T11:50:51Z",
+    "modifiedby": "EHC",
+    "dbname": "NX4_CTS_SURFACE_EQUIPMENT",
+    "retentionpolicy": "autogen",
+    "measurementname": "TUBING_POWER_PACK_SKID_WS-88",
+    "brandname": "TUBING POWER PACK SKID",
+    "brandcode": "WS-88",
+    "technologycode": "NX4",
+    "technologyname": "CTS SURFACE EQUIPMENT",
+    "status": "Enabled",
+    "equipmentcodes": [
+      "TPS-300",
+      "TPS-333",
+      "TPS-933"
+    ]
+  },
+  {
+    "_id": "60d5c554cd289e7af4c129456",
+    "createddate": "2021-06-25T11:50:51Z",
+    "createdby": "EHC",
+    "modifieddate": "2021-06-25T11:50:51Z",
+    "modifiedby": "EHC",
+    "dbname": "DXG_WCS_PUMPING_EQUIPMENT",
+    "retentionpolicy": "autogen",
+    "measurementname": "CEMENT_PUMP_WS-15",
+    "brandname": "CEMENT PUMP",
+    "brandcode": "WS-15",
+    "technologycode": "Q13",
+    "technologyname": "WCS PUMPING EQUIPMENT",
+    "status": "Enabled",
+    "equipmentcodes": [
+      "CPF-377"
+    ]
+  },
+  {
+    "_id": "89d5c554cd289e3af4c345456",
+    "createddate": "2021-06-25T11:50:51Z",
+    "createdby": "EHC",
+    "modifieddate": "2021-06-25T11:50:51Z",
+    "modifiedby": "EHC",
+    "dbname": "AL3_POWERDRIVE_BIAS_UNITS",
+    "retentionpolicy": "autogen",
+    "measurementname": "DM-PDX_POWERDRIVE_X",
+    "brandname": "POWERDRIVE X",
+    "brandcode": "DM-PDX",
+    "technologycode": "AL3",
+    "technologyname": "POWERDRIVE BIAS UNITS",
+    "status": "Enabled",
+    "equipmentcodes": [
+      "PDEM-BA",
+      "PDEM-GA"
+    ]
+  },
+  {
+    "_id": "89d5c554cr589e3af4c567456",
+    "createddate": "2021-06-25T11:50:51Z",
+    "createdby": "EHC",
+    "modifieddate": "2021-06-25T11:50:51Z",
+    "modifiedby": "EHC",
+    "dbname": "M16_CENTRIFUGES",
+    "retentionpolicy": "autogen",
+    "measurementname": "CD-500_CD-500",
+    "brandname": "CD-500",
+    "brandcode": "CD-500",
+    "technologycode": "M16",
+    "technologyname": "CENTRIFUGES",
+    "status": "Enabled",
+    "equipmentcodes": [
+      "CEN-500HV-EL"
+    ]
+  },
+  {
+    "_id": "60eefa098895adb2626266tr",
+    "createddate": "2021-06-25T11:50:51Z",
+    "createdby": "EHC",
+    "modifieddate": "2021-06-25T11:50:51Z",
+    "modifiedby": "EHC",
+    "dbname": "WM5__WM5__PULSE_NEUTRON_GENERATOR",
+    "retentionpolicy": "autogen",
+    "measurementname": "WL-PNG__WL-PNG__PNG",
+    "brandname": "PNG",
+    "brandcode": "WL-PNG",
+    "technologycode": "WM5",
+    "technologyname": "PULSE NEUTRON GENERATOR",
+    "status": "Enabled",
+    "equipmentcodes": [
+      "PNG-HA",
+      "PNG-HB"
+    ]
+  },
+  {
+    "_id": "56eefa087695adb268976rty",
+    "createddate": "2021-06-25T11:50:51Z",
+    "createdby": "EHC",
+    "modifieddate": "2021-06-25T11:50:51Z",
+    "modifiedby": "EHC",
+    "dbname": "WU2_MECHANICAL_CORING",
+    "retentionpolicy": "autogen",
+    "measurementname": "WL-CORING_MOTOR__WL-CORING_MOTOR__CORING_MOTOR",
+    "brandname": "CORING MOTOR",
+    "brandcode": "WL-CORING MOTOR",
+    "technologycode": "WU2",
+    "technologyname": "MECHANICAL CORING",
+    "status": "Enabled",
+    "equipmentcodes": [
+      "MRCM-AE"
+    ]
+  },
+  {
+    "_id": "67tygh087695adb268976rty",
+    "createddate": "2021-06-25T11:50:51Z",
+    "createdby": "EHC",
+    "modifieddate": "2021-06-25T11:50:51Z",
+    "modifiedby": "EHC",
+    "dbname": "WU2_MECHANICAL_CORING",
+    "retentionpolicy": "autogen",
+    "measurementname": "WL-MSCT-XL__WL-MSCT-XL__MSCT-XL",
+    "brandname": "MSCT-XL",
+    "brandcode": "WL-MSCT-XL",
+    "technologycode": "WU2",
+    "technologyname": "MECHANICAL CORING",
+    "status": "Enabled",
+    "equipmentcodes": [
+      "MCEC-BA",
+      "MCEC-BB",
+      "MCEC-CA",
+      "MCMU-EA",
+      "MCMU-EB",
+      "MCMU-FA"
+    ]
+  },
+  {
+    "_id": "56eefa456789adb26262669u",
+    "createddate": "2021-06-25T11:50:51Z",
+    "createdby": "EHC",
+    "modifieddate": "2021-06-25T11:50:51Z",
+    "modifiedby": "EHC",
+    "dbname": "WU2_MECHANICAL_CORING",
+    "retentionpolicy": "autogen",
+    "measurementname": "WL-MSCT__WL-MSCT__MSCT",
+    "brandname": "MSCT",
+    "brandcode": "WL-MSCT",
+    "technologycode": "WU2",
+    "technologyname": "MECHANICAL CORING",
+    "status": "Enabled",
+    "equipmentcodes": [
+      "MCMU-BA",
+      "MCMU-BB",
+      "MCEC-AA",
+      "MRCM-AD",
+      "MRCM-BA",
+      "MRCM-EA"
+    ]
+  }
+]

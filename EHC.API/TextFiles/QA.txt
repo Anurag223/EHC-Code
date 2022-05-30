@@ -1,0 +1,19 @@
+﻿
+
+May 5, 2020
+-------------------------------------------------------
+# started mongo from command line
+# because it was removed out of docker-compose
+
+docker run -d \
+  --name ehc.api.mongo \
+  --network=eq_historian_network \
+  --network-alias=ehc.api.mongo \
+  --restart=unless-stopped \
+  -v ehc.api.mongo.db:/data/db \
+  -v ehc.api.mongo.configdb:/data/configdb \
+  -p 27027:27017 \
+  -e MONGO_INITDB_ROOT_USERNAME=admin \
+  -e MONGO_INITDB_ROOT_PASSWORD=admin_123 \
+  mongo:4-xenial
+

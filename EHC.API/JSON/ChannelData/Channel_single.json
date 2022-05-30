@@ -1,0 +1,41 @@
+{
+  "equipmentWkeId": "10001233:SN3313",
+  "materialNumber": "10001233",
+  "serialNumber": "SN3313",
+  "equipmentCode": "ENGINE",
+  "code": "AirPressure",
+  "uom": "kPa",
+  "dimension": "pressure",
+  "period": {
+    "start": "2019-07-29T15:30:00.000Z",
+    "end": "2019-07-29T15:30:10.000Z"
+  },
+  "rows": [
+    [
+      "2019-07-29T15:30:02.156Z",
+      655829.25
+    ],
+    [
+      "2019-07-29T15:30:04.431Z",
+      655830.84
+    ],
+    [
+      "2019-07-29T15:30:07.293Z",
+      655837.52
+    ]
+  ],
+  "links": {
+    "self": {
+      "href": "/api/v2/equipment/10001233:SN3313/channels/AirPressure",
+      "rel": "self"
+    },
+    "previousPeriod": {
+      "href": "/api/v2/equipment/10001233:SN3313/channels/AirPressure?start=2019-07-28T00:00:000Z&end=2019-07-29T00:00:000Z",
+      "rel": "previousPeriod"
+    },
+    "equipment": {
+      "href": "/api/v2/equipment/10001233:SN3313",
+      "rel": "equipment"
+    }
+  }
+}

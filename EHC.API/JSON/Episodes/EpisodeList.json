@@ -1,0 +1,42 @@
+{
+  "collection": [
+    {
+      "json": "see EpisodeGet.json"
+    },
+    {
+      "json": "see EpisodeGet.json"
+    },
+    {
+      "json": "see EpisodeGet.json"
+    }
+  ],
+  "links": {
+    "first": {
+      "createdDate": "2019-10-14T19:15:59.9330203Z",
+      "createdBy": "TLM",
+      "modifiedDate": "2019-10-14T19:15:59.9330203Z",
+      "modifiedBy": "TLM",
+      "href": "/api/v2/episodes?page%5Bnumber%5D=1&page%5Bsize%5D=25&sort=-ModifiedDate&page[number]=1",
+      "rel": "first"
+    },
+    "next": {
+      "createdDate": "2019-10-14T19:15:59.9330307Z",
+      "createdBy": "TLM",
+      "modifiedDate": "2019-10-14T19:15:59.9330307Z",
+      "modifiedBy": "TLM",
+      "href": "/api/v2/episodes?page%5Bnumber%5D=1&page%5Bsize%5D=25&sort=-ModifiedDate&page[number]=2",
+      "rel": "next"
+    },
+    "last": {
+      "createdDate": "2019-10-14T19:15:59.9330439Z",
+      "createdBy": "TLM",
+      "modifiedDate": "2019-10-14T19:15:59.9330439Z",
+      "modifiedBy": "TLM",
+      "href": "/api/v2/episodes?page%5Bnumber%5D=1&page%5Bsize%5D=25&sort=-ModifiedDate&page[number]=5",
+      "rel": "last"
+    }
+  },
+  "meta": {
+    "totalCount": 85
+  }
+}

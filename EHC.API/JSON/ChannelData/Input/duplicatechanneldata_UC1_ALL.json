@@ -1,0 +1,93 @@
+{
+  "equipmentWkeMappings": [
+    {
+      "deviceId": "Pump141",
+      "equipmentWkeId": "H730200:091"
+    },
+    {
+      "deviceId": "Pump142",
+      "equipmentWkeId": "H730200:116"
+    },
+    {
+      "deviceId": "Pump143",
+      "equipmentWkeId": "H730200:233"
+    }
+  ],
+  "body": {	
+    "data": [
+      {
+        "deviceId": "All",
+        "rows": [
+          [
+            [
+              2, 5.800000190734111
+            ],
+            [
+              3, 6984.0
+            ],
+            [
+              0, "PC-RCAVE-02:6ID1"
+            ],
+            [
+              1, "2020-01-20T20:51:28Z"
+            ]
+          ],
+          [
+            [
+              2, 4.300000190734222
+            ],
+            [
+              3, 6988.0
+            ],
+            [
+              0, "PC-RCAVE-02:6ID2"
+            ],
+            [
+              1, "2020-01-20T20:51:32Z"
+            ]
+          ],
+          [
+            [
+              2, 6.199999809265333
+            ],
+            [
+              3, 7087.0
+            ],
+            [
+              0, "PC-RCAVE-02:6ID3"
+            ],
+            [
+              1, "2020-01-20T20:51:36Z"
+            ]
+          ]
+        ]
+      }      
+    ],
+    "channels": [
+      {
+        "code": "SiteID",
+        "dimension": "ratio",
+        "index": 0,
+        "uom": "unitless"
+      },
+      {
+        "code": "time",
+        "dimension": "time",
+        "index": 1,
+        "uom": "d"
+      },
+      {
+        "code": "Rate",
+        "dimension": "PumpRate",
+        "index": 2,
+        "uom": "BarrelsPerMin"
+      },
+      {
+        "code": "DischargePressure",
+        "dimension": "DischargeRate",
+        "index": 3,
+        "uom": "DischargesPerMinute"
+      }
+    ]
+  }
+}

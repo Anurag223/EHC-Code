@@ -1,0 +1,113 @@
+{
+  "episodeId" : "5db1b281e9015b0288664b8b",
+  "equipmentList": [
+    {
+      "meta": {
+        "equipmentWkeId": "10001233:SN3313",
+        "materialNumber": "10001233",
+        "serialNumber": "SN3313",
+        "equipmentCode": "ENGINE",
+        "period": {
+          "start": "2019-07-29T15:30:00.000Z",
+          "end": "2019-07-29T15:30:10.000Z"
+        },
+        "channels": [
+          {
+            "code": "time",
+            "uom": "d",
+            "dimension": "time"
+          },
+          {
+            "code": "AirPressure",
+            "uom": "kPa",
+            "dimension": "pressure"
+          },
+          {
+            "code": "DischargePressure",
+            "uom": "kPa",
+            "dimension": "pressure"
+          },
+          {
+            "code": "DischargeRate",
+            "uom": "unitless",
+            "dimension": "ratio"
+          }
+        ]
+      },
+      "rows": [
+        [
+          "2019-07-29T15:30:02.156Z",
+          655829.25,
+          495230.1875,
+          0.0869970247149467
+        ],
+        [
+          "2019-07-29T15:30:04.431Z",
+          655830.84,
+          491541.375,
+          0.0870783925056458
+        ],
+        [
+          "2019-07-29T15:30:07.293Z",
+          655837.52,
+          491482.1875,
+          0.0871633142232895
+        ]
+      ]
+    },
+    {
+      "meta": {
+        "equipmentWkeId": "H650932:414",
+        "materialNumber": "H650932",
+        "serialNumber": "414",
+        "equipmentCode": "MCMU-FA",
+        "period": {
+          "start": "2019-07-29T15:30:00.000Z",
+          "end": "2019-07-29T15:30:10.000Z"
+        },
+        "channels": [
+          {
+            "code": "time",
+            "uom": "d",
+            "dimension": "time"
+          },
+          {
+            "code": "AirPressure",
+            "uom": "kPa",
+            "dimension": "pressure"
+          },
+          {
+            "code": "DischargePressure",
+            "uom": "kPa",
+            "dimension": "pressure"
+          },
+          {
+            "code": "DischargeRate",
+            "uom": "unitless",
+            "dimension": "ratio"
+          }
+        ]
+      },
+      "rows": [
+        [
+          "2019-07-29T15:30:02.156Z",
+          655829.25,
+          495230.1875,
+          0.0869970247149467
+        ],
+        [
+          "2019-07-29T15:30:04.431Z",
+          655830.84,
+          491541.375,
+          0.0870783925056458
+        ],
+        [
+          "2019-07-29T15:30:07.293Z",
+          655837.52,
+          491482.1875,
+          0.0871633142232895
+        ]
+      ]
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "id": "F1851E40-8CC3-48FE-A9CB-C023802D95C9",
+  "name": "Fixing the leak",
+  "startTime": "2019-09-25T17:06:21.810Z",
+  "endTime": "2019-09-25T18:03:52.934Z",
+  "type": "standard",
+  "parentId": "259F6DD8-3F88-4585-9327-C1ED5F0A742D",
+  "tags": [
+    "south_america",
+    "5W-30"
+  ],
+  "equipmentWkeIdList": [
+    "H650932:414",
+    "100196736:SBF62407Y0283"
+  ],
+  "relationships": {
+    "well": {
+      "links": {
+        "cost_center": {
+          "href": "http://cost-center.com/3087",
+          "rel": "cost_center"
+        },
+        "FMP": {
+          "href": "http://fed.demo.tlm.slb.com/api/v2/equipment/3829F:289942",
+          "rel": "FMP"
+        }
+      },
+      "data": {
+        "latitude": "40.7128° N",
+        "longitude": "74.0060° W"
+      }
+    },
+    "operator": {
+      "links": {
+        "profile": {
+          "href": "https://employees.com/id/12345",
+          "rel": "profile"
+        },
+        "membership": {
+          "href": "https://groups.com/member/12345",
+          "rel": "membership"
+        }
+      },
+      "data": {
+        "GIN": "541125",
+        "access": "full"
+      }
+    }
+  }
+}
